@@ -1,0 +1,60 @@
+/* CSS Variables */
+
+:root {
+  /* Colors - Light Theme (default) */
+  --color-primary: #485564;
+  --color-text: #FAFAFA;
+  --color-link: #FAFAFA;
+  --color-link-hover: #e0e0e0;
+  --color-background: #485564;
+  --color-footer: #3a4553;
+  
+  /* Typography */
+  --font-primary: 'Roboto', sans-serif;
+  --font-secondary: 'Reem Kufi', sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 1.25rem;
+  --font-size-xlarge: 3em;
+  
+  /* Spacing */
+  --spacing-small: 5px;
+  --spacing-medium: 10px;
+  --spacing-large: 30px;
+  
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  
+  /* Animation */
+  --transition-speed: 0.3s;
+  --transition-timing: ease;
+  
+  /* Shadows */
+  --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --color-primary: #2c3541;
+  --color-text: #f0f0f0;
+  --color-link: #a0ccf0;
+  --color-link-hover: #ffffff;
+  --color-background: #1a202c;
+  --color-footer: #121826;
+  
+  /* Dark theme specific shadows */
+  --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Theme Transition */
+.theme-transition,
+.theme-transition *,
+.theme-transition *:before,
+.theme-transition *:after {
+  transition: all var(--transition-speed) var(--transition-timing) !important;
+  transition-delay: 0 !important;
+} 
