@@ -42,6 +42,8 @@ main {
 	justify-content: center;
 	padding: 0 var(--spacing-large);
 	text-align: center;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 img {
@@ -150,7 +152,7 @@ main > .intro {
 
 .intro {
 	font-family: var(--font-secondary);
-	font-size: var(--font-size-xlarge);
+	font-size: 3.75em;
 	font-weight: 600;
 	margin-bottom: var(--spacing-medium);
 	animation: fadeIn var(--transition-speed) var(--transition-timing);
@@ -182,6 +184,7 @@ main > .intro {
 	color: var(--color-link);
 	transition: transform var(--transition-speed) ease, 
 	            color var(--transition-speed) ease;
+	padding: 10px;
 }
 
 .icons-social a:hover {
@@ -190,7 +193,7 @@ main > .intro {
 }
 
 .icons-social i {
-	font-size: var(--font-size-xlarge);
+	font-size: 3em;
 	margin-bottom: var(--spacing-small);
 }
 
