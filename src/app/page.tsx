@@ -117,7 +117,7 @@ export default function Home() {
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
               <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
                 <img
-                  src="https://yt3.googleusercontent.com/ytc/AIdro_mYxiO7j5Y4zd-ELjgUAZhZddZn7-n8V_KP8O2V=s176-c-k-c0x00ffffff-no-rj"
+                  src="/images/homelab-hobby-logo.jpg"
                   alt="HomeLab Hobby"
                   className="h-32 object-contain"
                 />

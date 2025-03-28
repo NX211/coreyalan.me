@@ -1,3 +1,4 @@
 node_modules
 .ansible/
 .vscode/
+.DS_Store

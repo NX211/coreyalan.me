@@ -118,7 +118,7 @@ export default function Projects() {
                 { name: "HomeLab", color: "purple" }
               ]}
               websiteUrl="https://homelabhobby.social"
-              logoUrl="https://yt3.googleusercontent.com/ytc/AIdro_mYxiO7j5Y4zd-ELjgUAZhZddZn7-n8V_KP8O2V=s176-c-k-c0x00ffffff-no-rj"
+              logoUrl="/images/homelab-hobby-logo.png"
             />
           </div>
         </div>
