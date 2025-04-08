@@ -1,6 +1,5 @@
 import { toast } from 'react-hot-toast';
 
-const DOCUSEAL_API_URL = 'https://api.docuseal.com/v1';
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 second
 
@@ -48,8 +47,8 @@ export async function uploadDocument(
   try {
     const formData = new FormData();
     formData.append('document', file);
-
-    // Use a server-side proxy endpoint instead of direct API call
+    
+    // Use Next.js API route
     const response = await fetchWithRetry(`/api/docuseal/documents`, {
       method: 'POST',
       body: formData,
@@ -72,7 +71,7 @@ export async function uploadDocument(
 
 export async function getDocumentStatus(documentId: string): Promise<UploadResponse> {
   try {
-    // Use a server-side proxy endpoint instead of direct API call
+    // Use Next.js API route
     const response = await fetchWithRetry(
       `/api/docuseal/documents/${documentId}`,
       {
