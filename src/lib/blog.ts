@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
@@ -35,10 +35,10 @@ const blogPost: Omit<BlogPost, 'content' | 'contentHtml'> = {
   tags: ['Web Development', 'Portfolio', 'Design']
 };
 
-export async function getAllPostIds() {
+export async function getAllPostIds(): Promise<{ params: { id: string } }[]> {
   const fileNames = await fs.readdir(blogDirectory);
   
-  return fileNames.map(fileName => {
+  return fileNames.map((fileName: string) => {
     return {
       params: {
         id: fileName.replace(/\.md$/, '')

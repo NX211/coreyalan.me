@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faUser, faTags, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { getAllPostIds, getPostData } from '@/lib/blog';
 
-export function generateStaticParams() {
-  const paths = getAllPostIds();
+export async function generateStaticParams() {
+  const paths = await getAllPostIds();
   return paths.map(path => ({
     id: path.params.id,
   }));
