@@ -49,11 +49,9 @@ export async function uploadDocument(
     const formData = new FormData();
     formData.append('document', file);
 
-    const response = await fetchWithRetry(`${DOCUSEAL_API_URL}/documents`, {
+    // Use a server-side proxy endpoint instead of direct API call
+    const response = await fetchWithRetry(`/api/docuseal/documents`, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_DOCUSEAL_API_KEY}`,
-      },
       body: formData,
     });
 
@@ -74,12 +72,11 @@ export async function uploadDocument(
 
 export async function getDocumentStatus(documentId: string): Promise<UploadResponse> {
   try {
+    // Use a server-side proxy endpoint instead of direct API call
     const response = await fetchWithRetry(
-      `${DOCUSEAL_API_URL}/documents/${documentId}`,
+      `/api/docuseal/documents/${documentId}`,
       {
-        headers: {
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_DOCUSEAL_API_KEY}`,
-        },
+        method: 'GET',
       }
     );
 
