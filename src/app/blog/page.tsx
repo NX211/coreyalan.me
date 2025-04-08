@@ -27,7 +27,7 @@ export default async function Blog() {
       {/* Blog Post */}
       <section className="py-8">
         <div className="container mx-auto px-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
             {post.coverImage && (
               <div className="h-64 overflow-hidden">
                 <img 

@@ -12,7 +12,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +23,7 @@ export default function Header() {
   }, []);
 
   const getLinkClass = () => {
-    return isHomePage 
-      ? 'text-white dark:text-gray-300 hover:text-primary dark:hover:text-white'
-      : 'text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white';
+    return 'text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white';
   };
 
   return (

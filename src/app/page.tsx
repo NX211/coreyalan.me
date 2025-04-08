@@ -6,10 +6,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center">
-        <div className="absolute inset-0 bg-primary dark:bg-gray-900 -z-10">
-          <div className="absolute inset-0 bg-[url('/logo.png')] opacity-10 mix-blend-overlay"></div>
-        </div>
+      <section className="relative h-screen flex items-center bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-8 md:mb-0">
             <img
@@ -19,24 +16,24 @@ export default function Home() {
               style={{ maxWidth: '350px' }}
             />
           </div>
-          <div className="md:w-1/2 text-center md:text-left text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="md:w-1/2 text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
               Turning Vision Into Reality With Code And Design.
             </h1>
-            <p className="text-xl mb-8">
+            <p className="text-xl mb-8 text-gray-600 dark:text-gray-400">
               As a technology consultant and engineer, I specialize in solving real business problems through custom solutions. 
               From data pipelines to system integrations, I help small businesses leverage technology that was previously only accessible to larger enterprises.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
               <Link
                 href="/projects"
-                className="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors duration-300"
+                className="bg-primary text-white hover:bg-primary-dark px-6 py-3 rounded-lg font-medium transition-colors duration-300"
               >
                 View Projects
               </Link>
               <Link
                 href="/contact"
-                className="border border-white text-white hover:bg-white/10 px-6 py-3 rounded-lg font-medium transition-colors duration-300"
+                className="border border-primary text-primary hover:bg-primary/10 px-6 py-3 rounded-lg font-medium transition-colors duration-300"
               >
                 Contact Me
               </Link>
@@ -117,7 +114,7 @@ export default function Home() {
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
               <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
                 <img
-                  src="/images/homelab-hobby-logo.jpg"
+                  src="/images/homelab-hobby-logo.png"
                   alt="HomeLab Hobby"
                   className="h-32 object-contain"
                 />

@@ -7,9 +7,9 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, description }: PageHeaderProps) {
   return (
-    <section className="relative py-16 overflow-hidden">
+    <section className="relative py-16 overflow-hidden bg-gray-50 dark:bg-[#1E293B]">
       {/* Modern gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary-dark dark:from-gray-800 dark:to-gray-900 z-0">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary-dark dark:from-[#1E293B] dark:to-[#1E293B] z-0">
         {/* Minimalist geometric elements */}
         <div className="absolute inset-0">
           {/* Horizontal accent line */}

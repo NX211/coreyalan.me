@@ -3,12 +3,41 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+  }
+
+  [data-theme='dark'] {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300;
+    color: rgb(var(--foreground-rgb));
+    background: rgb(var(--background-start-rgb));
   }
 }
 
 @layer components {
+  .bg-primary {
+    @apply bg-blue-600;
+  }
+
+  .bg-primary\/5 {
+    @apply bg-blue-600/5;
+  }
+
+  .text-primary {
+    @apply text-blue-600;
+  }
+
+  .border-primary {
+    @apply border-blue-600;
+  }
+
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }

@@ -19,7 +19,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Sidebar */}
             <div className="md:col-span-1">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sticky top-24">
+              <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 sticky top-24">
                 <GitHubAvatar 
                   username="NX211" 
                   className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-primary dark:border-primary-light"
@@ -65,7 +65,7 @@ export default function About() {
                   Technical Skills
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Web Development</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>React.js & Next.js</li>
@@ -74,7 +74,7 @@ export default function About() {
                       <li>Node.js & Express</li>
                     </ul>
                   </div>
-                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">System Administration</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Linux Server Administration</li>
@@ -83,7 +83,7 @@ export default function About() {
                       <li>Exchange Server & Email Administration</li>
                     </ul>
                   </div>
-                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Cloud & Infrastructure</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Azure Cloud Services</li>
@@ -92,7 +92,7 @@ export default function About() {
                       <li>Proxmox Virtualization</li>
                     </ul>
                   </div>
-                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">DevOps & Automation</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Ansible Configuration Management</li>
@@ -101,7 +101,7 @@ export default function About() {
                       <li>Infrastructure as Code</li>
                     </ul>
                   </div>
-                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Data & Security</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Data Engineering & Pipelines</li>
@@ -110,7 +110,7 @@ export default function About() {
                       <li>Disaster Recovery Planning</li>
                     </ul>
                   </div>
-                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Networking & Solutions</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Network Administration & Design</li>

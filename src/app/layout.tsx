@@ -23,9 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <PlausibleAnalytics />
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col min-h-screen dark:bg-[#0F172A]">
             <Header />
-            <main className="flex-grow">
+            <main className="flex-grow dark:bg-[#0F172A]">
               {children}
             </main>
             <Footer />
