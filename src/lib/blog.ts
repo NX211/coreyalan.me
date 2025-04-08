@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
@@ -9,6 +9,7 @@ import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeRaw from 'rehype-raw';
 
+// Define the blog directory path
 const blogDirectory = path.join(process.cwd(), 'src/content/blog');
 
 export interface BlogPost {
@@ -23,8 +24,19 @@ export interface BlogPost {
   contentHtml: string;
 }
 
-export function getAllPostIds() {
-  const fileNames = fs.readdirSync(blogDirectory);
+// Single blog post data
+const blogPost: Omit<BlogPost, 'content' | 'contentHtml'> = {
+  id: 'building-a-portfolio',
+  title: 'Building a Modern Portfolio Website',
+  date: '2024-03-10',
+  excerpt: 'A comprehensive guide to creating a professional portfolio website using modern web technologies.',
+  author: 'Corey Stone',
+  coverImage: '/images/blog/portfolio.jpg',
+  tags: ['Web Development', 'Portfolio', 'Design']
+};
+
+export async function getAllPostIds() {
+  const fileNames = await fs.readdir(blogDirectory);
   
   return fileNames.map(fileName => {
     return {
@@ -35,16 +47,16 @@ export function getAllPostIds() {
   });
 }
 
-export function getSortedPostsData(): Omit<BlogPost, 'content' | 'contentHtml'>[] {
+export async function getSortedPostsData(): Promise<Omit<BlogPost, 'content' | 'contentHtml'>[]> {
   // Get file names under /blog
-  const fileNames = fs.readdirSync(blogDirectory);
-  const allPostsData = fileNames.map(fileName => {
+  const fileNames = await fs.readdir(blogDirectory);
+  const allPostsData = await Promise.all(fileNames.map(async fileName => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '');
 
     // Read markdown file as string
     const fullPath = path.join(blogDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = await fs.readFile(fullPath, 'utf8');
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
@@ -54,7 +66,7 @@ export function getSortedPostsData(): Omit<BlogPost, 'content' | 'contentHtml'>[
       id,
       ...(matterResult.data as Omit<BlogPost, 'id' | 'content' | 'contentHtml'>)
     };
-  });
+  }));
 
   // Sort posts by date
   return allPostsData.sort((a, b) => {
@@ -68,7 +80,7 @@ export function getSortedPostsData(): Omit<BlogPost, 'content' | 'contentHtml'>[
 
 export async function getPostData(id: string): Promise<BlogPost> {
   const fullPath = path.join(blogDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileContents = await fs.readFile(fullPath, 'utf8');
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);

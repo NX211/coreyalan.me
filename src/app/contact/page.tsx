@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLocationDot, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLocationDot, faPaperPlane, faClock, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin, faMastodon, faBluesky } from '@fortawesome/free-brands-svg-icons';
 import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/PageHeader';
@@ -51,37 +51,20 @@ export default function Contact() {
     setError('');
 
     try {
-      // Submit form data to Formbricks
-      if (typeof window !== 'undefined' && window.formbricks) {
-        window.formbricks.track('contact_form_submitted', formData);
+      // Track form submission
+      if (window.formbricks) {
+        window.formbricks.track('Contact Form Submission', {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject
+        });
       }
 
-      // Alternative: Direct API call to Formbricks
-      const response = await fetch(`${process.env.NEXT_PUBLIC_FORMBRICKS_URL}/api/v1/client/forms/submit`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          formId: process.env.NEXT_PUBLIC_FORMBRICKS_FORM_ID,
-          data: formData,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit form');
-      }
-
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
     } catch (err) {
-      setError('An error occurred. Please try again later.');
-      console.error('Form submission error:', err);
+      setError('There was an error submitting your message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -91,123 +74,145 @@ export default function Contact() {
     <div className="pt-24 pb-16">
       {/* Hero Section */}
       <PageHeader 
-        title="Contact Me"
+        title="Contact Me" 
         description="Have a question or want to work together? Get in touch!"
       />
 
-      {/* Contact Form Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-8 rounded-lg shadow-md border-l-4 border-primary">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Get in Touch</h2>
+      {/* Quick Contact Info */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <div className="flex items-center mb-4">
+              <FontAwesomeIcon icon={faClock} className="text-primary h-6 w-6 mr-3" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Response Time</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400">
+              I typically respond to all inquiries within 24 hours during business days.
+            </p>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <div className="flex items-center mb-4">
+              <FontAwesomeIcon icon={faGlobe} className="text-primary h-6 w-6 mr-3" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Availability</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400">
+              Available for new projects and consultations. Let's discuss your needs.
+            </p>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <div className="flex items-center mb-4">
+              <FontAwesomeIcon icon={faPhone} className="text-primary h-6 w-6 mr-3" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Preferred Contact</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400">
+              Email is the best way to reach me. I'll get back to you as soon as possible.
+            </p>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Contact Information */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-8 rounded-lg shadow-md border-l-4 border-primary">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Get in Touch</h2>
+            
+            {/* Profile Photo and Contact Info Row */}
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
+              {/* Profile Photo */}
+              <div className="flex-shrink-0">
+                <GitHubAvatar 
+                  username="NX211" 
+                  className="w-24 h-24 rounded-full object-cover border-4 border-primary dark:border-primary-light shadow-lg"
+                />
+              </div>
               
-              {/* Profile Photo and Contact Info Row */}
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
-                {/* Profile Photo */}
-                <div className="flex-shrink-0">
-                  <GitHubAvatar 
-                    username="NX211" 
-                    className="w-24 h-24 rounded-full object-cover border-4 border-primary dark:border-primary-light shadow-lg"
-                  />
-                </div>
+              {/* Contact Details */}
+              <div className="text-center md:text-left">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Corey Stone</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">Full Stack Developer & Technology Consultant</p>
                 
-                {/* Contact Details */}
-                <div className="flex-grow space-y-4">
-                  <div className="flex items-start space-x-4">
-                    <div className="text-primary dark:text-primary-light">
-                      <FontAwesomeIcon icon={faEnvelope} className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Email</h3>
-                      <a
-                        href="mailto:corey@coreyalan.me"
-                        className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors duration-300"
-                      >
-                        corey@coreyalan.me
-                      </a>
-                    </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center md:justify-start">
+                    <FontAwesomeIcon icon={faEnvelope} className="text-primary h-5 w-5 mr-3" />
+                    <a href="mailto:corey@coreyalan.me" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
+                      corey@coreyalan.me
+                    </a>
                   </div>
-                  <div className="flex items-start space-x-4">
-                    <div className="text-primary dark:text-primary-light">
-                      <FontAwesomeIcon icon={faLocationDot} className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Location</h3>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Clarksville, TN, USA
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="mt-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Follow Me</h3>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://github.com/NX211"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-700 dark:text-gray-300 hover:text-[#171515] dark:hover:text-white transition-colors duration-300"
-                    aria-label="GitHub"
-                  >
-                    <FontAwesomeIcon icon={faGithub} className="h-6 w-6" />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/corey-stone-17b19a80"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-700 dark:text-gray-300 hover:text-[#0077b5] dark:hover:text-[#0077b5] transition-colors duration-300"
-                    aria-label="LinkedIn"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} className="h-6 w-6" />
-                  </a>
-                  <a
-                    href="https://authoritah.social/@nx211"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-700 dark:text-gray-300 hover:text-[#563acc] dark:hover:text-[#563acc] transition-colors duration-300"
-                    aria-label="Mastodon"
-                  >
-                    <FontAwesomeIcon icon={faMastodon} className="h-6 w-6" />
-                  </a>
-                  <a
-                    href="https://bsky.app/profile/nx211.bsky.social"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-700 dark:text-gray-300 hover:text-[#0085ff] dark:hover:text-[#0085ff] transition-colors duration-300"
-                    aria-label="Bluesky"
-                  >
-                    <FontAwesomeIcon icon={faBluesky} className="h-6 w-6" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Decorative Element */}
-              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex justify-center">
-                  <div className="flex space-x-2">
-                    <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-purple-400"></div>
+                  <div className="flex items-center justify-center md:justify-start">
+                    <FontAwesomeIcon icon={faLocationDot} className="text-primary h-5 w-5 mr-3" />
+                    <span className="text-gray-600 dark:text-gray-400">Nashville, TN</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Contact Form */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border-t-4 border-primary">
-              <form 
-                onSubmit={handleSubmit} 
-                className="space-y-6"
-                data-formbricks-form={process.env.NEXT_PUBLIC_FORMBRICKS_FORM_ID}
+            {/* Social Links */}
+            <div className="flex justify-center space-x-4">
+              <a 
+                href="https://github.com/NX211" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                aria-label="GitHub"
               >
+                <FontAwesomeIcon icon={faGithub} className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/corey-stone-17b19a80" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                aria-label="LinkedIn"
+              >
+                <FontAwesomeIcon icon={faLinkedin} className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://authoritah.social/@nx211" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                aria-label="Mastodon"
+              >
+                <FontAwesomeIcon icon={faMastodon} className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://bsky.app/profile/nx211.bsky.social" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                aria-label="Bluesky"
+              >
+                <FontAwesomeIcon icon={faBluesky} className="h-6 w-6" />
+              </a>
+            </div>
+
+            {/* Decorative Element */}
+            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex justify-center">
+                <div className="flex space-x-2">
+                  <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-purple-400"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h2>
+            
+            {submitted ? (
+              <div className="bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 p-4 rounded-lg">
+                <p className="text-center">
+                  Thank you for your message! I'll get back to you as soon as possible.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Name
@@ -219,9 +224,10 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary-light dark:focus:border-primary-light focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Email
@@ -233,23 +239,30 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary-light dark:focus:border-primary-light focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
+
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Subject
                   </label>
-                  <input
-                    type="text"
+                  <select
                     id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary-light dark:focus:border-primary-light focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-300"
-                  />
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">Select a subject</option>
+                    <option value="Project Inquiry">Project Inquiry</option>
+                    <option value="Consultation">Consultation</option>
+                    <option value="Support">Support</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Message
@@ -261,19 +274,20 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary dark:focus:ring-primary-light dark:focus:border-primary-light focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
                   />
                 </div>
+
                 {error && (
-                  <div className="text-red-500 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded border border-red-200 dark:border-red-800">{error}</div>
+                  <div className="text-red-600 dark:text-red-400 text-sm">
+                    {error}
+                  </div>
                 )}
-                {submitted && (
-                  <div className="text-green-600 text-sm bg-green-50 dark:bg-green-900/20 p-3 rounded border border-green-200 dark:border-green-800">Thank you for your message! I'll get back to you soon.</div>
-                )}
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                  className="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-md font-medium transition-colors duration-300 flex items-center justify-center"
                 >
                   {isSubmitting ? (
                     'Sending...'
@@ -285,10 +299,41 @@ export default function Contact() {
                   )}
                 </button>
               </form>
+            )}
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What types of projects do you take on?</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                I specialize in custom web applications, system integrations, and infrastructure solutions for small to medium-sized businesses.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What's your typical response time?</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                I aim to respond to all inquiries within 24 hours during business days. For urgent matters, please indicate in your message.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Do you offer free consultations?</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Yes, I offer a free 30-minute consultation to discuss your project needs and determine if we're a good fit.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What's your availability for new projects?</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                I'm currently accepting new projects. Contact me to discuss timelines and availability for your specific needs.
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 } 

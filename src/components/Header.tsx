@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +11,8 @@ export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +22,12 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const getLinkClass = () => {
+    return isHomePage 
+      ? 'text-white dark:text-gray-300 hover:text-primary dark:hover:text-white'
+      : 'text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white';
+  };
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
@@ -32,17 +41,23 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white">
+            <Link href="/" className={getLinkClass()}>
               Home
             </Link>
-            <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white">
+            <Link href="/about" className={getLinkClass()}>
               About
             </Link>
-            <Link href="/projects" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white">
+            <Link href="/projects" className={getLinkClass()}>
               Projects
             </Link>
-            <Link href="/blog" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white">
+            <Link href="/blog" className={getLinkClass()}>
               Blog
+            </Link>
+            <Link href="/contact" className={getLinkClass()}>
+              Contact
+            </Link>
+            <Link href="/client-portal" className={getLinkClass()}>
+              Client Portal
             </Link>
             <button
               onClick={toggleTheme}
@@ -89,31 +104,45 @@ export default function Header() {
             <div className="flex flex-col space-y-4">
               <Link 
                 href="/" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white py-2"
+                className={`${getLinkClass()} py-2`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/about" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white py-2"
+                className={`${getLinkClass()} py-2`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/projects" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white py-2"
+                className={`${getLinkClass()} py-2`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Projects
               </Link>
               <Link 
                 href="/blog" 
-                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white py-2"
+                className={`${getLinkClass()} py-2`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blog
+              </Link>
+              <Link 
+                href="/contact" 
+                className={`${getLinkClass()} py-2`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link 
+                href="/client-portal" 
+                className={`${getLinkClass()} py-2`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Client Portal
               </Link>
             </div>
           </div>
