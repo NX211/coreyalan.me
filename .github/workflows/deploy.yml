@@ -25,14 +25,22 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - name: Install dependencies
+      - name: Clean install dependencies
         run: npm ci
+      - name: Clean build directories
+        run: npm run clean
       - name: Verify public directory
         run: find public -type f | sort
       - name: Create CNAME file
         run: echo "coreyalan.me" > ./public/CNAME
       - name: Build
         run: npm run build
+      - name: Clear GitHub Pages Cache
+        run: |
+          curl -X POST \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/actions/caches/cleanup
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
