@@ -74,7 +74,7 @@ export default function ClientPortal() {
                 href="https://helpdesk.authoritah.com/help/3530376337"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300"
+                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"
               >
                 Access Support Portal
               </a>
@@ -106,7 +106,7 @@ export default function ClientPortal() {
                 href="https://billing.coreyalan.me/client/login"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300"
+                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"
               >
                 Access Billing Portal
               </a>
@@ -136,7 +136,7 @@ export default function ClientPortal() {
             <div className="absolute bottom-6 left-0 right-0 text-center">
               <Link
                 href="/client-portal/documents"
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300"
+                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"
               >
                 Access Documents
               </Link>

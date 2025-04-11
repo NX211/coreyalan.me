@@ -33,7 +33,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-primary dark:text-white">
-            <img src="/logo.png" alt="Corey Stone" className="h-10 w-auto" />
+            <img src="/images/logo-header.png" alt="Corey Stone" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

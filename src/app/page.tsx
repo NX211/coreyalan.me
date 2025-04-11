@@ -10,10 +10,10 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-8 md:mb-0">
             <img
-              src="/logo.png"
-              alt="Corey Stone profile"
-              className="max-w-full rounded-lg shadow-2xl mx-auto md:mx-0"
-              style={{ maxWidth: '350px' }}
+              src="/images/logo.png"
+              alt="Corey Alan Logo"
+              className="max-w-full mx-auto md:mx-0"
+              style={{ maxWidth: '400px' }}
             />
           </div>
           <div className="md:w-1/2 text-center md:text-left">

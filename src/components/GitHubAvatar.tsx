@@ -39,7 +39,7 @@ export default function GitHubAvatar({ username, className }: { username: string
     // Fallback to logo if there's an error
     return (
       <img
-        src="/logo.png"
+        src="/images/logo.png"
         alt={username}
         className={className || 'w-32 h-32 rounded-full'}
       />

@@ -32,7 +32,7 @@ export default function DocumentsPage() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="h-12 w-12 flex items-center justify-center bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-200">
+                <div className="h-12 w-12 flex items-center justify-center bg-primary/5 dark:bg-primary/20 text-primary dark:text-primary/80 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-200">
                   <FontAwesomeIcon icon={faUpload} className="h-6 w-6" />
                 </div>
                 <div>
@@ -50,7 +50,7 @@ export default function DocumentsPage() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="h-12 w-12 flex items-center justify-center bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-200">
+                <div className="h-12 w-12 flex items-center justify-center bg-primary/5 dark:bg-primary/20 text-primary dark:text-primary/80 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-200">
                   <FontAwesomeIcon icon={faFileLines} className="h-6 w-6" />
                 </div>
                 <div>
@@ -66,7 +66,7 @@ export default function DocumentsPage() {
         {/* Featured Upload Section */}
         <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 mb-12">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center h-20 w-20 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-full mb-6">
+            <div className="inline-flex items-center justify-center h-20 w-20 bg-primary/5 dark:bg-primary/20 text-primary dark:text-primary/80 rounded-full mb-6">
               <FontAwesomeIcon icon={faUpload} className="h-10 w-10" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
@@ -88,7 +88,7 @@ export default function DocumentsPage() {
         {/* Security Info */}
         <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 mb-12">
           <div className="flex items-center mb-6">
-            <div className="h-12 w-12 flex items-center justify-center bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg mr-4">
+            <div className="h-12 w-12 flex items-center justify-center bg-primary/5 dark:bg-primary/20 text-primary dark:text-primary/80 rounded-lg mr-4">
               <FontAwesomeIcon icon={faShield} className="h-6 w-6" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Secure Document Processing</h2>

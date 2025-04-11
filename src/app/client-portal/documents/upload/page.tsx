@@ -85,7 +85,7 @@ export default function UploadPage() {
             {/* Accepted Formats */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
               <div className="flex items-center mb-4">
-                <div className="h-10 w-10 flex items-center justify-center bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg mr-3">
+                <div className="h-10 w-10 flex items-center justify-center bg-primary/5 dark:bg-primary/20 text-primary dark:text-primary/80 rounded-lg mr-3">
                   <FontAwesomeIcon icon={faFileLines} className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Accepted Formats</h3>

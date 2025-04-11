@@ -22,22 +22,6 @@
 }
 
 @layer components {
-  .bg-primary {
-    @apply bg-blue-600;
-  }
-
-  .bg-primary\/5 {
-    @apply bg-blue-600/5;
-  }
-
-  .text-primary {
-    @apply text-blue-600;
-  }
-
-  .border-primary {
-    @apply border-blue-600;
-  }
-
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }

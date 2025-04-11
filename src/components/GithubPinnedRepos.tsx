@@ -131,7 +131,7 @@ export default function GithubPinnedRepos({ username }: { username: string }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {repos.map((repo) => (
-        <div key={`${repo.owner}-${repo.repo}`} className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 flex flex-col h-full">
+        <div key={`${repo.owner}-${repo.repo}`} className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-6 flex flex-col h-full">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1">
             {repo.repo}
           </h3>

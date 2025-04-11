@@ -1,21 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLocationDot, faPaperPlane, faClock, faPhone, faGlobe, faInfoCircle, faTicket } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLocationDot, faClock, faPhone, faGlobe, faInfoCircle, faTicket, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin, faMastodon, faBluesky } from '@fortawesome/free-brands-svg-icons';
 import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
-
-// Add a type declaration for the Formbricks global
-declare global {
-  interface Window {
-    formbricks?: {
-      track: (event: string, data: any) => void;
-    };
-  }
-}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -28,19 +19,6 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  // Load Formbricks script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = `${process.env.NEXT_PUBLIC_FORMBRICKS_URL}/js/formbricks.js`;
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -51,19 +29,25 @@ export default function Contact() {
     setIsSubmitting(true);
     setError('');
 
+    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeq-4XfCCrlbweklA6W2YB2TIN-nE9lRTgxYvzTA0KI4OfLyw/formResponse';
+    
     try {
-      // Track form submission
-      if (window.formbricks) {
-        window.formbricks.track('Contact Form Submission', {
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject
-        });
-      }
+      // Create form data object with Google Forms entry IDs
+      const googleFormsData = new FormData();
+      googleFormsData.append('entry.2005620554', formData.name); // Replace with your actual entry IDs
+      googleFormsData.append('entry.1045781291', formData.email);
+      googleFormsData.append('entry.1065046570', formData.subject);
+      googleFormsData.append('entry.1166974658', formData.message);
 
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Submit to Google Forms
+      await fetch(formUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: googleFormsData
+      });
+
       setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (err) {
       setError('There was an error submitting your message. Please try again.');
     } finally {
@@ -94,7 +78,7 @@ export default function Contact() {
                   href="https://helpdesk.authoritah.com/help/3530376337"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300"
+                  className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-300"
                 >
                   <FontAwesomeIcon icon={faTicket} className="mr-2" />
                   Access Support Portal
@@ -226,6 +210,19 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+
+            {/* Calendar Booking Button */}
+            <div className="text-center mt-8">
+              <a
+                href="https://calendar.app.google/4bZN3vV8H6aU5cNt9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300"
+              >
+                <FontAwesomeIcon icon={faClock} className="mr-2" />
+                Schedule a Meeting
+              </a>
+            </div>
           </div>
 
           {/* Contact Form */}
@@ -252,6 +249,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+                    placeholder="Your name"
                   />
                 </div>
 
@@ -267,6 +265,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+                    placeholder="your.email@example.com"
                   />
                 </div>
 
@@ -302,6 +301,7 @@ export default function Contact() {
                     required
                     rows={4}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
+                    placeholder="Your message here..."
                   />
                 </div>
 
@@ -327,37 +327,6 @@ export default function Contact() {
                 </button>
               </form>
             )}
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What types of projects do you take on?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                I specialize in custom web applications, system integrations, and infrastructure solutions for small to medium-sized businesses.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What's your typical response time?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                I aim to respond to all inquiries within 24 hours during business days. For urgent matters, please indicate in your message.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Do you offer free consultations?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Yes, I offer a free 30-minute consultation to discuss your project needs and determine if we're a good fit.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What's your availability for new projects?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                I'm currently accepting new projects. Contact me to discuss timelines and availability for your specific needs.
-              </p>
-            </div>
           </div>
         </div>
       </div>
