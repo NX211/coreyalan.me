@@ -151,7 +151,7 @@ export default function Contact() {
                   </div>
                   <div className="flex items-center justify-center md:justify-start">
                     <FontAwesomeIcon icon={faLocationDot} className="text-primary h-5 w-5 mr-3" />
-                    <span className="text-gray-600 dark:text-gray-400">Nashville, TN</span>
+                    <span className="text-gray-600 dark:text-gray-400">Clarksville, TN</span>
                   </div>
                 </div>
               </div>
