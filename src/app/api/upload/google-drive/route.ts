@@ -184,10 +184,9 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Define the maximum content length
-export const config = {
-  api: {
-    bodyParser: false,
-    responseLimit: '50mb',
-  },
-}; 
+// Define maximum request size - new App Router format
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+export const maxDuration = 60; 
