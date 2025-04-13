@@ -2,6 +2,7 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN npm ci
+RUN npx prisma generate
 RUN npm run build
 
 FROM node:18-alpine AS runner
@@ -21,6 +22,7 @@ COPY --from=builder /app/prisma ./prisma
 # Install production dependencies
 RUN npm install -g prisma
 RUN npm install @prisma/client
+RUN prisma generate
 
 EXPOSE 3000
 
