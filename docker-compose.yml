@@ -1,37 +1,21 @@
-version: '3'
+version: '3.8'
 
 services:
-  nextjs:
-    build: .
-    container_name: coreyalan-nextjs
-    restart: unless-stopped
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_BASE_URL=https://coreyalan.me
-      - NEXT_PUBLIC_GOOGLE_FORM_ID=${NEXT_PUBLIC_GOOGLE_FORM_ID:-1FAIpQLSeq-4XfCCrlbweklA6W2YB2TIN-nE9lRTgxYvzTA0KI4OfLyw}
-      - OPENSIGN_API_KEY=${OPENSIGN_API_KEY}
-      - OPENSIGN_WEBHOOK_SECRET=${OPENSIGN_WEBHOOK_SECRET}
-      - UPLOAD_API_KEY=${UPLOAD_API_KEY}
-      - NEXT_PUBLIC_UPLOAD_API_KEY=${NEXT_PUBLIC_UPLOAD_API_KEY}
-      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT:-central-run-456618-v0}
-    networks:
-      - proxy
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.coreyalan.rule=Host(`coreyalan.me`)"
-      - "traefik.http.routers.coreyalan.entrypoints=websecure"
-      - "traefik.http.routers.coreyalan.tls=true"
-      - "traefik.http.routers.coreyalan.tls.certresolver=letsencrypt"
-      - "traefik.http.services.coreyalan.loadbalancer.server.port=3000"
-    volumes:
-      - ./.next/cache:/app/.next/cache
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
-
-networks:
-  proxy:
-    external: true
+      - EMAIL_SERVER_HOST=${EMAIL_SERVER_HOST}
+      - EMAIL_SERVER_PORT=${EMAIL_SERVER_PORT}
+      - EMAIL_SERVER_USER=${EMAIL_SERVER_USER}
+      - EMAIL_SERVER_PASSWORD=${EMAIL_SERVER_PASSWORD}
+      - EMAIL_SERVER_SECURE=${EMAIL_SERVER_SECURE}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - EMAIL_TO=${EMAIL_TO}
+    env_file:
+      - .env.local
+      - .env.email

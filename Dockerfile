@@ -5,6 +5,9 @@ COPY . .
 # Install dependencies
 RUN npm ci
 
+# Install TypeScript type definitions for nodemailer
+RUN npm install --save-dev @types/nodemailer
+
 # Generate Prisma client and ensure it's available for build
 RUN npx prisma generate
 
