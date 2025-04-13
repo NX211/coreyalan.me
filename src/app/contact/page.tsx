@@ -6,7 +6,7 @@ import { faGithub, faLinkedin, faMastodon, faBluesky } from '@fortawesome/free-b
 import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
-import GoogleForm from '@/components/GoogleForm';
+import ContactForm from '@/components/ContactForm';
 
 export default function Contact() {
   return (
@@ -181,8 +181,7 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-8">
-            <GoogleForm
-              formId={process.env.NEXT_PUBLIC_GOOGLE_FORM_ID || ''}
+            <ContactForm
               title="Send a Message"
               description="Fill out the form below to get in touch with me."
             />
