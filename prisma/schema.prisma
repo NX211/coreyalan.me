@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for storing client information
+model User {
+  id             String          @id @default(uuid())
+  email          String          @unique
+  name           String?
+  company        String?
+  phone          String?
+  documents      Document[]      // Documents uploaded by the user
+  signedDocuments SignedDocument[] // Documents signed by the user
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+// Document model for tracking uploaded files
+model Document {
+  id            String    @id @default(uuid())
+  fileName      String
+  fileType      String    // MIME type
+  fileSize      Int       // Size in bytes
+  filePath      String    // Path in Google Drive or storage
+  driveFileId   String?   // Google Drive file ID if applicable
+  description   String?
+  user          User      @relation(fields: [userId], references: [id])
+  userId        String
+  isPublic      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// SignedDocument model for tracking document signing status
+model SignedDocument {
+  id                String    @id @default(uuid())
+  documentName      String
+  documentType      String    // e.g., "nda", "contract", "sow"
+  status            Status    @default(PENDING)
+  externalId        String?   // ID from external signing service like OpenSign
+  documentUrl       String    // URL to the document for signing
+  signedDocumentUrl String?   // URL to the signed document
+  signer            User      @relation(fields: [signerId], references: [id])
+  signerId          String
+  signedAt          DateTime?
+  expiresAt         DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+// Enum for document status
+enum Status {
+  PENDING
+  SIGNED
+  EXPIRED
+  DECLINED
+  VOIDED
+}
+
+// DocumentTemplate model for reusable documents
+model DocumentTemplate {
+  id           String    @id @default(uuid())
+  name         String
+  documentType String    // e.g., "nda", "contract", "sow"
+  templateUrl  String    // URL to the template
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}

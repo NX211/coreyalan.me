@@ -1,60 +1,14 @@
 'use client';
 
-import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLocationDot, faClock, faPhone, faGlobe, faInfoCircle, faTicket, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin, faMastodon, faBluesky } from '@fortawesome/free-brands-svg-icons';
 import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
+import GoogleForm from '@/components/GoogleForm';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-
-    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeq-4XfCCrlbweklA6W2YB2TIN-nE9lRTgxYvzTA0KI4OfLyw/formResponse';
-    
-    try {
-      // Create form data object with Google Forms entry IDs
-      const googleFormsData = new FormData();
-      googleFormsData.append('entry.2005620554', formData.name); // Replace with your actual entry IDs
-      googleFormsData.append('entry.1045781291', formData.email);
-      googleFormsData.append('entry.1065046570', formData.subject);
-      googleFormsData.append('entry.1166974658', formData.message);
-
-      // Submit to Google Forms
-      await fetch(formUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: googleFormsData
-      });
-
-      setSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (err) {
-      setError('There was an error submitting your message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="pt-24 pb-16">
       {/* Hero Section */}
@@ -227,106 +181,11 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h2>
-            
-            {submitted ? (
-              <div className="bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 p-4 rounded-lg">
-                <p className="text-center">
-                  Thank you for your message! I'll get back to you as soon as possible.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Subject
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="Project Inquiry">Project Inquiry</option>
-                    <option value="Consultation">Consultation</option>
-                    <option value="Support">Support</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:text-white"
-                    placeholder="Your message here..."
-                  />
-                </div>
-
-                {error && (
-                  <div className="text-red-600 dark:text-red-400 text-sm">
-                    {error}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-md font-medium transition-colors duration-300 flex items-center justify-center"
-                >
-                  {isSubmitting ? (
-                    'Sending...'
-                  ) : (
-                    <>
-                      <FontAwesomeIcon icon={faPaperPlane} className="mr-2 h-4 w-4" />
-                      Send Message
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+            <GoogleForm
+              formId={process.env.NEXT_PUBLIC_GOOGLE_FORM_ID || ''}
+              title="Send a Message"
+              description="Fill out the form below to get in touch with me."
+            />
           </div>
         </div>
       </div>

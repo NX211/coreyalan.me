@@ -5,7 +5,7 @@ const nextConfig = {
   },
   output: 'standalone',
   experimental: {
-    outputFileTracingRoot: undefined,
+    serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
   },
   // Enable React strict mode for better development practices
   reactStrictMode: true,

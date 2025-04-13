@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { uploadDocument, handleApiError } from '@/lib/docuseal';
+import { uploadDocument, handleApiError } from '@/lib/opensign';
 import { toast } from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 

@@ -118,19 +118,16 @@ export default function ClientPortal() {
             <div style={{ paddingBottom: '60px' }}>
               <div className="flex items-center mb-4">
                 <FontAwesomeIcon icon={faFileSignature} className="text-primary h-6 w-6 mr-3" />
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Document Signing</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Document Center</h2>
               </div>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Sign important documents securely online. Access and sign NDAs, contracts, and other project-related documents.
+                Upload and share project files securely through our document system. Sign important documents online including NDAs, contracts, and more.
               </p>
               <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Available Documents:</h3>
-                <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
-                  <li>Non-Disclosure Agreements</li>
-                  <li>Project Contracts</li>
-                  <li>Service Agreements</li>
-                  <li>Other Legal Documents</li>
-                </ul>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Document Sharing:</h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Securely upload files for collaboration and feedback. Our system also provides electronic document signing capabilities with legal validity.
+                </p>
               </div>
             </div>
             <div className="absolute bottom-6 left-0 right-0 text-center">

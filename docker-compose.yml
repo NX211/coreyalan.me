@@ -4,10 +4,16 @@ services:
   nextjs:
     build: .
     container_name: coreyalan-nextjs
+    restart: unless-stopped
     environment:
       - NODE_ENV=production
-      - DOCUSEAL_API_KEY=${DOCUSEAL_API_KEY:-your_api_key_here}
-    restart: unless-stopped
+      - NEXT_PUBLIC_API_BASE_URL=https://coreyalan.me
+      - NEXT_PUBLIC_GOOGLE_FORM_ID=${NEXT_PUBLIC_GOOGLE_FORM_ID:-1FAIpQLSeq-4XfCCrlbweklA6W2YB2TIN-nE9lRTgxYvzTA0KI4OfLyw}
+      - OPENSIGN_API_KEY=${OPENSIGN_API_KEY}
+      - OPENSIGN_WEBHOOK_SECRET=${OPENSIGN_WEBHOOK_SECRET}
+      - UPLOAD_API_KEY=${UPLOAD_API_KEY}
+      - NEXT_PUBLIC_UPLOAD_API_KEY=${NEXT_PUBLIC_UPLOAD_API_KEY}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT:-central-run-456618-v0}
     networks:
       - proxy
     labels:
@@ -17,6 +23,14 @@ services:
       - "traefik.http.routers.coreyalan.tls=true"
       - "traefik.http.routers.coreyalan.tls.certresolver=letsencrypt"
       - "traefik.http.services.coreyalan.loadbalancer.server.port=3000"
+    volumes:
+      - ./.next/cache:/app/.next/cache
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
 networks:
   proxy:
