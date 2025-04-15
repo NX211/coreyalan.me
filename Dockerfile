@@ -5,6 +5,9 @@ COPY . .
 # Install dependencies using npm install to update package-lock.json
 RUN npm install
 
+# Re-run install to ensure dev dependencies like Jest are correctly picked up after lock file update
+RUN npm install
+
 # Install TypeScript type definitions for nodemailer and jest
 RUN npm install --save-dev @types/nodemailer @types/jest
 
