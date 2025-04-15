@@ -1,24 +1,21 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
-COPY . .
 
-# Clear existing node_modules and npm cache
+# Copy package manifests first for better layer caching
+COPY package*.json ./
+
+# Clear existing node_modules and npm cache (still useful before a fresh install)
 RUN rm -rf node_modules
 RUN npm cache clean --force
 
-# Install dependencies using npm install to update package-lock.json
+# Install all dependencies (including devDependencies needed for build)
+# Using --legacy-peer-deps might be needed depending on project specifics, add if required
 RUN npm install
 
-# Re-run install to ensure dev dependencies like Jest are correctly picked up after lock file update
-RUN npm install
+# Copy the rest of the application code
+COPY . .
 
-# Install TypeScript type definitions for nodemailer and jest
-RUN npm install --save-dev @types/nodemailer @types/jest
-
-# Install missing dependencies
-RUN npm install @tanstack/react-query @tanstack/react-query-devtools @upstash/redis next-auth express-rate-limit zustand
-
-# Generate Prisma client and ensure it's available for build
+# Generate Prisma client after code and node_modules are in place
 RUN npx prisma generate
 
 # Make an environment variable for the build to detect we're in Docker build
@@ -46,13 +43,12 @@ COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma/schema.prisma ./prisma/schema.prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 # Install production dependencies
 RUN npm install -g prisma
-RUN npm install @prisma/client @tanstack/react-query @upstash/redis next-auth express-rate-limit zustand
-RUN prisma generate
+RUN npm install @prisma/client@$(npm view @prisma/client version)
 
 # Set the correct port for Cloud Run
 ENV PORT 8080
