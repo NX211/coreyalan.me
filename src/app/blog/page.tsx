@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getSortedPostsData } from '@/lib/blog';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Icon from '@/components/ui-components/Icon';
 import { faCalendarAlt, faUser, faTags, faClock, faNewspaper } from '@fortawesome/free-solid-svg-icons';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/layout/PageHeader';
 
 export default async function Blog() {
   const posts = await getSortedPostsData();
@@ -29,18 +30,21 @@ export default async function Blog() {
         <div className="container mx-auto px-4">
           <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
             {post.coverImage && (
-              <div className="h-64 overflow-hidden">
-                <img 
+              <div className="relative h-64">
+                <Image 
                   src={post.coverImage} 
                   alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-300 hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
                 />
               </div>
             )}
             <div className="p-8">
               <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-4 space-x-4">
                 <div className="flex items-center">
-                  <FontAwesomeIcon icon={faCalendarAlt} className="h-3 w-3 mr-1" />
+                  <Icon icon={faCalendarAlt} className="h-3 w-3 mr-1" />
                   <span>{new Date(post.date).toLocaleDateString('en-US', { 
                     year: 'numeric', 
                     month: 'long', 
@@ -48,11 +52,11 @@ export default async function Blog() {
                   })}</span>
                 </div>
                 <div className="flex items-center">
-                  <FontAwesomeIcon icon={faUser} className="h-3 w-3 mr-1" />
+                  <Icon icon={faUser} className="h-3 w-3 mr-1" />
                   <span>{post.author}</span>
                 </div>
                 <div className="flex items-center">
-                  <FontAwesomeIcon icon={faClock} className="h-3 w-3 mr-1" />
+                  <Icon icon={faClock} className="h-3 w-3 mr-1" />
                   <span>{calculateReadingTime(post.excerpt)}</span>
                 </div>
               </div>
@@ -65,7 +69,7 @@ export default async function Blog() {
                 {post.excerpt}
               </p>
               <div className="flex flex-wrap items-center text-xs text-gray-600 dark:text-gray-400 mb-4">
-                <FontAwesomeIcon icon={faTags} className="h-3 w-3 mr-1" />
+                <Icon icon={faTags} className="h-3 w-3 mr-1" />
                 {post.tags && post.tags.map((tag, index) => (
                   <span key={tag} className="mr-2">
                     #{tag}{index < post.tags.length - 1 ? ' ' : ''}
@@ -88,7 +92,7 @@ export default async function Blog() {
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-lg p-8 text-center">
             <div className="max-w-2xl mx-auto">
-              <FontAwesomeIcon icon={faNewspaper} className="h-12 w-12 text-primary mb-4" />
+              <Icon icon={faNewspaper} className="h-12 w-12 text-primary mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Subscribe to the Newsletter</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
                 Stay updated with the latest posts, tutorials, and insights delivered straight to your inbox.

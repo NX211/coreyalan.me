@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileLines, faInfoCircle, faFileSignature } from '@fortawesome/free-solid-svg-icons';
-import DocumentSigning from '@/components/DocumentSigning';
+import DocumentSigning from '@/components/features/DocumentSigning';
 
 export default function OptionalDocumentsPage() {
   return (
@@ -43,9 +43,8 @@ export default function OptionalDocumentsPage() {
             </div>
             
             <DocumentSigning
-              documentUrl="https://docuseal.com/d/o2Ej2CDZWdZgd9"
-              title="Non-Disclosure Agreement"
-              description="This agreement protects confidential information shared during our collaboration."
+              documentId="o2Ej2CDZWdZgd9"
+              onSignComplete={() => console.log('NDA signed')}
             />
           </div>
 
@@ -57,9 +56,8 @@ export default function OptionalDocumentsPage() {
             </div>
             
             <DocumentSigning
-              documentUrl="https://docuseal.com/d/optional-agreement"
-              title="Project Collaboration Agreement"
-              description="This agreement outlines our preferred collaboration methods and communication channels."
+              documentId="optional-agreement"
+              onSignComplete={() => console.log('Project Collaboration Agreement signed')}
             />
           </div>
 
@@ -71,9 +69,8 @@ export default function OptionalDocumentsPage() {
             </div>
             
             <DocumentSigning
-              documentUrl="https://docuseal.com/d/feedback-form"
-              title="Client Feedback Form"
-              description="Help us improve our services by providing your feedback and suggestions."
+              documentId="feedback-form"
+              onSignComplete={() => console.log('Feedback Form signed')}
             />
           </div>
         </div>

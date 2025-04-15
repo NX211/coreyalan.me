@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faUpload,
   faFileLines,
@@ -9,6 +8,7 @@ import {
   faInfoCircle,
   faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
+import Icon from '@/components/ui-components/Icon';
 
 export default function DocumentsPage() {
   return (
@@ -33,14 +33,14 @@ export default function DocumentsPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="h-12 w-12 flex items-center justify-center bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-200">
-                  <FontAwesomeIcon icon={faUpload} className="h-6 w-6" />
+                  <Icon icon={faUpload} className="h-6 w-6" />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Upload Documents</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">Upload new documents securely</p>
                 </div>
               </div>
-              <FontAwesomeIcon icon={faArrowRight} className="text-gray-400 group-hover:text-primary transition-colors duration-200" />
+              <Icon icon={faArrowRight} className="text-gray-400 group-hover:text-primary transition-colors duration-200" />
             </div>
           </Link>
 
@@ -51,14 +51,14 @@ export default function DocumentsPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="h-12 w-12 flex items-center justify-center bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg mr-4 group-hover:scale-110 transition-transform duration-200">
-                  <FontAwesomeIcon icon={faFileLines} className="h-6 w-6" />
+                  <Icon icon={faFileLines} className="h-6 w-6" />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Available Documents</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">View and sign available documents</p>
                 </div>
               </div>
-              <FontAwesomeIcon icon={faArrowRight} className="text-gray-400 group-hover:text-primary transition-colors duration-200" />
+              <Icon icon={faArrowRight} className="text-gray-400 group-hover:text-primary transition-colors duration-200" />
             </div>
           </Link>
         </div>
@@ -67,7 +67,7 @@ export default function DocumentsPage() {
         <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 mb-12">
           <div className="text-center">
             <div className="inline-flex items-center justify-center h-20 w-20 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-full mb-6">
-              <FontAwesomeIcon icon={faUpload} className="h-10 w-10" />
+              <Icon icon={faUpload} className="h-10 w-10" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
               Upload Documents
@@ -79,7 +79,7 @@ export default function DocumentsPage() {
               href="/client-portal/documents/upload"
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-lg transition-colors duration-200 text-lg"
             >
-              <FontAwesomeIcon icon={faUpload} className="h-5 w-5" />
+              <Icon icon={faUpload} className="h-5 w-5" />
               Start Upload
             </Link>
           </div>
@@ -89,7 +89,7 @@ export default function DocumentsPage() {
         <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 mb-12">
           <div className="flex items-center mb-6">
             <div className="h-12 w-12 flex items-center justify-center bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg mr-4">
-              <FontAwesomeIcon icon={faShield} className="h-6 w-6" />
+              <Icon icon={faShield} className="h-6 w-6" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Secure Document Processing</h2>
           </div>
@@ -112,7 +112,7 @@ export default function DocumentsPage() {
         {/* Info Notice */}
         <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
           <div className="flex items-start">
-            <FontAwesomeIcon icon={faInfoCircle} className="text-blue-500 h-6 w-6 mr-4 mt-1 flex-shrink-0" />
+            <Icon icon={faInfoCircle} className="text-blue-500 h-6 w-6 mr-4 mt-1 flex-shrink-0" />
             <div>
               <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
                 Document Guidelines

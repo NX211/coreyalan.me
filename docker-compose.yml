@@ -1,23 +1,29 @@
-version: '3'
+version: '3.8'
 
 services:
-  nextjs:
+  app:
     build: .
-    container_name: coreyalan-nextjs
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
     environment:
-      - NODE_ENV=production
-      - DOCUSEAL_API_KEY=${DOCUSEAL_API_KEY:-your_api_key_here}
-    restart: unless-stopped
-    networks:
-      - proxy
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.coreyalan.rule=Host(`coreyalan.me`)"
-      - "traefik.http.routers.coreyalan.entrypoints=websecure"
-      - "traefik.http.routers.coreyalan.tls=true"
-      - "traefik.http.routers.coreyalan.tls.certresolver=letsencrypt"
-      - "traefik.http.services.coreyalan.loadbalancer.server.port=3000"
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/coreyalan_dev
+    depends_on:
+      - db
 
-networks:
-  proxy:
-    external: true
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=coreyalan_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

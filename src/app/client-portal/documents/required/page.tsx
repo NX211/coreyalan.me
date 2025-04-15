@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons';
-import DocumentSigning from '@/components/DocumentSigning';
+import DocumentSigning from '@/components/features/DocumentSigning';
 
 export default function RequiredDocumentsPage() {
   return (
@@ -27,9 +27,8 @@ export default function RequiredDocumentsPage() {
             </div>
             
             <DocumentSigning
-              documentUrl="https://docuseal.com/d/o2Ej2CDZWdZgd9"
-              title="Non-Disclosure Agreement"
-              description="Please review and sign the NDA document below. This document is legally binding and protects confidential information."
+              documentId="o2Ej2CDZWdZgd9"
+              onSignComplete={() => console.log('NDA signed')}
             />
           </div>
         </div>
