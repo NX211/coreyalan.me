@@ -12,6 +12,9 @@ RUN npm cache clean --force
 # Using --legacy-peer-deps might be needed depending on project specifics, add if required
 RUN npm install
 
+# Verify installed Prisma version
+RUN ./node_modules/.bin/prisma --version
+
 # Copy the rest of the application code
 COPY . .
 
