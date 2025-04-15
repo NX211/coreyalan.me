@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTheme } from './ThemeProvider';
+import { useTheme } from './app-providers/ThemeProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
