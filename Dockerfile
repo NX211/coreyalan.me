@@ -16,7 +16,8 @@ RUN npm install
 COPY . .
 
 # Generate Prisma client after code and node_modules are in place
-RUN npx prisma generate
+# Output client to a predictable source location
+RUN npx prisma generate --output ./src/generated/prisma
 
 # Make an environment variable for the build to detect we're in Docker build
 ENV NEXT_BUILD_IN_DOCKER=true
@@ -44,11 +45,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma/schema.prisma ./prisma/schema.prisma
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 # Install production dependencies
 RUN npm install -g prisma
-RUN npm install @prisma/client@$(npm view @prisma/client version)
 
 # Set the correct port for Cloud Run
 ENV PORT 8080
