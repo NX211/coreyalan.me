@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Icon from '@/components/ui-components/Icon';
 import { SupportWidget as SupportWidgetScript } from '@/components/app-providers/SupportWidget';
 import dynamic from 'next/dynamic';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SupportWidget = dynamic(() => import('@/components/features/SupportWidget'), {
   ssr: false
@@ -25,19 +26,18 @@ export default function ClientPortal() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <a
-            href="/client-portal/documents"
-            className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center">
-              <Icon icon={faFileAlt} className="w-8 h-8 text-blue-500 mr-4" />
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Documents
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Upload and manage your documents
-                </p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow p-6 relative" style={{ height: '500px' }}>
+            <div style={{ paddingBottom: '60px' }}>
+              <div className="flex items-center">
+                <Icon icon={faFileAlt} className="w-8 h-8 text-blue-500 mr-4" />
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Documents
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Upload and manage your documents
+                  </p>
+                </div>
               </div>
             </div>
             <div className="absolute bottom-6 left-0 right-0 text-center">
@@ -52,19 +52,18 @@ export default function ClientPortal() {
             </div>
           </div>
 
-          <a
-            href="/client-portal/projects"
-            className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center">
-              <Icon icon={faChartLine} className="w-8 h-8 text-green-500 mr-4" />
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Projects
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Track project progress and updates
-                </p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow p-6 relative" style={{ height: '500px' }}>
+            <div style={{ paddingBottom: '60px' }}>
+              <div className="flex items-center">
+                <Icon icon={faChartLine} className="w-8 h-8 text-green-500 mr-4" />
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Projects
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Track project progress and updates
+                  </p>
+                </div>
               </div>
             </div>
             <div className="absolute bottom-6 left-0 right-0 text-center">

@@ -8,6 +8,9 @@ RUN npm ci
 # Install TypeScript type definitions for nodemailer
 RUN npm install --save-dev @types/nodemailer
 
+# Install missing dependencies
+RUN npm install @tanstack/react-query @tanstack/react-query-devtools @upstash/redis
+
 # Generate Prisma client and ensure it's available for build
 RUN npx prisma generate
 
@@ -34,7 +37,7 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 # Install production dependencies
 RUN npm install -g prisma
-RUN npm install @prisma/client
+RUN npm install @prisma/client @tanstack/react-query @upstash/redis
 RUN prisma generate
 
 # Set the correct port for Cloud Run
