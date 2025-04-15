@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import Icon from '@/components/ui-components/Icon';
-import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import GitHubAvatar from '@/components/ui-components/GitHubAvatar';
-import PageHeader from '@/components/layout/PageHeader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload, faEnvelope, faClock } from '@fortawesome/free-solid-svg-icons';
+import GitHubAvatar from '@/components/GitHubAvatar';
+import PageHeader from '@/components/PageHeader';
 
 export default function About() {
   return (
@@ -44,6 +43,14 @@ export default function About() {
                     className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
                   >
                     <Icon icon={faDownload} className="mr-2 h-4 w-4" /> Download Resume
+                  </a>
+                  <a
+                    href="https://calendar.app.google/4bZN3vV8H6aU5cNt9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
+                  >
+                    <FontAwesomeIcon icon={faClock} className="mr-2 h-4 w-4" /> Schedule Meeting
                   </a>
                   <Link
                     href="/contact"

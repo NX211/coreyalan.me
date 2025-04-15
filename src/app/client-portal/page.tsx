@@ -40,7 +40,17 @@ export default function ClientPortal() {
                 </p>
               </div>
             </div>
-          </a>
+            <div className="absolute bottom-6 left-0 right-0 text-center">
+              <a
+                href="https://helpdesk.authoritah.com/help/3530376337"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"
+              >
+                Access Support Portal
+              </a>
+            </div>
+          </div>
 
           <a
             href="/client-portal/projects"
@@ -57,24 +67,44 @@ export default function ClientPortal() {
                 </p>
               </div>
             </div>
-          </a>
+            <div className="absolute bottom-6 left-0 right-0 text-center">
+              <a
+                href="https://billing.coreyalan.me/client/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"
+              >
+                Access Billing Portal
+              </a>
+            </div>
+          </div>
 
-          <a
-            href="/client-portal/settings"
-            className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center">
-              <Icon icon={faCog} className="w-8 h-8 text-purple-500 mr-4" />
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Settings
-                </h2>
+          {/* Document Signing Section */}
+          <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6 relative" style={{ height: '500px' }}>
+            <div style={{ paddingBottom: '60px' }}>
+              <div className="flex items-center mb-4">
+                <FontAwesomeIcon icon={faFileSignature} className="text-primary h-6 w-6 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Document Center</h2>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Upload and share project files securely through our document system. Sign important documents online including NDAs, contracts, and more.
+              </p>
+              <div className="mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Document Sharing:</h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Manage your account settings
+                  Securely upload files for collaboration and feedback. Our system also provides electronic document signing capabilities with legal validity.
                 </p>
               </div>
             </div>
-          </a>
+            <div className="absolute bottom-6 left-0 right-0 text-center">
+              <Link
+                href="/client-portal/documents"
+                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"
+              >
+                Access Documents
+              </Link>
+            </div>
+          </div>
         </div>
 
         <div className="mt-12 text-center">

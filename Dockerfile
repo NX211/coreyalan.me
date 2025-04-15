@@ -1,52 +1,47 @@
-FROM node:18-alpine AS deps
-
-WORKDIR /app
-
-# Copy package files
-COPY package.json package-lock.json ./
-COPY prisma ./prisma/
-
-# Install dependencies
-RUN npm ci --only=production
-RUN npx prisma generate
-
-# Build the application
 FROM node:18-alpine AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Set environment variables
-ENV NEXT_TELEMETRY_DISABLED 1
-ENV NODE_ENV production
+# Install dependencies
+RUN npm ci
 
-# Build application
+# Install TypeScript type definitions for nodemailer
+RUN npm install --save-dev @types/nodemailer
+
+# Generate Prisma client and ensure it's available for build
+RUN npx prisma generate
+
+# Make an environment variable for the build to detect we're in Docker build
+ENV NEXT_BUILD_IN_DOCKER=true
+
+# Build the application
 RUN npm run build
 
-# Production image
 FROM node:18-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+# Install Cloud SQL Auth proxy
+RUN apk add --no-cache wget
+RUN wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.0.0/cloud-sql-proxy.linux.amd64 -O /cloud-sql-proxy
+RUN chmod +x /cloud-sql-proxy
 
-# Create a non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Copy necessary files from builder stage
+COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
-# Switch to non-root user
-USER nextjs
+# Install production dependencies
+RUN npm install -g prisma
+RUN npm install @prisma/client
+RUN prisma generate
 
 # Set the correct port for Cloud Run
 ENV PORT 8080
 EXPOSE 8080
 
-# Start the application
-CMD ["node", "server.js"] 
+# Use an entrypoint script that starts both Cloud SQL proxy and your app
+COPY entrypoint.sh ./
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"] 

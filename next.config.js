@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  poweredByHeader: false,
-  reactStrictMode: true,
-  swcMinify: true,
   images: {
     domains: ['github.com'],
     formats: ['image/avif', 'image/webp'],
@@ -11,70 +7,39 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
   },
-  headers: async () => {
+  output: 'standalone',
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
+  },
+  // Enable React strict mode for better development practices
+  reactStrictMode: true,
+  // Configure proper headers for security
+  async headers() {
     return [
       {
         source: '/:path*',
         headers: [
           {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload',
+            key: 'X-Frame-Options',
+            value: 'DENY',
           },
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
           },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
         ],
       },
-      {
-        source: '/fonts/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/images/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ];
+    ]
   },
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['@fortawesome/free-solid-svg-icons'],
-  },
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  webpack: (config, { dev, isServer }) => {
-    // Optimize font loading
-    config.module.rules.push({
-      test: /\.(woff|woff2|eot|ttf|otf)$/i,
-      type: 'asset/resource',
-    });
+  // Remove static export configuration for Cloud Run
+  // assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
+  // trailingSlash: true,
+  // output: 'export',
+}
 
     // Optimize image loading
     config.module.rules.push({

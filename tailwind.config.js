@@ -10,8 +10,8 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#2563eb', // blue-600
-          dark: '#1d4ed8', // blue-700
+          DEFAULT: '#37abc8',
+          dark: '#2d89a0', // Darker shade for hover states
         },
         accent: {
           DEFAULT: '#f97316',

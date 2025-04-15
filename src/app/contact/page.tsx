@@ -1,16 +1,12 @@
-import { faEnvelope, faLocationDot, faClock, faPhone, faGlobe, faInfoCircle, faTicket } from '@fortawesome/free-solid-svg-icons';
-import Icon from '@/components/ui-components/Icon';
-import PageHeader from '@/components/layout/PageHeader';
-import Link from 'next/link';
-import { ContactForm } from '@/components/forms/ContactForm';
-import SocialLinks from '@/components/ui-components/SocialLinks';
-import Image from 'next/image';
+'use client';
 
-// Define metadata for the page
-export const metadata = {
-  title: 'Contact Me | Corey Stone',
-  description: 'Get in touch with me for inquiries, project discussions, or support.'
-};
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLocationDot, faClock, faPhone, faGlobe, faInfoCircle, faTicket, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedin, faMastodon, faBluesky } from '@fortawesome/free-brands-svg-icons';
+import GitHubAvatar from '@/components/GitHubAvatar';
+import PageHeader from '@/components/PageHeader';
+import Link from 'next/link';
+import ContactForm from '@/components/ContactForm';
 
 export default function Contact() {
   return (
@@ -36,7 +32,7 @@ export default function Contact() {
                   href="https://helpdesk.authoritah.com/help/3530376337"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300"
+                  className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-300"
                 >
                   <Icon icon={faTicket} className="mr-2" />
                   Access Support Portal
@@ -111,9 +107,9 @@ export default function Contact() {
                       corey@coreyalan.me
                     </a>
                   </div>
-                  <div className="flex items-center">
-                    <Icon icon={faLocationDot} className="text-primary h-5 w-5 mr-3" />
-                    <span className="text-gray-600 dark:text-gray-400">Based in California, USA</span>
+                  <div className="flex items-center justify-center md:justify-start">
+                    <FontAwesomeIcon icon={faLocationDot} className="text-primary h-5 w-5 mr-3" />
+                    <span className="text-gray-600 dark:text-gray-400">Clarksville, TN</span>
                   </div>
                 </div>
               </div>
@@ -135,43 +131,27 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+
+            {/* Calendar Booking Button */}
+            <div className="text-center mt-8">
+              <a
+                href="https://calendar.app.google/4bZN3vV8H6aU5cNt9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300"
+              >
+                <FontAwesomeIcon icon={faClock} className="mr-2" />
+                Schedule a Meeting
+              </a>
+            </div>
           </div>
 
           {/* Contact Form */}
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h2>
-            <ContactForm />
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What types of projects do you take on?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                I specialize in custom web applications, system integrations, and infrastructure solutions for small to medium-sized businesses.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What's your typical response time?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                I aim to respond to all inquiries within 24 hours during business days. For urgent matters, please indicate in your message.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Do you offer free consultations?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Yes, I offer a free 30-minute consultation to discuss your project needs and determine if we're a good fit.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What's your availability for new projects?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                I'm currently accepting new projects. Contact me to discuss timelines and availability for your specific needs.
-              </p>
-            </div>
+            <ContactForm
+              title="Send a Message"
+              description="Fill out the form below to get in touch with me."
+            />
           </div>
         </div>
       </div>

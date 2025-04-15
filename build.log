@@ -1,0 +1,33 @@
+
+> coreyalan-portfolio@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.26
+  - Environments: .env.local, .env.production
+  - Experiments (use with caution):
+    · optimizeCss
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (121kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+ ⨯ ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+   Collecting page data ...
+Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+    at new PrismaClient (/Users/nx211/Projects/github/coreyalan.me/node_modules/.prisma/client/default.js:43:11)
+    at 62549 (/Users/nx211/Projects/github/coreyalan.me/.next/server/app/api/auth/register/route.js:1:828)
+    at t (/Users/nx211/Projects/github/coreyalan.me/.next/server/webpack-runtime.js:1:128)
+    at r (/Users/nx211/Projects/github/coreyalan.me/.next/server/app/api/auth/register/route.js:1:10055)
+    at /Users/nx211/Projects/github/coreyalan.me/.next/server/app/api/auth/register/route.js:1:10093
+    at t.X (/Users/nx211/Projects/github/coreyalan.me/.next/server/webpack-runtime.js:1:1206)
+    at /Users/nx211/Projects/github/coreyalan.me/.next/server/app/api/auth/register/route.js:1:10068
+    at Object.<anonymous> (/Users/nx211/Projects/github/coreyalan.me/.next/server/app/api/auth/register/route.js:1:10121)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Object..js (node:internal/modules/cjs/loader:1899:10)
+
+> Build error occurred
+Error: Failed to collect page data for /api/auth/register
+    at /Users/nx211/Projects/github/coreyalan.me/node_modules/next/dist/build/utils.js:1269:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  type: 'Error'
+}
