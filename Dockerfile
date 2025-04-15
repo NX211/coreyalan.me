@@ -2,8 +2,8 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
 
-# Install dependencies
-RUN npm ci
+# Install dependencies using npm install to update package-lock.json
+RUN npm install
 
 # Install TypeScript type definitions for nodemailer
 RUN npm install --save-dev @types/nodemailer
