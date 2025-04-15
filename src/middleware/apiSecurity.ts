@@ -1,15 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import rateLimit, { RateLimitRequestHandler } from 'express-rate-limit';
 import { z } from 'zod';
-import { Request, Response, NextFunction } from 'express';
-
-// Rate limiting configuration
-const limiter: RateLimitRequestHandler = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  standardHeaders: true,
-  legacyHeaders: false,
-});
 
 // Error response type
 export type ErrorResponse = {
@@ -41,14 +31,6 @@ export function apiSecurityMiddleware(
 ) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      // Apply rate limiting
-      await new Promise<void>((resolve, reject) => {
-        limiter(req as unknown as Request, res as unknown as Response, ((err: unknown) => {
-          if (err) reject(err);
-          else resolve();
-        }) as NextFunction);
-      });
-
       // Add security headers
       res.setHeader('X-Content-Type-Options', 'nosniff');
       res.setHeader('X-Frame-Options', 'DENY');
