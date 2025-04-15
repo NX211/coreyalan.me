@@ -2,6 +2,10 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
 
+# Clear existing node_modules and npm cache
+RUN rm -rf node_modules
+RUN npm cache clean --force
+
 # Install dependencies using npm install to update package-lock.json
 RUN npm install
 

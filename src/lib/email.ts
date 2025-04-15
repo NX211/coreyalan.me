@@ -1,4 +1,4 @@
-import nodemailer, { Transporter } from 'nodemailer';
+import * as nodemailer from 'nodemailer';
 import { z } from 'zod';
 
 // Email options schema
@@ -29,7 +29,7 @@ export class EmailError extends Error {
 }
 
 export class EmailService {
-  private transporter: Transporter;
+  private transporter: nodemailer.Transporter;
 
   constructor() {
     const config = {
