@@ -241,7 +241,7 @@ export default function DocumentsPage() {
                   Submit a ticket through our help desk for technical assistance
                 </p>
                 <a
-                  href="https://helpdesk.authoritah.com/help/3530376337"
+                  href="https://help.coreyalan.me/help/3530376337"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center w-full bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors"

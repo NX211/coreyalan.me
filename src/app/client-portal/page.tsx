@@ -42,7 +42,7 @@ export default function ClientPortal() {
             </div>
             <div className="absolute bottom-6 left-0 right-0 text-center">
               <a
-                href="https://helpdesk.authoritah.com/help/3530376337"
+                href="https://help.coreyalan.me/help/3530376337"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"

@@ -117,7 +117,7 @@ export default function NdaDocumentPage() {
                           Download Document
                         </a>
                         <a
-                          href="https://helpdesk.authoritah.com/help/3530376337"
+                          href="https://help.coreyalan.me/help/3530376337"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
@@ -218,7 +218,7 @@ export default function NdaDocumentPage() {
                     This NDA is a standard agreement to protect confidential information shared between you and Corey Alan during your project. If you have any questions about this document, please contact us.
                   </p>
                   <a
-                    href="https://helpdesk.authoritah.com/help/3530376337"
+                    href="https://help.coreyalan.me/help/3530376337"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"

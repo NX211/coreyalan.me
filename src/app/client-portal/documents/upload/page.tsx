@@ -389,7 +389,7 @@ export default function DocumentUploadPage() {
                     If you're having trouble uploading files, please contact our support team.
                   </p>
                   <a
-                    href="https://helpdesk.authoritah.com/help/3530376337"
+                    href="https://help.coreyalan.me/help/3530376337"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"

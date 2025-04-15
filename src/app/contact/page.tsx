@@ -32,7 +32,7 @@ export default function Contact() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="https://helpdesk.authoritah.com/help/3530376337"
+                  href="https://help.coreyalan.me/help/3530376337"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-300"
