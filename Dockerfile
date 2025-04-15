@@ -17,7 +17,8 @@ COPY . .
 
 # Generate Prisma client after code and node_modules are in place
 # Output client to a predictable source location
-RUN npx prisma generate --output ./src/generated/prisma
+# Execute local binary directly to ensure correct version
+RUN ./node_modules/.bin/prisma generate --output ./src/generated/prisma
 
 # Make an environment variable for the build to detect we're in Docker build
 ENV NEXT_BUILD_IN_DOCKER=true
