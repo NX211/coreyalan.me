@@ -36,3 +36,6 @@ next-env.d.ts
 # Build logs
 build.log
 *.log
+.next/
+.DS_Store
+.env
