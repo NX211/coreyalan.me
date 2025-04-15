@@ -1,3 +1,5 @@
+export {};
+
 interface PlausibleOptions {
   callback?: () => void;
   props?: Record<string, string | number | boolean>;
@@ -14,7 +16,7 @@ type PlausibleFunction = (
 
 declare global {
   interface Window {
-    plausible: PlausibleFunction;
+    plausible?: (eventName: string, options?: PlausibleOptions) => void;
     plausible_queue?: {
       q: Array<[string, PlausibleOptions | (() => void)]>;
     };

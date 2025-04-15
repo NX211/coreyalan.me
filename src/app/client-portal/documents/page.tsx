@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faFileSignature, 
   faCloudUploadAlt, 

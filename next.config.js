@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    domains: ['github.com'],
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
   },
   output: 'standalone',
   experimental: {
@@ -37,4 +41,30 @@ const nextConfig = {
   // output: 'export',
 }
 
-module.exports = nextConfig 
+    // Optimize image loading
+    config.module.rules.push({
+      test: /\.(png|jpe?g|gif|webp|avif)$/i,
+      type: 'asset',
+      parser: {
+        dataUrlCondition: {
+          maxSize: 10 * 1024, // 10kb
+        },
+      },
+    });
+
+    return config;
+  },
+  env: {
+    // Custom environment variables can go here
+  },
+  // For development only - disable in production builds
+  typescript: {
+    ignoreBuildErrors: process.env.NODE_ENV === 'development',
+  },
+  eslint: {
+    ignoreDuringBuilds: process.env.NODE_ENV === 'development',
+    dirs: ['src'], // Only run ESLint on the src directory
+  },
+};
+
+module.exports = nextConfig; 

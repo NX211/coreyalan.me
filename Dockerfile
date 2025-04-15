@@ -37,7 +37,9 @@ RUN npm install -g prisma
 RUN npm install @prisma/client
 RUN prisma generate
 
-EXPOSE 3000
+# Set the correct port for Cloud Run
+ENV PORT 8080
+EXPOSE 8080
 
 # Use an entrypoint script that starts both Cloud SQL proxy and your app
 COPY entrypoint.sh ./

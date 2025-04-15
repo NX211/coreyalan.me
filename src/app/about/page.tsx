@@ -20,10 +20,16 @@ export default function About() {
             {/* Sidebar */}
             <div className="md:col-span-1">
               <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 sticky top-24">
-                <GitHubAvatar 
-                  username="NX211" 
-                  className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-primary dark:border-primary-light"
-                />
+                <div className="relative w-32 h-32 mx-auto mb-6">
+                  <Image
+                    src="https://github.com/coreyalan.png"
+                    alt="Corey Alan's GitHub avatar"
+                    fill
+                    className="rounded-full object-cover border-4 border-primary dark:border-primary-light"
+                    sizes="(max-width: 768px) 128px, 128px"
+                    priority
+                  />
+                </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4">
                   Corey Stone
                 </h2>
@@ -36,7 +42,7 @@ export default function About() {
                     download
                     className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
                   >
-                    <FontAwesomeIcon icon={faDownload} className="mr-2 h-4 w-4" /> Download Resume
+                    <Icon icon={faDownload} className="mr-2 h-4 w-4" /> Download Resume
                   </a>
                   <a
                     href="https://calendar.app.google/4bZN3vV8H6aU5cNt9"
@@ -50,7 +56,7 @@ export default function About() {
                     href="/contact"
                     className="border border-primary text-primary dark:text-primary-light hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
                   >
-                    <FontAwesomeIcon icon={faEnvelope} className="mr-2 h-4 w-4" /> Contact Me
+                    <Icon icon={faEnvelope} className="mr-2 h-4 w-4" /> Contact Me
                   </Link>
                 </div>
               </div>
@@ -106,25 +112,6 @@ export default function About() {
                       <li>Ansible Configuration Management</li>
                       <li>CI/CD Pipelines</li>
                       <li>GitHub Actions</li>
-                      <li>Infrastructure as Code</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Data & Security</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
-                      <li>Data Engineering & Pipelines</li>
-                      <li>Security Implementation</li>
-                      <li>Monitoring & Logging</li>
-                      <li>Disaster Recovery Planning</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Networking & Solutions</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
-                      <li>Network Administration & Design</li>
-                      <li>Remote Work Solutions</li>
-                      <li>Systems Integration</li>
-                      <li>Social Media Management</li>
                     </ul>
                   </div>
                 </div>
