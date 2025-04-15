@@ -29,7 +29,7 @@ export class EmailError extends Error {
 }
 
 export class EmailService {
-  private transporter: nodemailer.Transporter;
+  private transporter: ReturnType<typeof nodemailer.createTransport>;
 
   constructor() {
     const config = {
