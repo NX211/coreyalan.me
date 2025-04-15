@@ -39,8 +39,8 @@ const nextConfig = {
   // assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
   // trailingSlash: true,
   // output: 'export',
-}
-
+  
+  webpack: (config, { dev, isServer }) => {
     // Optimize image loading
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|webp|avif)$/i,
@@ -54,6 +54,7 @@ const nextConfig = {
 
     return config;
   },
+  
   env: {
     // Custom environment variables can go here
   },
