@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLocationDot, faClock, faPhone, faGlobe, faInfoCircle, faTicket, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin, faMastodon, faBluesky } from '@fortawesome/free-brands-svg-icons';
@@ -7,6 +8,8 @@ import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/PageHeader';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
+import Icon from '@/components/ui-components/Icon';
+import SocialLinks from '@/components/ui-components/SocialLinks';
 
 export default function Contact() {
   return (
@@ -61,7 +64,7 @@ export default function Contact() {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Availability</h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Available for new projects and consultations. Let's discuss your needs.
+              Available for new projects and consultations. Let&apos;s discuss your needs.
             </p>
           </div>
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
@@ -70,7 +73,7 @@ export default function Contact() {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Preferred Contact</h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              Email is the best way to reach me. I'll get back to you as soon as possible.
+              Email is the best way to reach me. I&apos;ll get back to you as soon as possible.
             </p>
           </div>
         </div>

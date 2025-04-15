@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faFileSignature, 
   faCloudUploadAlt, 
@@ -60,7 +61,7 @@ export default function DocumentsPage() {
             </div>
             <div className="p-6 flex-1 flex flex-col">
               <p className="text-gray-600 dark:text-gray-400 mb-auto">
-                Upload documents, designs, spreadsheets, or any project files you'd like to share. Files are securely stored in a shared Google Drive folder for easy collaboration.
+                Upload documents, designs, spreadsheets, or any project files you&apos;d like to share. Files are securely stored in a shared Google Drive folder for easy collaboration.
               </p>
               <div className="mt-6">
                 <Link 
@@ -167,7 +168,7 @@ export default function DocumentsPage() {
                   How does document signing work?
                 </h4>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Our electronic signature system is legally binding and compliant with e-signature laws. Visit the Legal Agreements section to sign documents like the Non-Disclosure Agreement. When you sign a document, you'll be guided through a step-by-step process, and once completed, all parties receive a fully executed copy.
+                  Our electronic signature system is legally binding and compliant with e-signature laws. Visit the Legal Agreements section to sign documents like the Non-Disclosure Agreement. When you sign a document, you&apos;ll be guided through a step-by-step process, and once completed, all parties receive a fully executed copy.
                 </p>
               </div>
             </div>

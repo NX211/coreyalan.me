@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faEnvelope, faClock } from '@fortawesome/free-solid-svg-icons';
 import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/PageHeader';
+import Icon from '@/components/ui-components/Icon';
 
 export default function About() {
   return (
@@ -72,7 +74,7 @@ export default function About() {
                   I work as a technology consultant primarily with small businesses, creating custom solutions to technical problems. My expertise spans web development, custom integration, and workflow automation to help businesses modernize their processes.
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  With a background in systems administration and full-stack development, I bring a holistic approach to technology problems. I believe in finding the right solution for each client's unique needs, whether that's a custom web application, an automated workflow, or integrating existing systems.
+                  With a background in systems administration and full-stack development, I bring a holistic approach to technology problems. I believe in finding the right solution for each client&apos;s unique needs, whether that&apos;s a custom web application, an automated workflow, or integrating existing systems.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
@@ -126,14 +128,14 @@ export default function About() {
                   My work with Azure cloud services and Microsoft 365 has helped businesses transition to modern, scalable, and secure work environments. I specialize in creating robust data pipelines and implementing efficient network designs that improve operational workflows while maintaining security best practices.
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  In addition to technical infrastructure, I've helped organizations optimize their digital presence through strategic social media management and implementing streamlined remote work solutions that enhance productivity and collaboration.
+                  In addition to technical infrastructure, I&apos;ve helped organizations optimize their digital presence through strategic social media management and implementing streamlined remote work solutions that enhance productivity and collaboration.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
                   Current Direction
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  I'm currently focused on becoming more involved in the tech community and growing my knowledge and expertise around technologies that solve real business problems. I'm passionate about helping small businesses leverage modern technology solutions that were previously only accessible to larger enterprises.
+                  I&apos;m currently focused on becoming more involved in the tech community and growing my knowledge and expertise around technologies that solve real business problems. I&apos;m passionate about helping small businesses leverage modern technology solutions that were previously only accessible to larger enterprises.
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                   In addition to client work, I maintain open-source projects like Traefik plugins and create content for my HomeLab Hobby channel, where I share knowledge about home server setups, self-hosting, and infrastructure.
@@ -143,7 +145,7 @@ export default function About() {
                   Ready to Collaborate?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-8">
-                  If you're looking for custom technology solutions for your business or have a project in mind, I'd love to discuss how I can help.
+                  If you&apos;re looking for custom technology solutions for your business or have a project in mind, I&apos;d love to discuss how I can help.
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                   <Link
