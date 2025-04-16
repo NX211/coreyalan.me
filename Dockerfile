@@ -1,4 +1,4 @@
-FROM node:18-alpine AS builder
+FROM node:18-slim AS builder
 WORKDIR /app
 
 # Copy package manifests first for better layer caching
@@ -23,7 +23,7 @@ RUN ./node_modules/.bin/prisma generate
 
 # Explicitly copy the required engine file into the client directory
 # This helps ensure Next.js build finds it during analysis
-RUN cp ./node_modules/@prisma/engines/libquery_engine-linux-musl-openssl-3.0.x.so.node ./node_modules/.prisma/client/
+RUN cp ./node_modules/@prisma/engines/libquery_engine-debian-openssl-3.0.x.so.node ./node_modules/.prisma/client/
 
 # Make an environment variable for the build to detect we're in Docker build
 ENV NEXT_BUILD_IN_DOCKER=true
@@ -38,11 +38,13 @@ RUN echo '#!/bin/sh' > prebuild.sh && \
 # Build the application with improved linting
 RUN ./prebuild.sh || true && npx next build --no-lint
 
-FROM node:18-alpine AS runner
+FROM node:18-slim AS runner
 WORKDIR /app
 
+# Install wget using apt-get for Debian-based image
+RUN apt-get update && apt-get install -y wget --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
 # Install Cloud SQL Auth proxy
-RUN apk add --no-cache wget
 RUN wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.0.0/cloud-sql-proxy.linux.amd64 -O /cloud-sql-proxy
 RUN chmod +x /cloud-sql-proxy
 
@@ -54,7 +56,7 @@ COPY --from=builder /app/prisma/schema.prisma ./prisma/schema.prisma
 
 # Copy the generated client from the default location
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-# Explicitly copy the Prisma engine files
+# Explicitly copy the Prisma engine files (will include the correct Debian engine)
 COPY --from=builder /app/node_modules/@prisma/engines ./node_modules/@prisma/engines
 
 # Install production dependencies
