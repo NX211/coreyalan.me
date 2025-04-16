@@ -51,6 +51,8 @@ COPY --from=builder /app/prisma/schema.prisma ./prisma/schema.prisma
 
 # Copy the generated client from the default location
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+# Explicitly copy the Prisma engine files
+COPY --from=builder /app/node_modules/@prisma/engines ./node_modules/@prisma/engines
 
 # Install production dependencies
 RUN npm install -g prisma
