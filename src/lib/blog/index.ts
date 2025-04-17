@@ -83,14 +83,24 @@ export async function getSortedPostsData(): Promise<BlogPostMetadata[]> {
       const fullPath = path.join(blogDirectory, fileName);
       const fileContents = await fs.readFile(fullPath, 'utf8');
       const matterResult = matter(fileContents);
-      
-      return {
+
+      // Explicitly create a plain object to avoid potential serialization issues
+      const postData = {
         id,
-        ...matterResult.data
+        title: matterResult.data.title,
+        date: matterResult.data.date,
+        excerpt: matterResult.data.excerpt,
+        author: matterResult.data.author,
+        coverImage: matterResult.data.coverImage,
+        tags: matterResult.data.tags,
+        // Add any other fields from your frontmatter here
       };
+
+      return postData; // Return the plain object
     })
   );
 
+  // Now parse the guaranteed plain objects
   return allPostsData
     .map(post => blogPostMetadataSchema.parse(post))
     .sort((a, b) => (a.date < b.date ? 1 : -1));
