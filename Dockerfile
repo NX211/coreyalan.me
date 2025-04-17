@@ -24,10 +24,6 @@ COPY . .
 # Generate Prisma client after code and node_modules are in place
 RUN ./node_modules/.bin/prisma generate
 
-# Explicitly copy the required engine file into the client directory
-# This helps ensure Next.js build finds it during analysis
-RUN cp ./node_modules/@prisma/engines/libquery_engine-debian-openssl-3.0.x.so.node ./node_modules/.prisma/client/
-
 # Make an environment variable for the build to detect we're in Docker build
 ENV NEXT_BUILD_IN_DOCKER=true
 
