@@ -17,6 +17,7 @@ datasource db {
 // User model for storing client information
 model User {
   id             String          @id @default(uuid())
+  invoiceNinjaId String?         @unique // Added field to link to Invoice Ninja
   email          String          @unique
   name           String?
   company        String?
