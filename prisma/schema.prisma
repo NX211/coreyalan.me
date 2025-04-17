@@ -22,6 +22,13 @@ model User {
   name           String?
   company        String?
   phone          String?
+  website        String?         // Added field
+  address1       String?         // Added field
+  address2       String?         // Added field
+  city           String?         // Added field
+  state          String?         // Added field
+  postalCode     String?         // Added field
+  countryId      String?         // Added field (assuming String, adjust if needed)
   documents      Document[]      // Documents uploaded by the user
   signedDocuments SignedDocument[] // Documents signed by the user
   createdAt      DateTime        @default(now())
