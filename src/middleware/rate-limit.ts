@@ -16,12 +16,15 @@ export async function rateLimitMiddleware(request: NextRequest) {
     }
 
     if (current > maxRequests) {
+      // Rate limit exceeded, return 429
       return new NextResponse('Too Many Requests', { status: 429 });
     }
 
-    return NextResponse.next();
+    // Rate limit check passed, allow request to proceed
+    return null; // Use null for API route middleware
   } catch (error) {
-    console.error('Rate limit error:', error);
-    return NextResponse.next();
+    console.error('Rate limit error (proceeding):', error);
+    // If Redis fails, allow request to proceed but log the error
+    return null; // Use null for API route middleware
   }
 } 

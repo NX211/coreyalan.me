@@ -5,6 +5,9 @@ import Icon from '@/components/ui-components/Icon';
 import { faCalendarAlt, faUser, faTags, faClock, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import PageHeader from '@/components/layout/PageHeader';
 
+// Force dynamic rendering to work around potential serialization issues during build
+export const dynamic = 'force-dynamic';
+
 export default async function Blog() {
   const posts = await getSortedPostsData();
   const post = posts[0]; // Get the most recent blog post
