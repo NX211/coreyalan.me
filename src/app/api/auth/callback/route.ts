@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { securityMiddleware } from '@/middleware/compose';
 import { invoiceNinjaService } from '@/lib/invoice-ninja';
-import { SessionService } from '@/lib/session';
+import { setSession } from '@/lib/session';
 import { SecurityLogger } from '@/lib/security/logger';
 
 export const GET = securityMiddleware(async (request: NextRequest) => {
@@ -23,19 +23,22 @@ export const GET = securityMiddleware(async (request: NextRequest) => {
 
   try {
     const token = await invoiceNinjaService.exchangeCodeForToken(code);
-    SessionService.setSession(token);
+    setSession(token);
     
     // Log successful authentication
     await SecurityLogger.logSecurityEvent('oauth_callback_success', request, {
       tokenType: token.token_type
     });
     
-    return NextResponse.redirect(new URL('/', request.url));
+    const redirectUrl = new URL('/client-portal', request.url);
+    return NextResponse.redirect(redirectUrl);
   } catch (error: any) {
     console.error('OAuth callback error:', error);
     await SecurityLogger.logSecurityEvent('oauth_callback_failure', request, {
       error: error?.message || 'Unknown error'
     });
-    return NextResponse.redirect(new URL('/auth/login?error=auth_failed', request.url));
+    const loginUrl = new URL('/auth/login', request.url);
+    loginUrl.searchParams.set('error', 'authentication_failed');
+    return NextResponse.redirect(loginUrl);
   }
 }); 

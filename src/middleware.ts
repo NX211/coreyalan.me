@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { SessionService } from './lib/session';
+// Import specific functions instead of the class
+import { validateSession } from './lib/session'; 
 
 const PUBLIC_PATHS = ['/auth/login', '/auth/register', '/auth/callback', '/api/auth/callback'];
 
@@ -24,7 +25,8 @@ export async function middleware(request: NextRequest) {
   } else {
     // Only perform runtime validation when it's a real user request
     try {
-        isValidSession = await SessionService.validateSession();
+        // Call the validateSession function directly
+        isValidSession = await validateSession(); 
     } catch (error) {
       console.error('Session validation error during request:', error);
       // Treat validation error as invalid session at runtime
