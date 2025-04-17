@@ -95,7 +95,8 @@ export type ContactFormData = z.infer<typeof contactFormDataSchema>;
  * Document upload form data schema
  */
 export const documentUploadFormDataSchema = z.object({
-  file: z.instanceof(File),
+  // Use conditional check for File type to avoid server-side errors
+  file: typeof window !== 'undefined' ? z.instanceof(File) : z.any(),
   description: enhancedStringSchema(1, 500).optional(),
   tags: z.array(enhancedStringSchema(1, 50)).optional()
 });
