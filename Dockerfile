@@ -38,8 +38,8 @@ RUN ./prebuild.sh || true && npx next build --no-lint
 FROM node:18-slim AS runner
 WORKDIR /app
 
-# Install wget needed for Cloud SQL proxy download
-RUN apt-get update && apt-get install -y wget --no-install-recommends && rm -rf /var/lib/apt/lists/*
+# Install wget and ca-certificates needed for Cloud SQL proxy download
+RUN apt-get update && apt-get install -y wget ca-certificates --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Install Cloud SQL Auth proxy
 RUN wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.0.0/cloud-sql-proxy.linux.amd64 -O /cloud-sql-proxy && \
