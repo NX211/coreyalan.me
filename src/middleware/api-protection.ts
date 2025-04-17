@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 export async function apiProtectionMiddleware(request: NextRequest) {
   // Skip protection for public routes
   if (request.nextUrl.pathname.startsWith('/api/public')) {
-    return NextResponse.next();
+    return null; // Allow public API requests to proceed
   }
 
   // In production, this would check authentication tokens
@@ -28,5 +28,6 @@ export async function apiProtectionMiddleware(request: NextRequest) {
     );
   }
 
-  return NextResponse.next();
+  // Checks passed, allow request to proceed
+  return null;
 } 

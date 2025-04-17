@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function csrfMiddleware(request: NextRequest) {
-  // Skip CSRF for GET requests
+  // Skip CSRF for GET requests and allow processing
   if (request.method === 'GET') {
-    return NextResponse.next();
+    return null; // Allow GET requests to proceed
   }
 
   // Get CSRF token from header
@@ -21,5 +21,6 @@ export async function csrfMiddleware(request: NextRequest) {
     return new NextResponse('Invalid CSRF token', { status: 403 });
   }
 
-  return NextResponse.next();
+  // CSRF check passed, allow request to proceed
+  return null;
 } 
