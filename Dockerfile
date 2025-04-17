@@ -4,6 +4,9 @@ WORKDIR /app
 # Copy package manifests first for better layer caching
 COPY package*.json ./
 
+# Install openssl needed by Prisma binary engine
+RUN apt-get update && apt-get install -y openssl --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
 # Clear existing node_modules and npm cache (still useful before a fresh install)
 RUN rm -rf node_modules
 RUN npm cache clean --force
