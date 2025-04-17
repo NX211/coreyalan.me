@@ -33,20 +33,32 @@ const MAX_REQUESTS = 5;
  */
 export async function POST(request: NextRequest) {
   try {
-    let data;
+    let formData;
     try {
-      data = await request.json();
+      // Use formData() to handle potential multipart/form-data
+      formData = await request.formData();
     } catch (error) {
+      console.error('Failed to parse request data:', error);
       return NextResponse.json(
         {
           success: false,
-          message: 'Invalid request body',
+          message: 'Invalid request data format',
         },
         { status: 400 }
       );
     }
-    
+
+    // Extract data from FormData
+    const data = {
+      name: formData.get('name') as string | null,
+      email: formData.get('email') as string | null,
+      subject: formData.get('subject') as string | null,
+      message: formData.get('message') as string | null,
+      // Add other fields from your form if necessary
+    };
+
     try {
+      // Validate the extracted data
       const validatedData = contactFormDataSchema.parse(data);
       
       await emailService.sendEmail({
