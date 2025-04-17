@@ -12,31 +12,32 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Skip session validation during build/static generation (check if request.ip exists)
+  // Determine if running during build phase (e.g., check for specific build env var or lack of runtime context)
+  // A simple heuristic: Lack of request.ip often indicates a build-time prerender request.
+  const isBuildPhase = !request.ip;
+
   let isValidSession = false;
-  if (request.ip) { // Only run validation if it seems like a real request
+  if (isBuildPhase) {
+    // Assume session is valid during build/static generation to allow prerendering
+    // Static pages will be built; runtime checks will handle actual user sessions.
+    isValidSession = true;
+  } else {
+    // Only perform runtime validation when it's a real user request
     try {
         isValidSession = await SessionService.validateSession();
     } catch (error) {
       console.error('Session validation error during request:', error);
-      // Decide how to handle validation errors at runtime (e.g., redirect or allow)
-      // For now, let's treat validation error as invalid session
+      // Treat validation error as invalid session at runtime
       isValidSession = false; 
     }
-  } else {
-    // Assume session is valid during build/static generation to allow prerendering
-    // Or potentially return NextResponse.next() if prerendering protected pages isn't desired
-    // For now, let's assume we want static pages built, treating session as valid
-    isValidSession = true; 
   }
 
-  if (!isValidSession) {
+  if (!isValidSession && !isBuildPhase) { // Only redirect if it's runtime and session is invalid
     const loginUrl = new URL('/auth/login', request.url);
     return NextResponse.redirect(loginUrl);
   }
 
-  // If session is valid (or assumed valid during build), allow request
-  // Note: Security headers should be applied globally in next.config.js or another mechanism
+  // Allow request if session is valid or if it's the build phase
   return NextResponse.next(); 
 }
 
