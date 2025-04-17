@@ -124,12 +124,25 @@ export async function getPostData(id: string): Promise<BlogPost> {
   
   const contentHtml = processedContent.toString();
   
-  return blogPostSchema.parse({
+  // Ensure matterResult.data fields are handled correctly, especially date
+  const frontmatter = matterResult.data;
+  const postData = {
     id,
-    contentHtml,
+    title: frontmatter.title,
+    date: String(frontmatter.date), // Explicitly cast date to string
+    excerpt: frontmatter.excerpt,
+    author: frontmatter.author,
+    coverImage: frontmatter.coverImage,
+    tags: frontmatter.tags,
     content: matterResult.content,
-    ...matterResult.data
-  });
+    contentHtml,
+    // Spread any other potential fields AFTER explicitly defined ones
+    // This assumes other fields are serializable or handled by Zod appropriately
+    ...frontmatter, 
+  };
+
+  // Now parse the guaranteed plain object
+  return blogPostSchema.parse(postData);
 }
 
 // Export all schemas for runtime validation
