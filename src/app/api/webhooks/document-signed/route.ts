@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 import * as crypto from 'crypto';
+import { Status } from '@prisma/client';
 
 // Function to validate webhook signature
 function validateSignature(signature: string | null, payload: string): boolean {
@@ -20,6 +21,9 @@ function validateSignature(signature: string | null, payload: string): boolean {
 // POST /api/webhooks/document-signed - Handle signing service webhooks
 export async function POST(request: NextRequest) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     // Get the raw request body for signature validation
     const rawBody = await request.text();
     
@@ -54,7 +58,7 @@ export async function POST(request: NextRequest) {
       await prisma.signedDocument.update({
         where: { id: document.id },
         data: {
-          status: 'SIGNED',
+          status: Status.SIGNED,
           signedAt: new Date(),
           signedDocumentUrl: body.signedDocumentUrl || document.documentUrl,
         },

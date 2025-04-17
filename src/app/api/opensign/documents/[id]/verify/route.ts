@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 
 const OPENSIGN_API_URL = 'https://api.opensignlabs.com/v1';
 
@@ -21,6 +21,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const { id } = params;
     
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     // First check if we have this document in our database
     const storedDocument = await prisma.signedDocument.findFirst({
       where: { externalId: id },
@@ -64,14 +67,27 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         status: storedDocument?.status || 'UNKNOWN'
       }
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Document verification error:', error);
     return NextResponse.json(
       { 
         isValid: false,
-        error: 'Internal server error during verification'
+        error: error.message || 'Internal server error during verification'
       },
       { status: 500 }
     );
   }
+}
+
+// Remove unused POST handler if not needed, or implement similarly
+/*
+export async function POST(request: NextRequest) {
+  try {
+    const prisma = getPrisma(); 
+    if (!prisma) throw new Error('Database connection is unavailable');
+    // ... rest of function using prisma ...
+  } catch (error: any) {
+     // ... error handling ...
+  }
 } 
+*/ 

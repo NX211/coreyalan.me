@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 
 // GET /api/documents/[id] - Get a specific document
 export async function GET(
@@ -7,6 +7,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     const document = await prisma.document.findUnique({
       where: { id: params.id },
     });
@@ -19,10 +22,10 @@ export async function GET(
     }
 
     return NextResponse.json(document);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to fetch document:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch document' },
+      { error: error.message || 'Failed to fetch document' },
       { status: 500 }
     );
   }
@@ -34,6 +37,9 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     const body = await request.json();
     const document = await prisma.document.update({
       where: { id: params.id },
@@ -41,10 +47,10 @@ export async function PATCH(
     });
 
     return NextResponse.json(document);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to update document:', error);
     return NextResponse.json(
-      { error: 'Failed to update document' },
+      { error: error.message || 'Failed to update document' },
       { status: 500 }
     );
   }
@@ -56,15 +62,18 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     await prisma.document.delete({
       where: { id: params.id },
     });
 
     return new NextResponse(null, { status: 204 });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to delete document:', error);
     return NextResponse.json(
-      { error: 'Failed to delete document' },
+      { error: error.message || 'Failed to delete document' },
       { status: 500 }
     );
   }

@@ -40,6 +40,8 @@ const nextConfig = {
   // trailingSlash: true,
   // output: 'export',
   
+  // Remove custom webpack rule for images - next/image handles this
+  /*
   webpack: (config, { dev, isServer }) => {
     // Optimize image loading
     config.module.rules.push({
@@ -54,6 +56,7 @@ const nextConfig = {
 
     return config;
   },
+  */
   
   env: {
     // Custom environment variables can go here

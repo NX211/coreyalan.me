@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faUser, faTags, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { getAllPostIds, getPostData } from '@/lib/blog';
@@ -30,11 +31,13 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
 
           {/* Cover image */}
           {post.coverImage && (
-            <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
-              <img
+            <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-lg shadow-lg">
+              <Image
                 src={post.coverImage}
                 alt={post.title}
-                className="w-full h-auto"
+                fill
+                style={{ objectFit: 'cover' }}
+                priority
               />
             </div>
           )}

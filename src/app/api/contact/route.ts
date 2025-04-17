@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { redis } from '@/lib/redis';
 import { SecurityLogger } from '@/lib/security-logger';
 import { sendEmail } from '@/lib/email';
 import { ApiError } from '@/lib/errors';

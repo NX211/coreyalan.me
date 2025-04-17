@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 
 // GET /api/documents - Get all documents
 export async function GET(request: NextRequest) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     const searchParams = request.nextUrl.searchParams;
     const userId = searchParams.get('userId');
 
@@ -13,10 +16,10 @@ export async function GET(request: NextRequest) {
     });
 
     return NextResponse.json(documents);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to fetch documents:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch documents' },
+      { error: error.message || 'Failed to fetch documents' },
       { status: 500 }
     );
   }
@@ -25,6 +28,9 @@ export async function GET(request: NextRequest) {
 // POST /api/documents - Create a new document
 export async function POST(request: NextRequest) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     const body = await request.json();
     
     const document = await prisma.document.create({
@@ -41,10 +47,10 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(document, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to create document:', error);
     return NextResponse.json(
-      { error: 'Failed to create document' },
+      { error: error.message || 'Failed to create document' },
       { status: 500 }
     );
   }

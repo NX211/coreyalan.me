@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 
 // GET /api/signedDocuments/[id] - Get a specific signed document
 export async function GET(
@@ -7,6 +7,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     const document = await prisma.signedDocument.findUnique({
       where: { id: params.id },
       include: { signer: true },
@@ -35,6 +38,9 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
     const body = await request.json();
     
     const document = await prisma.signedDocument.update({
@@ -46,10 +52,33 @@ export async function PATCH(
     });
 
     return NextResponse.json(document);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to update signed document:', error);
     return NextResponse.json(
-      { error: 'Failed to update signed document' },
+      { error: error.message || 'Failed to update signed document' },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE /api/signedDocuments/[id] - Delete a signed document
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
+
+    await prisma.signedDocument.delete({ 
+      where: { id: params.id },
+    });
+
+    return new NextResponse(null, { status: 204 });
+  } catch (error: any) {
+    console.error('Failed to delete signed document:', error);
+    return NextResponse.json(
+      { error: error.message || 'Failed to delete signed document' },
       { status: 500 }
     );
   }

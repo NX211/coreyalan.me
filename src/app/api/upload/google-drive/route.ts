@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 import { GoogleAuth } from 'google-auth-library';
 import { google } from 'googleapis';
 
@@ -67,6 +67,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    const prisma = getPrisma();
+    if (!prisma) throw new Error('Database connection is unavailable');
 
     // Find or create the user
     let user = await prisma.user.findUnique({

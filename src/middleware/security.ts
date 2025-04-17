@@ -4,7 +4,6 @@ import { composeMiddleware } from './compose';
 import { rateLimitMiddleware } from './rate-limit';
 import { csrfMiddleware } from './csrf';
 import { apiProtectionMiddleware } from './api-protection';
-import { SessionService } from '@/lib/session';
 
 // Public routes that don't require authentication
 const PUBLIC_ROUTES = [

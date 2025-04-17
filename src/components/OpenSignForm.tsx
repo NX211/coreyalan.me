@@ -115,12 +115,14 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
   useEffect(() => {
     if (!formContainerRef.current || !isLoaded || error) return;
 
+    // Capture the ref's current value for use in cleanup
+    const container = formContainerRef.current; 
     let formElement: HTMLElement | null = null;
     
     try {
       // Clear previous form - safely check if there are any children first
-      if (formContainerRef.current.children.length > 0 && elementAddedRef.current) {
-        formContainerRef.current.innerHTML = '';
+      if (container.children.length > 0 && elementAddedRef.current) {
+        container.innerHTML = '';
       }
 
       // Create new form element
@@ -137,7 +139,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
       formElement.setAttribute('data-theme', theme);
 
       // Append to container
-      formContainerRef.current.appendChild(formElement);
+      container.appendChild(formElement);
       elementAddedRef.current = true;
     } catch (err) {
       console.error('Error creating form element:', err);
@@ -150,8 +152,9 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
     // Cleanup function
     return () => {
       try {
-        if (formContainerRef.current && formElement && formContainerRef.current.contains(formElement)) {
-          formContainerRef.current.removeChild(formElement);
+        // Use the captured container variable in cleanup
+        if (container && formElement && container.contains(formElement)) { 
+          container.removeChild(formElement);
         }
       } catch (err) {
         console.error('Error during cleanup:', err);

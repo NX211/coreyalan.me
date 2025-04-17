@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCode, faLink } from '@fortawesome/free-solid-svg-icons';
@@ -22,11 +23,12 @@ export default function ProjectCard({
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-4">
             {logoUrl && (
-              <div className="flex-shrink-0">
-                <img 
+              <div className="relative flex-shrink-0 w-10 h-10">
+                <Image 
                   src={logoUrl} 
                   alt={`${title} logo`} 
-                  className="w-10 h-10 object-contain" 
+                  fill
+                  style={{ objectFit: 'contain' }}
                 />
               </div>
             )}

@@ -39,7 +39,7 @@ export function composeMiddleware(...middlewares: Middleware[]) {
 
 // Export pre-composed security middleware
 export const securityMiddleware = composeMiddleware(
-  rateLimitMiddleware,
+  // rateLimitMiddleware, // Temporarily comment out
   csrfMiddleware,
   apiProtectionMiddleware
 ); 

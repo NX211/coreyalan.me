@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import Icon from '@/components/ui-components/Icon';
 import { 
   faExternalLinkAlt,
@@ -24,14 +25,15 @@ export default function ProjectFeatureCard({
   type
 }: ProjectFeatureCardProps) {
   return (
-    <div className="flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
-      <div className="relative h-48">
-        <img
+    <div className="flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden dark:bg-gray-800 dark:border-gray-700">
+      <div className="relative h-48 w-full">
+        <Image
           src={imageUrl}
           alt={title}
-          className="w-full h-full object-cover"
+          fill
+          style={{ objectFit: 'cover' }}
         />
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 z-10">
           <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
             type === 'frontend' ? 'bg-blue-100 text-blue-800' :
             type === 'backend' ? 'bg-green-100 text-green-800' :
