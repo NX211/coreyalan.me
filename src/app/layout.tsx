@@ -4,9 +4,9 @@ import { Inter } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/app-providers/ThemeProvider';
-import { PlausibleAnalytics } from '@/components/app-providers/PlausibleAnalytics';
 import { QueryProvider } from '@/lib/queries/QueryProvider';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import PlausibleProvider from 'next-plausible';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,11 +20,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const plausibleDomain = "coreyalan.me";
+  const customDomain = "stats.authoritah.com";
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <PlausibleProvider 
+          domain={plausibleDomain} 
+          customDomain={`https://${customDomain}`} 
+          selfHosted={true} 
+        />
+      </head>
       <body className={inter.className}>
         <ThemeProvider>
-          <PlausibleAnalytics />
           <QueryProvider>
             <div className="flex flex-col min-h-screen dark:bg-[#0F172A]">
               <Header />

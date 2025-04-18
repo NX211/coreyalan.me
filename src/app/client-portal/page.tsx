@@ -4,13 +4,7 @@ import PageHeader from '@/components/layout/PageHeader';
 import { faTicket, faFileInvoice, faClock, faHeadset, faLock, faFileSignature, faFileAlt, faChartLine, faCog, faQuestionCircle, faFileLines, faShield, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import Icon from '@/components/ui-components/Icon';
-import { SupportWidget as SupportWidgetScript } from '@/components/app-providers/SupportWidget';
-import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-const SupportWidget = dynamic(() => import('@/components/features/SupportWidget'), {
-  ssr: false
-});
 
 export default function ClientPortal() {
   return (
@@ -113,7 +107,6 @@ export default function ClientPortal() {
           </div>
         </div>
       </div>
-      <SupportWidgetScript />
     </div>
   );
 } 
