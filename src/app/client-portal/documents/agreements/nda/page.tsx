@@ -13,7 +13,7 @@ import {
   faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 import DocumentSigning from '@/components/DocumentSigning';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/layout/PageHeader';
 
 export default function NdaDocumentPage() {
   const [isSigned, setIsSigned] = useState(false);

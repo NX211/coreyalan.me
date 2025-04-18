@@ -10,7 +10,7 @@ import {
   faFileContract,
   faFileAlt
 } from '@fortawesome/free-solid-svg-icons';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/layout/PageHeader';
 
 export default function AgreementsPage() {
   return (

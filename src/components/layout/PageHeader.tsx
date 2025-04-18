@@ -1,35 +1,45 @@
 'use client';
 
-import Link from 'next/link';
-import Icon from '@/components/ui-components/Icon';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
 interface PageHeaderProps {
   title: string;
-  description?: string;
-  backLink?: string;
+  description: string;
 }
 
-export default function PageHeader({ title, description, backLink }: PageHeaderProps) {
+export default function PageHeader({ title, description }: PageHeaderProps) {
   return (
-    <div className="mb-8">
-      {backLink && (
-        <Link
-          href={backLink}
-          className="mb-4 inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
-        >
-          <Icon icon={faArrowLeft} className="mr-2 h-4 w-4" />
-          Back
-        </Link>
-      )}
-      <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        {title}
-      </h1>
-      {description && (
-        <p className="mt-2 text-lg text-gray-500">
+    <section className="relative py-16 overflow-hidden bg-gray-50 dark:bg-[#1E293B]">
+      {/* Modern gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary-dark dark:from-[#1E293B] dark:to-[#1E293B] z-0">
+        {/* Minimalist geometric elements */}
+        <div className="absolute inset-0">
+          {/* Horizontal accent line */}
+          <div className="absolute top-1/4 left-0 w-full h-px bg-white/10"></div>
+          
+          {/* Geometric accent shapes */}
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 -rotate-12 rounded-sm transform -translate-x-24 translate-y-12"></div>
+          <div className="absolute top-12 right-0 w-64 h-32 bg-white/5 rotate-12 rounded-sm transform translate-x-24 -translate-y-6"></div>
+          
+          {/* Subtle dot grid pattern */}
+          <div className="absolute inset-0 opacity-10" 
+               style={{ 
+                 backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)', 
+                 backgroundSize: '30px 30px' 
+               }}>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container relative mx-auto px-4 z-10 text-white">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+          {title}
+        </h1>
+        <p className="text-xl text-center max-w-3xl mx-auto">
           {description}
         </p>
-      )}
-    </div>
+        
+        {/* Minimal accent bar instead of underline */}
+        <div className="w-24 h-1 bg-white/40 mx-auto mt-6 rounded-full"></div>
+      </div>
+    </section>
   );
 } 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faYoutube, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faLink, faArrowRight, faCode } from '@fortawesome/free-solid-svg-icons';
-import GithubPinnedRepos from '@/components/features/GithubPinnedRepos';
+import GithubPinnedRepos from '@/components/GithubPinnedRepos';
 import PageHeader from '@/components/layout/PageHeader';
 import ProjectCard from '@/components/ui-components/ProjectCard';
 import ProjectFeatureCard from '@/components/features/ProjectFeatureCard';
@@ -35,39 +35,35 @@ export default function Projects() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               Featured Projects
             </h2>
-            <ApiErrorBoundary error={error ? new Error(error.message) as any : null}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {projects?.map((project) => {
-                  if (isProjectFeature(project)) {
-                    return (
-                      <ProjectFeatureCard
-                        key={project.title}
-                        title={project.title}
-                        description={project.description}
-                        imageUrl={project.imageUrl}
-                        technologies={project.technologies}
-                        githubUrl={project.githubUrl}
-                        liveUrl={project.liveUrl}
-                        type={project.type}
-                      />
-                    );
-                  } else {
-                    return (
-                      <ProjectCard
-                        key={project.title}
-                        title={project.title}
-                        description={project.description}
-                        tags={project.tags}
-                        githubUrl={project.githubUrl}
-                        catalogUrl={project.catalogUrl}
-                        websiteUrl={project.websiteUrl}
-                        logoUrl={project.logoUrl}
-                      />
-                    );
-                  }
-                })}
-              </div>
-            </ApiErrorBoundary>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Traefik WebFinger - Added from old/page-5.tsx */}
+              <ProjectCard 
+                title="Traefik WebFinger Plugin"
+                description="A Traefik plugin that implements the WebFinger protocol (RFC7033), enabling federated identity for web applications. This plugin allows Traefik to respond to WebFinger requests, which is crucial for ActivityPub and other federated protocols."
+                tags={[
+                  { name: "Go", color: "blue" },
+                  { name: "Traefik", color: "green" },
+                  { name: "WebFinger", color: "purple" }
+                ]}
+                githubUrl="https://github.com/NX211/traefik-webfinger"
+                catalogUrl="https://plugins.traefik.io/plugins/traefik-webfinger"
+                logoUrl="https://raw.githubusercontent.com/nx211/traefik-webfinger/main/.assets/logo.svg"
+              />
+
+              {/* Traefik Proxmox Provider - Added from old/page-5.tsx */}
+              <ProjectCard 
+                title="Traefik Proxmox Provider"
+                description="A Traefik provider for Proxmox VE that automatically discovers and routes traffic to virtual machines and containers. This plugin simplifies network configuration in Proxmox environments by dynamically generating Traefik routes."
+                tags={[
+                  { name: "Go", color: "blue" },
+                  { name: "Traefik", color: "green" },
+                  { name: "Proxmox", color: "yellow" }
+                ]}
+                githubUrl="https://github.com/NX211/traefik-proxmox-provider"
+                catalogUrl="https://plugins.traefik.io/plugins/traefik-proxmox-provider"
+                logoUrl="https://github.com/NX211/traefik-proxmox-provider/blob/main/.assets/logo.png?raw=true"
+              />
+            </div>
           </div>
         </section>
 
@@ -77,7 +73,7 @@ export default function Projects() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               GitHub Projects
             </h2>
-            <GithubPinnedRepos />
+            <GithubPinnedRepos username="NX211" />
           </div>
         </section>
 
@@ -114,16 +110,16 @@ export default function Projects() {
                 logoUrl="/jlshaw_logo.png"
               />
               
-              {/* HomeLab Hobby */}
+              {/* Kajabi Vault */}
               <ProjectCard 
-                title="HomeLab Hobby"
-                description="A social media channel focused on home lab setups, self-hosting applications, and infrastructure tutorials. Content is distributed on multiple platforms including TikTok and YouTube."
+                title="Kajabi Vault"
+                description="A custom solution built for Kajabi users, providing secure access to content and resources. [More details needed]"
                 tags={[
-                  { name: "Content Creation", color: "red" },
-                  { name: "HomeLab", color: "purple" }
+                  { name: "Kajabi", color: "orange" },
+                  { name: "Web Development", color: "pink" },
+                  { name: "Next.js", color: "blue" }
                 ]}
-                websiteUrl="https://homelabhobby.social"
-                logoUrl="/images/homelab-hobby-logo.png"
+                logoUrl="/kajabi-vault-logo.svg"
               />
             </div>
           </div>

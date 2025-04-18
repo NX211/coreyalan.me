@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faEnvelope, faClock } from '@fortawesome/free-solid-svg-icons';
 import GitHubAvatar from '@/components/GitHubAvatar';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/layout/PageHeader';
 import Icon from '@/components/ui-components/Icon';
 
 export default function About() {
@@ -22,16 +21,10 @@ export default function About() {
             {/* Sidebar */}
             <div className="md:col-span-1">
               <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 sticky top-24">
-                <div className="relative w-32 h-32 mx-auto mb-6">
-                  <Image
-                    src="https://github.com/coreyalan.png"
-                    alt="Corey Alan's GitHub avatar"
-                    fill
-                    className="rounded-full object-cover border-4 border-primary dark:border-primary-light"
-                    sizes="(max-width: 768px) 128px, 128px"
-                    priority
-                  />
-                </div>
+                <GitHubAvatar 
+                  username="NX211" 
+                  className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-primary dark:border-primary-light"
+                />
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4">
                   Corey Stone
                 </h2>
@@ -44,7 +37,7 @@ export default function About() {
                     download
                     className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
                   >
-                    <Icon icon={faDownload} className="mr-2 h-4 w-4" /> Download Resume
+                    <FontAwesomeIcon icon={faDownload} className="mr-2 h-4 w-4" /> Download Resume
                   </a>
                   <a
                     href="https://calendar.app.google/4bZN3vV8H6aU5cNt9"
@@ -58,7 +51,7 @@ export default function About() {
                     href="/contact"
                     className="border border-primary text-primary dark:text-primary-light hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
                   >
-                    <Icon icon={faEnvelope} className="mr-2 h-4 w-4" /> Contact Me
+                    <FontAwesomeIcon icon={faEnvelope} className="mr-2 h-4 w-4" /> Contact Me
                   </Link>
                 </div>
               </div>
@@ -74,7 +67,7 @@ export default function About() {
                   I work as a technology consultant primarily with small businesses, creating custom solutions to technical problems. My expertise spans web development, custom integration, and workflow automation to help businesses modernize their processes.
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  With a background in systems administration and full-stack development, I bring a holistic approach to technology problems. I believe in finding the right solution for each client&apos;s unique needs, whether that&apos;s a custom web application, an automated workflow, or integrating existing systems.
+                  With a background in systems administration and full-stack development, I bring a holistic approach to technology problems. I believe in finding the right solution for each client's unique needs, whether that's a custom web application, an automated workflow, or integrating existing systems.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
@@ -114,6 +107,25 @@ export default function About() {
                       <li>Ansible Configuration Management</li>
                       <li>CI/CD Pipelines</li>
                       <li>GitHub Actions</li>
+                      <li>Infrastructure as Code</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Data & Security</h4>
+                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                      <li>Data Engineering & Pipelines</li>
+                      <li>Security Implementation</li>
+                      <li>Monitoring & Logging</li>
+                      <li>Disaster Recovery Planning</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Networking & Solutions</h4>
+                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                      <li>Network Administration & Design</li>
+                      <li>Remote Work Solutions</li>
+                      <li>Systems Integration</li>
+                      <li>Social Media Management</li>
                     </ul>
                   </div>
                 </div>
@@ -128,14 +140,14 @@ export default function About() {
                   My work with Azure cloud services and Microsoft 365 has helped businesses transition to modern, scalable, and secure work environments. I specialize in creating robust data pipelines and implementing efficient network designs that improve operational workflows while maintaining security best practices.
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  In addition to technical infrastructure, I&apos;ve helped organizations optimize their digital presence through strategic social media management and implementing streamlined remote work solutions that enhance productivity and collaboration.
+                  In addition to technical infrastructure, I've helped organizations optimize their digital presence through strategic social media management and implementing streamlined remote work solutions that enhance productivity and collaboration.
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
                   Current Direction
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  I&apos;m currently focused on becoming more involved in the tech community and growing my knowledge and expertise around technologies that solve real business problems. I&apos;m passionate about helping small businesses leverage modern technology solutions that were previously only accessible to larger enterprises.
+                  I'm currently focused on becoming more involved in the tech community and growing my knowledge and expertise around technologies that solve real business problems. I'm passionate about helping small businesses leverage modern technology solutions that were previously only accessible to larger enterprises.
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                   In addition to client work, I maintain open-source projects like Traefik plugins and create content for my HomeLab Hobby channel, where I share knowledge about home server setups, self-hosting, and infrastructure.
@@ -145,7 +157,7 @@ export default function About() {
                   Ready to Collaborate?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-8">
-                  If you&apos;re looking for custom technology solutions for your business or have a project in mind, I&apos;d love to discuss how I can help.
+                  If you're looking for custom technology solutions for your business or have a project in mind, I'd love to discuss how I can help.
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                   <Link

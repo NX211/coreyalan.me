@@ -20,7 +20,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/layout/PageHeader';
 
 interface FileWithPreview extends File {
   preview?: string;

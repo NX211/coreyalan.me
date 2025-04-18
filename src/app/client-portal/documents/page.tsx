@@ -22,7 +22,7 @@ import {
   faCheckCircle,
   faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from '@/components/layout/PageHeader';
 
 // Add FreeScoutW to Window interface
 declare global {

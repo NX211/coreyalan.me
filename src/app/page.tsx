@@ -7,18 +7,16 @@ import ProjectFeatureCard from '@/components/features/ProjectFeatureCard';
 
 export default function Home() {
   return (
-    <div className="pt-24 pb-16">
+    <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center bg-gray-50 dark:bg-gray-900 py-16">
         <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-8 md:mb-0 flex justify-center md:justify-start">
-            <Image
+          <div className="md:w-1/2 mb-8 md:mb-0">
+            <img
               src="/images/logo.png"
               alt="Corey Alan Logo"
-              width={300}
-              height={150}
-              className="max-w-full h-auto mx-auto md:mx-0"
-              priority
+              className="max-w-full mx-auto md:mx-0"
+              style={{ maxWidth: '300px' }}
             />
           </div>
           <div className="md:w-1/2 text-center md:text-left">
@@ -61,35 +59,67 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Traefik WebFinger Plugin */}
-            <ProjectFeatureCard
-              title="Traefik WebFinger Plugin"
-              description="A Traefik plugin that adds WebFinger support to your Traefik instance, enabling decentralized identity discovery."
-              imageUrl="https://raw.githubusercontent.com/nx211/traefik-webfinger/main/.assets/logo.svg"
-              technologies={["Go", "Traefik", "WebFinger"]}
-              githubUrl="https://github.com/nx211/traefik-webfinger"
-              type="backend"
-            />
+            {/* Project 1 */}
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
+              <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
+                <img
+                  src="https://raw.githubusercontent.com/nx211/traefik-webfinger/main/.assets/logo.svg"
+                  alt="Traefik WebFinger Plugin"
+                  className="h-32 object-contain"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  Traefik WebFinger Plugin
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  A Traefik plugin that implements the WebFinger protocol, enabling federated identity for web applications.
+                </p>
+                <a
+                  href="https://github.com/NX211/traefik-webfinger"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary dark:text-blue-400 font-medium inline-flex items-center"
+                >
+                  View Project <FontAwesomeIcon icon={faArrowRight} className="ml-2 h-4 w-4" />
+                </a>
+              </div>
+            </div>
 
-            {/* Traefik Proxmox Provider */}
-            <ProjectFeatureCard
-              title="Traefik Proxmox Provider"
-              description="A Traefik provider for Proxmox VE, automatically discovering and routing traffic to virtual machines and containers."
-              imageUrl="https://github.com/NX211/traefik-proxmox-provider/blob/main/.assets/logo.png?raw=true"
-              technologies={["Go", "Traefik", "Proxmox"]}
-              githubUrl="https://github.com/NX211/traefik-proxmox-provider"
-              type="backend"
-            />
+            {/* Project 2 */}
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
+              <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
+                <img
+                  src="https://github.com/NX211/traefik-proxmox-provider/blob/main/.assets/logo.png?raw=true"
+                  alt="Traefik Proxmox Provider"
+                  className="h-32 object-contain"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  Traefik Proxmox Provider
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  A Traefik provider for Proxmox VE, automatically discovering and routing traffic to virtual machines and containers.
+                </p>
+                <a
+                  href="https://github.com/NX211/traefik-proxmox-provider"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary dark:text-blue-400 font-medium inline-flex items-center"
+                >
+                  View Project <FontAwesomeIcon icon={faArrowRight} className="ml-2 h-4 w-4" />
+                </a>
+              </div>
+            </div>
 
             {/* Project 3 */}
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
-              <div className="relative w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
-                <Image
+              <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
+                <img
                   src="/images/homelab-hobby-logo.png"
                   alt="HomeLab Hobby"
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  className="p-4"
+                  className="h-32 object-contain"
                 />
               </div>
               <div className="p-6">
@@ -167,10 +197,10 @@ export default function Home() {
             Let's collaborate to create custom solutions for your technical needs.
           </p>
           <Link
-            href="/projects"
+            href="/contact"
             className="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors duration-300 inline-block"
           >
-            View All Projects <FontAwesomeIcon icon={faArrowRight} className="ml-2 h-4 w-4" />
+            Get in Touch
           </Link>
         </div>
       </section>
