@@ -8,7 +8,7 @@ function Logo() {
     <Link href="/" className="flex items-center">
       <div className="relative w-8 h-8">
         <Image
-          src="/logo.png"
+          src="/logo-header.png"
           alt="Corey Alan Logo"
           fill
           className="object-contain"
