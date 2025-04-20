@@ -182,7 +182,7 @@ export default function ClientPortal() {
       <Script id="freescout-widget">
         {
           `
-          var FreeScoutW={s:{"color":"#485564","position":"br","locale":"en","id":3192618876}};
+          var FreeScoutW={s:{"color":"#37abc8","position":"br","locale":"en","id":3192618876}};
           (function(d,e,s){
             if(d.getElementById("freescout-w"))return;
             a=d.createElement(e);
@@ -191,7 +191,7 @@ export default function ClientPortal() {
             a.id="freescout-w";
             a.src=s;
             m.parentNode.insertBefore(a, m)
-          })(document,"script","https://help.coreyalan.me/modules/enduserportal/js/widget.js?v=2259");
+          })(document,"script","https://help.coreyalan.me/modules/enduserportal/js/widget.js?v=1763");
         `
         }
       </Script>
