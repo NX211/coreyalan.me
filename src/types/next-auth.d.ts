@@ -11,11 +11,13 @@ declare module 'next-auth' {
 
   interface Session {
     user: User;
+    accessToken?: string;
   }
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
     role?: string;
+    accessToken?: string;
   }
 } 

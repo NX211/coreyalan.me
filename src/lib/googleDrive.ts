@@ -1,21 +1,24 @@
 import { google } from 'googleapis';
-import { JWT } from 'google-auth-library';
+import { getServerSession } from 'next-auth';
+import { authOptions } from './auth-options';
 
-// Initialize Google Drive client
-const initGoogleDriveClient = () => {
-  // The key file should be a JSON service account key from Google Cloud
-  const serviceAccountAuth = new JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    scopes: ['https://www.googleapis.com/auth/drive']
-  });
+// Initialize Google Drive client with OAuth2
+const initGoogleDriveClient = async () => {
+  const session = await getServerSession(authOptions);
+  
+  if (!session?.accessToken) {
+    throw new Error('No access token available');
+  }
 
-  return google.drive({ version: 'v3', auth: serviceAccountAuth });
+  const auth = new google.auth.OAuth2();
+  auth.setCredentials({ access_token: session.accessToken });
+
+  return google.drive({ version: 'v3', auth });
 };
 
 // Create a folder if it doesn't exist
 export const findOrCreateFolder = async (folderName: string, parentFolderId?: string): Promise<string> => {
-  const drive = initGoogleDriveClient();
+  const drive = await initGoogleDriveClient();
   
   // Check if folder already exists
   const query = [
@@ -60,7 +63,7 @@ export const uploadFileToDrive = async (
   fileContent: Buffer,
   folderId: string
 ): Promise<{ id: string; webViewLink: string }> => {
-  const drive = initGoogleDriveClient();
+  const drive = await initGoogleDriveClient();
 
   const fileMetadata = {
     name: fileName,
@@ -99,7 +102,6 @@ export const getClientSharedFolder = async (clientEmail: string): Promise<string
   const mainFolderId = await findOrCreateFolder('Client Uploads');
   
   // Then find or create a specific folder for this client
-  // Use email as an identifier, but clean it up for folder name
   const clientFolderName = `${clientEmail.split('@')[0]}-uploads`;
   return findOrCreateFolder(clientFolderName, mainFolderId);
 }; 

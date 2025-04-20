@@ -18,8 +18,9 @@ const envSchema = z.object({
   INVOICE_NINJA_REDIRECT_URI: z.string().url(),
 
   // OAuth2
-  GOOGLE_CLIENT_ID: z.string(),
-  GOOGLE_CLIENT_SECRET: z.string(),
+  GOOGLE_CLIENT_ID: z.string().min(1),
+  GOOGLE_CLIENT_SECRET: z.string().min(1),
+  GOOGLE_DRIVE_FOLDER_ID: z.string().optional(),
 
   // Session
   SESSION_SECRET: z.string().min(32),

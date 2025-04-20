@@ -70,7 +70,7 @@ export default function GithubPinnedRepos({ username }: { username: string }) {
         setLoading(true);
         
         // Fetch pinned repositories using our utility
-        const pinnedRepos = await getPinnedRepos();
+        const pinnedRepos = await getPinnedRepos(username);
         
         // Add debugging
         console.log("Fetched GitHub repos:", JSON.stringify(pinnedRepos, null, 2));
@@ -85,7 +85,7 @@ export default function GithubPinnedRepos({ username }: { username: string }) {
     };
 
     fetchPinnedRepos();
-  }, []);
+  }, [username]);
 
   if (loading) {
     return (

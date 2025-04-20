@@ -1,8 +1,18 @@
 import { NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: 'openid email profile https://www.googleapis.com/auth/drive.file',
+        },
+      },
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -35,7 +45,10 @@ export const authOptions: NextAuthOptions = {
     signIn: '/login',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
       if (user) {
         token.role = user.role;
       }
@@ -44,6 +57,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.role = token.role || 'user';
+        session.accessToken = token.accessToken;
       }
       return session;
     },

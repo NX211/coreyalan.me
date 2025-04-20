@@ -62,13 +62,14 @@ export const getLatestRustDeskRelease = cache(async (): Promise<GitHubRelease> =
 /**
  * Fetches pinned repositories from GitHub
  */
-export const getPinnedRepos = cache(async (): Promise<RepoData[]> => {
+export const getPinnedRepos = cache(async (username: string): Promise<RepoData[]> => {
   const response = await fetch(
-    'https://api.github.com/users/corey-stone/repos?sort=updated&per_page=6',
+    `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`,
     {
       headers: {
         'Accept': 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28',
+        'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,
       },
       next: { revalidate: 3600 } // Revalidate every hour
     }
