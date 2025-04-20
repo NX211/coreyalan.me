@@ -3,38 +3,37 @@ import { securityMiddleware } from '@/middleware/compose';
 import { invoiceNinjaService } from '@/lib/invoice-ninja';
 import { setSession } from '@/lib/session';
 import { SecurityLogger } from '@/lib/security/logger';
+import { InvoiceNinjaToken } from '@/types/invoice-ninja';
 
 export const GET = securityMiddleware(async (request: NextRequest) => {
   const { searchParams } = new URL(request.url);
-  const code = searchParams.get('code');
-  const error = searchParams.get('error');
+  const token = searchParams.get('token');
 
-  if (error) {
-    await SecurityLogger.logSecurityEvent('oauth_callback_error', request, {
-      error
-    });
-    return NextResponse.redirect(new URL('/auth/login?error=' + error, request.url));
-  }
-
-  if (!code) {
-    await SecurityLogger.logSecurityEvent('oauth_callback_missing_code', request);
-    return NextResponse.redirect(new URL('/auth/login?error=no_code', request.url));
+  if (!token) {
+    await SecurityLogger.logSecurityEvent('auth_callback_missing_token', request);
+    return NextResponse.redirect(new URL('/auth/login?error=no_token', request.url));
   }
 
   try {
-    const token = await invoiceNinjaService.exchangeCodeForToken(code);
-    setSession(token);
+    // Create a proper token object
+    const tokenData: InvoiceNinjaToken = {
+      access_token: token,
+      token_type: 'Bearer',
+      expires_in: 3600, // 1 hour
+      refresh_token: token, // Using the same token for refresh in this case
+    };
+
+    invoiceNinjaService.setToken(token);
+    setSession(tokenData);
     
     // Log successful authentication
-    await SecurityLogger.logSecurityEvent('oauth_callback_success', request, {
-      tokenType: token.token_type
-    });
+    await SecurityLogger.logSecurityEvent('auth_callback_success', request);
     
     const redirectUrl = new URL('/client-portal', request.url);
     return NextResponse.redirect(redirectUrl);
   } catch (error: any) {
-    console.error('OAuth callback error:', error);
-    await SecurityLogger.logSecurityEvent('oauth_callback_failure', request, {
+    console.error('Auth callback error:', error);
+    await SecurityLogger.logSecurityEvent('auth_callback_failure', request, {
       error: error?.message || 'Unknown error'
     });
     const loginUrl = new URL('/auth/login', request.url);
