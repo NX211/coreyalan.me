@@ -104,7 +104,6 @@ export function RemoteSupportDownload() {
                   alt={`${osName} logo`}
                   width={40}
                   height={40}
-                  className="dark:invert"
                 />
               </div>
               <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">{osName}</h3>
