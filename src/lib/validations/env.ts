@@ -55,6 +55,9 @@ const envSchema = z.object({
   SMTP_USER: z.string(),
   SMTP_PASSWORD: z.string(),
   SMTP_FROM: z.string().email().optional().default('noreply@coreyalan.me'),
+
+  // OpenSign
+  OPENSIGN_API_KEY: z.string().min(1),
 });
 
 export function validateEnv() {

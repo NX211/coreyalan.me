@@ -1,22 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPrisma } from '@/lib/prisma';
-import * as crypto from 'crypto';
 import { Status } from '@prisma/client';
-
-// Function to validate webhook signature
-function validateSignature(signature: string | null, payload: string): boolean {
-  if (!signature || !process.env.OPENSIGN_WEBHOOK_SECRET) {
-    return false;
-  }
-
-  const hmac = crypto.createHmac('sha256', process.env.OPENSIGN_WEBHOOK_SECRET);
-  const calculatedSignature = hmac.update(payload).digest('hex');
-  
-  return crypto.timingSafeEqual(
-    Buffer.from(signature),
-    Buffer.from(calculatedSignature)
-  );
-}
 
 // POST /api/webhooks/document-signed - Handle signing service webhooks
 export async function POST(request: NextRequest) {
@@ -24,18 +8,15 @@ export async function POST(request: NextRequest) {
     const prisma = getPrisma();
     if (!prisma) throw new Error('Database connection is unavailable');
 
-    // Get the raw request body for signature validation
-    const rawBody = await request.text();
-    
-    // Validate webhook signature
-    const signature = request.headers.get('x-opensign-signature');
-    if (!validateSignature(signature, rawBody)) {
-      console.error('Invalid webhook signature');
-      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
+    // Validate API key
+    const apiKey = request.headers.get('x-api-token');
+    if (apiKey !== process.env.OPENSIGN_API_KEY) {
+      console.error('Invalid API key');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     
     // Parse the body as JSON
-    const body = JSON.parse(rawBody);
+    const body = await request.json();
     
     // Handle OpenSign webhook
     if (body.type === 'document.signed') {
