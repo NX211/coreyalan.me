@@ -31,6 +31,14 @@ export default function About() {
                 <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
                   Full Stack Developer & Technology Consultant
                 </p>
+                <div className="flex justify-center space-x-2 mb-6">
+                  <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-purple-400"></div>
+                </div>
                 <div className="flex flex-col space-y-3">
                   <a
                     href="/CoreyResume.docx"
@@ -60,7 +68,7 @@ export default function About() {
             {/* Main Content */}
             <div className="md:col-span-2">
               <div className="prose dark:prose-invert max-w-none">
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
                   My Experience
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -70,12 +78,12 @@ export default function About() {
                   With a background in systems administration and full-stack development, I bring a holistic approach to technology problems. I believe in finding the right solution for each client's unique needs, whether that's a custom web application, an automated workflow, or integrating existing systems.
                 </p>
 
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
+                <h3 className="text-4xl font-bold text-[#37abc8] mt-10 mb-10 text-center">
                   Technical Skills
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Web Development</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Web Development</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>React.js & Next.js</li>
                       <li>TypeScript & JavaScript</li>
@@ -84,7 +92,7 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">System Administration</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">System Administration</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Linux Server Administration</li>
                       <li>Windows Server & Active Directory</li>
@@ -93,7 +101,7 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Cloud & Infrastructure</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Cloud & Infrastructure</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Azure Cloud Services</li>
                       <li>Microsoft 365 Administration</li>
@@ -102,7 +110,7 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">DevOps & Automation</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">DevOps & Automation</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Ansible Configuration Management</li>
                       <li>CI/CD Pipelines</li>
@@ -111,7 +119,7 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Data & Security</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Data & Security</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Data Engineering & Pipelines</li>
                       <li>Security Implementation</li>
@@ -120,17 +128,16 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Networking & Solutions</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Networking & Solutions</h4>
                     <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Network Administration & Design</li>
                       <li>Remote Work Solutions</li>
-                      <li>Systems Integration</li>
                       <li>Social Media Management</li>
                     </ul>
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
+                <h3 className="text-4xl font-bold text-[#37abc8] mt-10 mb-10 text-center">
                   Professional Experience
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -143,7 +150,7 @@ export default function About() {
                   In addition to technical infrastructure, I've helped organizations optimize their digital presence through strategic social media management and implementing streamlined remote work solutions that enhance productivity and collaboration.
                 </p>
 
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
+                <h3 className="text-4xl font-bold text-[#37abc8] mt-10 mb-10 text-center">
                   Current Direction
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -153,13 +160,13 @@ export default function About() {
                   In addition to client work, I maintain open-source projects like Traefik plugins and create content for my HomeLab Hobby channel, where I share knowledge about home server setups, self-hosting, and infrastructure.
                 </p>
 
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-6">
+                <h3 className="text-4xl font-bold text-[#37abc8] mt-10 mb-10 text-center">
                   Ready to Collaborate?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-8">
                   If you're looking for custom technology solutions for your business or have a project in mind, I'd love to discuss how I can help.
                 </p>
-                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
                   <Link
                     href="/projects"
                     className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-center"

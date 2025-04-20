@@ -32,7 +32,7 @@ export default function Projects() {
         {/* Featured Projects */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+            <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
               Featured Projects
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -70,7 +70,7 @@ export default function Projects() {
         {/* GitHub Pinned Repos */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+            <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
               GitHub Projects
             </h2>
             <GithubPinnedRepos username="NX211" />
@@ -80,7 +80,7 @@ export default function Projects() {
         {/* Other Projects */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+            <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
               Other Projects
             </h2>
             

@@ -15,6 +15,14 @@ export default function Footer() {
             <Link href="/" className="text-xl font-bold text-primary dark:text-white">
               Corey Stone
             </Link>
+            <div className="flex space-x-2 mt-2">
+              <div className="w-2 h-2 rounded-full bg-red-400"></div>
+              <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+              <div className="w-2 h-2 rounded-full bg-green-400"></div>
+              <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+              <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
+              <div className="w-2 h-2 rounded-full bg-purple-400"></div>
+            </div>
             <p className="mt-2 text-gray-600 dark:text-gray-400">
               Turning Vision Into Reality With Code And Design
             </p>
