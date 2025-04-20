@@ -28,7 +28,7 @@ const getLanguageColor = (language: string): string => {
 // Function to generate additional tags based on repo name and description
 const getAdditionalTags = (repo: RepoData): { name: string, color: string }[] => {
   const tags: { name: string, color: string }[] = [];
-  const nameAndDesc = `${repo.repo.toLowerCase()} ${repo.description.toLowerCase()}`;
+  const nameAndDesc = `${repo.name.toLowerCase()} ${repo.description.toLowerCase()}`;
   
   // Check for common topics
   if (nameAndDesc.includes('traefik')) {
@@ -70,7 +70,7 @@ export default function GithubPinnedRepos({ username }: { username: string }) {
         setLoading(true);
         
         // Fetch pinned repositories using our utility
-        const pinnedRepos = await getPinnedRepos(username);
+        const pinnedRepos = await getPinnedRepos();
         
         // Add debugging
         console.log("Fetched GitHub repos:", JSON.stringify(pinnedRepos, null, 2));
@@ -85,7 +85,7 @@ export default function GithubPinnedRepos({ username }: { username: string }) {
     };
 
     fetchPinnedRepos();
-  }, [username]);
+  }, []);
 
   if (loading) {
     return (
@@ -131,9 +131,9 @@ export default function GithubPinnedRepos({ username }: { username: string }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {repos.map((repo) => (
-        <div key={`${repo.owner}-${repo.repo}`} className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-6 flex flex-col h-full">
+        <div key={repo.name} className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-6 flex flex-col h-full">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1">
-            {repo.repo}
+            {repo.name}
           </h3>
           
           {/* Tags section */}
@@ -161,17 +161,17 @@ export default function GithubPinnedRepos({ username }: { username: string }) {
               <div className="flex items-center space-x-4">
                 <span className="text-gray-600 dark:text-gray-400 text-xs flex items-center">
                   <FontAwesomeIcon icon={faStar} className="mr-1 h-3 w-3" />
-                  {repo.stars}
+                  {repo.stargazers_count}
                 </span>
                 <span className="text-gray-600 dark:text-gray-400 text-xs flex items-center">
                   <FontAwesomeIcon icon={faCodeBranch} className="mr-1 h-3 w-3" />
-                  {repo.forks}
+                  {repo.forks_count}
                 </span>
               </div>
             </div>
             <div className="text-right">
               <a
-                href={repo.link}
+                href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary dark:text-blue-400 hover:underline text-sm font-medium"

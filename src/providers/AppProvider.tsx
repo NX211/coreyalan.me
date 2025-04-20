@@ -7,7 +7,7 @@ interface AppProviderProps {
 
 export function AppProvider({ children }: AppProviderProps) {
   return (
-    <SessionProvider>
+    <SessionProvider session={null}>
       {children}
     </SessionProvider>
   );

@@ -7,25 +7,22 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, description }: PageHeaderProps) {
   return (
-    <section className="relative py-16 overflow-hidden bg-gray-50 dark:bg-[#1E293B]">
-      {/* Modern gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary-dark dark:from-[#1E293B] dark:to-[#1E293B] z-0">
-        {/* Minimalist geometric elements */}
-        <div className="absolute inset-0">
-          {/* Horizontal accent line */}
-          <div className="absolute top-1/4 left-0 w-full h-px bg-white/10"></div>
-          
-          {/* Geometric accent shapes */}
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 -rotate-12 rounded-sm transform -translate-x-24 translate-y-12"></div>
-          <div className="absolute top-12 right-0 w-64 h-32 bg-white/5 rotate-12 rounded-sm transform translate-x-24 -translate-y-6"></div>
-          
-          {/* Subtle dot grid pattern */}
-          <div className="absolute inset-0 opacity-10" 
-               style={{ 
-                 backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)', 
-                 backgroundSize: '30px 30px' 
-               }}>
-          </div>
+    <section className="relative py-16 overflow-hidden bg-accent">
+      {/* Modern geometric elements */}
+      <div className="absolute inset-0">
+        {/* Horizontal accent line */}
+        <div className="absolute top-1/4 left-0 w-full h-px bg-white/10"></div>
+        
+        {/* Geometric accent shapes */}
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 -rotate-12 rounded-sm transform -translate-x-24 translate-y-12"></div>
+        <div className="absolute top-12 right-0 w-64 h-32 bg-white/5 rotate-12 rounded-sm transform translate-x-24 -translate-y-6"></div>
+        
+        {/* Subtle dot grid pattern */}
+        <div className="absolute inset-0 opacity-10" 
+             style={{ 
+               backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)', 
+               backgroundSize: '30px 30px' 
+             }}>
         </div>
       </div>
       

@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import ThemeToggle from '@/components/ui-components/ThemeToggle';
+import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-react';
 
 interface LogoProps {
   className?: string;
@@ -9,19 +11,14 @@ interface LogoProps {
 function Logo({ className = '' }: LogoProps) {
   return (
     <Link href="/" className={`flex items-center ${className}`}>
-      <div className="relative w-8 h-8">
-        <Image
-          src="/logo.png"
-          alt="Corey Alan Logo"
-          fill
-          className="object-contain"
-          sizes="(max-width: 768px) 32px, 32px"
-          priority
-        />
-      </div>
-      <span className="ml-2 text-xl font-semibold text-gray-900 dark:text-white">
-        Corey Alan
-      </span>
+      <Image
+        src="/images/logo.png"
+        alt="Corey Stone"
+        width={40}
+        height={40}
+        className="h-10 w-auto"
+        priority
+      />
     </Link>
   );
 }
@@ -32,22 +29,31 @@ interface NavContainerProps {
 
 function NavContainer({ children }: NavContainerProps) {
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          {children}
-        </div>
+    <nav className="container mx-auto px-4 py-4">
+      <div className="flex items-center justify-between">
+        {children}
       </div>
     </nav>
   );
 }
 
 export default function Navigation() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <NavContainer>
       <Logo />
       <div className="flex items-center">
-        <ThemeToggle />
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          className="h-9 w-9"
+        >
+          <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
       </div>
     </NavContainer>
   );

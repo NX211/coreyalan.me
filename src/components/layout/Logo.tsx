@@ -7,13 +7,13 @@ function Logo() {
   return (
     <Link href="/" className="flex items-center">
       {/* Increased logo size again */}
-      <div className="relative w-12 h-12"> {/* Increased from w-10 h-10 */}
+      <div className="relative w-16 h-16"> {/* Increased to 56x56px (h-14) to better fill header height */}
         <Image
           src="/images/logo-header.png" // Kept corrected path
           alt="Corey Alan Logo"
           fill
           className="object-contain"
-          sizes="(max-width: 768px) 48px, 48px" // Updated sizes
+          sizes="(max-width: 1024px) 68px, 68px" // Updated sizes to match new dimensions
           priority
         />
       </div>

@@ -5,6 +5,7 @@ import Script from 'next/script';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTicket, faFileInvoice, faClock, faHeadset, faLock, faFileSignature } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { RemoteSupportDownload } from '@/components/remote-support-download';
 
 export default function ClientPortal() {
   return (
@@ -141,6 +142,11 @@ export default function ClientPortal() {
           </div>
         </div>
 
+        {/* Remote Support Download Section */}
+        <div className="mt-12">
+          <RemoteSupportDownload />
+        </div>
+
         {/* FAQ Section */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
@@ -185,7 +191,7 @@ export default function ClientPortal() {
             a.id="freescout-w";
             a.src=s;
             m.parentNode.insertBefore(a, m)
-          })(document,"script","https://helpdesk.authoritah.com/modules/enduserportal/js/widget.js?v=2259");
+          })(document,"script","https://help.coreyalan.me/modules/enduserportal/js/widget.js?v=2259");
         `
         }
       </Script>

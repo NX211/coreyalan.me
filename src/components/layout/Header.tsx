@@ -1,16 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { useTheme } from '@/components/app-providers/ThemeProvider';
+import { useTheme } from 'next-themes';
 import Icon from '@/components/ui-components/Icon';
-import { faBars, faXmark, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import MobileMenu from './MobileMenu';
 import NavLinks from './NavLinks';
 import ScrollHandler from './ScrollHandler';
 import Logo from './Logo';
+import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-react';
 
 export default function Header() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -35,16 +37,16 @@ export default function Header() {
           <NavLinks />
           
           <div className="flex items-center space-x-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-              aria-label="Toggle theme"
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              className="h-9 w-9"
             >
-              <Icon 
-                icon={theme === 'dark' ? faSun : faMoon} 
-                className="w-5 h-5"
-              />
-            </button>
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}

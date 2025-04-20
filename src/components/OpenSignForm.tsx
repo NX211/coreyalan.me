@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 
 interface OpenSignFormProps {
@@ -37,9 +37,16 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
   onError,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
   const formContainerRef = useRef<HTMLDivElement>(null);
   const elementAddedRef = useRef(false);
+
+  const handleError = useCallback((err: Error | string) => {
+    const errorObj = err instanceof Error ? err : new Error(err);
+    setError(errorObj);
+    onError?.(errorObj);
+    toast.error(errorObj.message);
+  }, [onError]);
 
   // Load OpenSign client script once
   useEffect(() => {
@@ -60,10 +67,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
         };
         script.onerror = () => {
           if (isMounted) {
-            const errorMsg = 'Failed to load OpenSign form script';
-            setError(errorMsg);
-            if (onError) onError(new Error(errorMsg));
-            toast.error(errorMsg);
+            handleError('Failed to load OpenSign form script');
           }
         };
         document.head.appendChild(script);
@@ -79,7 +83,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [handleError]);
 
   // Setup message listener for form completion
   useEffect(() => {
@@ -89,7 +93,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
         typeof event.data === 'object' &&
         event.data.type === 'opensign:form:complete'
       ) {
-        if (onComplete) onComplete();
+        onComplete?.();
         toast.success('Document signed successfully!');
       }
       
@@ -98,10 +102,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
         typeof event.data === 'object' &&
         event.data.type === 'opensign:form:error'
       ) {
-        const errorMsg = event.data.message || 'An error occurred with the form';
-        setError(errorMsg);
-        if (onError) onError(new Error(errorMsg));
-        toast.error(errorMsg);
+        handleError(event.data.message || 'An error occurred with the form');
       }
     };
 
@@ -109,7 +110,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [onComplete, onError]);
+  }, [onComplete, handleError]);
 
   // Create form element in the DOM when component mounts or parameters change
   useEffect(() => {
@@ -143,10 +144,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
       elementAddedRef.current = true;
     } catch (err) {
       console.error('Error creating form element:', err);
-      const errorMsg = 'Failed to create document signing form';
-      setError(errorMsg);
-      if (onError) onError(new Error(errorMsg));
-      toast.error(errorMsg);
+      handleError('Failed to create document signing form');
     }
 
     // Cleanup function
@@ -162,7 +160,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
     };
   }, [
     src, email, name, role, expand, minimize, preview, 
-    backgroundColor, theme, externalId, error, isLoaded, onError
+    backgroundColor, theme, externalId, error, isLoaded, handleError
   ]);
 
   return (
@@ -177,7 +175,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
     >
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
-          <p className="text-red-600 dark:text-red-400">{error}</p>
+          <p className="text-red-600 dark:text-red-400">{error.message}</p>
           <button 
             className="mt-2 px-4 py-2 bg-red-100 dark:bg-red-800 text-red-700 dark:text-red-300 rounded-md hover:bg-red-200 dark:hover:bg-red-700 transition-colors"
             onClick={() => {
@@ -192,7 +190,7 @@ const OpenSignForm: React.FC<OpenSignFormProps> = ({
       
       {!isLoaded && !error && (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
         </div>
       )}
     </div>

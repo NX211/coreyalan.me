@@ -80,7 +80,18 @@ ${message}
     });
     
   } catch (error) {
-    console.error('Contact form submission error:', error);
+    console.error('Contact form submission error:', {
+      error,
+      emailConfig: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        secure: process.env.EMAIL_SERVER_SECURE,
+        user: process.env.EMAIL_SERVER_USER ? '✓' : '✗',
+        pass: process.env.EMAIL_SERVER_PASSWORD ? '✓' : '✗',
+        from: process.env.EMAIL_FROM,
+        to: process.env.EMAIL_TO
+      }
+    });
     
     return NextResponse.json(
       { 

@@ -2,13 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useTheme } from './app-providers/ThemeProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faSun, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header() {
-  const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -33,7 +32,14 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-primary dark:text-white">
-            <img src="/images/logo-header.png" alt="Corey Stone" className="h-10 w-auto" />
+            <Image 
+              src="/images/logo-header.png" 
+              alt="Corey Stone" 
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -56,30 +62,10 @@ export default function Header() {
             <Link href="/client-portal" className={getLinkClass()}>
               Client Portal
             </Link>
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              <FontAwesomeIcon 
-                icon={theme === 'dark' ? faSun : faMoon} 
-                className="h-5 w-5 text-gray-700 dark:text-gray-300" 
-              />
-            </button>
           </div>
 
           {/* Mobile Navigation Button */}
           <div className="flex md:hidden items-center space-x-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              <FontAwesomeIcon 
-                icon={theme === 'dark' ? faSun : faMoon} 
-                className="h-5 w-5 text-gray-700 dark:text-gray-300" 
-              />
-            </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"

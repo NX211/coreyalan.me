@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { ThemeProvider } from '@/components/app-providers/ThemeProvider';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { QueryProvider } from '@/lib/queries/QueryProvider';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import PlausibleProvider from 'next-plausible';
@@ -35,9 +35,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <QueryProvider>
-            <div className="flex flex-col min-h-screen dark:bg-[#0F172A]">
+            <div className="flex flex-col min-h-screen">
               <Header />
-              <main className="flex-grow dark:bg-[#0F172A]">
+              <main className="flex-grow">
                 {children}
               </main>
               <Footer />
