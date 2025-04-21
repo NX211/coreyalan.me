@@ -6,7 +6,9 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCode, faLink } from '@fortawesome/free-solid-svg-icons';
 import { ProjectInfo } from '@/types/common';
 
-interface ProjectCardProps extends Omit<ProjectInfo, 'technologies' | 'type'> {}
+interface ProjectCardProps extends Omit<ProjectInfo, 'technologies' | 'type'> {
+  logoSize?: 'normal' | 'large';
+}
 
 export default function ProjectCard({
   title,
@@ -15,37 +17,29 @@ export default function ProjectCard({
   githubUrl,
   catalogUrl,
   websiteUrl,
-  logoUrl
+  logoUrl,
+  logoSize = 'normal'
 }: ProjectCardProps) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden h-full flex flex-col">
       <div className="p-6 flex-grow">
-        <div className="flex justify-between items-start">
-          <div className="flex items-center gap-4">
-            {logoUrl && (
-              <div className="relative flex-shrink-0 w-10 h-10">
-                <Image 
-                  src={logoUrl} 
-                  alt={`${title} logo`} 
-                  fill
-                  style={{ objectFit: 'contain' }}
-                />
-              </div>
-            )}
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              {title}
-            </h3>
-          </div>
-          {githubUrl && (
-            <a 
-              href={githubUrl} 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-primary"
-            >
-              <FontAwesomeIcon icon={faGithub} className="h-6 w-6" />
-            </a>
+        <div className="flex flex-col items-center mb-4">
+          {logoUrl && (
+            <div className={`relative flex-shrink-0 flex items-center justify-center mb-3 ${
+              logoSize === 'large' ? 'w-32 h-32' : 'w-16 h-16'
+            }`}>
+              <Image 
+                src={logoUrl} 
+                alt={`${title} logo`} 
+                fill
+                style={{ objectFit: 'contain' }}
+                className="p-1"
+              />
+            </div>
           )}
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white text-center">
+            {title}
+          </h3>
         </div>
         
         {tags.length > 0 && (

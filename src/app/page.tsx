@@ -62,11 +62,13 @@ export default function Home() {
             {/* Project 1 */}
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
               <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
-                <img
-                  src="https://raw.githubusercontent.com/nx211/traefik-webfinger/main/.assets/logo.svg"
-                  alt="Traefik WebFinger Plugin"
-                  className="h-32 object-contain"
-                />
+                <div className="relative w-32 h-32 flex items-center justify-center">
+                  <img
+                    src="/images/projects/traefik-logo.svg"
+                    alt="Traefik WebFinger Plugin"
+                    className="w-full h-full object-contain p-2"
+                  />
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
@@ -89,11 +91,13 @@ export default function Home() {
             {/* Project 2 */}
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
               <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
-                <img
-                  src="https://github.com/NX211/traefik-proxmox-provider/blob/main/.assets/logo.png?raw=true"
-                  alt="Traefik Proxmox Provider"
-                  className="h-32 object-contain"
-                />
+                <div className="relative w-32 h-32 flex items-center justify-center">
+                  <img
+                    src="/images/projects/traefik-proxmox-logo.svg"
+                    alt="Traefik Proxmox Provider"
+                    className="w-full h-full object-contain p-2"
+                  />
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
@@ -116,11 +120,13 @@ export default function Home() {
             {/* Project 3 */}
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
               <div className="w-full h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
-                <img
-                  src="/images/homelab-hobby-logo.png"
-                  alt="HomeLab Hobby"
-                  className="h-32 object-contain"
-                />
+                <div className="relative w-32 h-32 flex items-center justify-center">
+                  <img
+                    src="/images/homelab-hobby-logo.png"
+                    alt="HomeLab Hobby"
+                    className="w-full h-full object-contain p-2"
+                  />
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">

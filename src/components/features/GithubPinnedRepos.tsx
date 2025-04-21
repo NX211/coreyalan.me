@@ -6,7 +6,8 @@ import Icon from '@/components/ui-components/Icon';
 import { 
   faStar, 
   faCodeBranch,
-  faExclamationCircle
+  faExclamationCircle,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -29,7 +30,8 @@ export default function GithubPinnedRepos() {
       try {
         const response = await fetch('/api/github/pinned-repos');
         if (!response.ok) {
-          throw new Error('Failed to fetch pinned repositories');
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to fetch pinned repositories');
         }
         const data = await response.json();
         setRepos(data);
@@ -49,13 +51,13 @@ export default function GithubPinnedRepos() {
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+            className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
           >
-            <div className="h-4 w-3/4 animate-pulse rounded bg-gray-200" />
-            <div className="mt-2 h-3 w-1/2 animate-pulse rounded bg-gray-200" />
+            <div className="h-4 w-3/4 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+            <div className="mt-2 h-3 w-1/2 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
             <div className="mt-4 flex items-center space-x-4">
-              <div className="h-4 w-16 animate-pulse rounded bg-gray-200" />
-              <div className="h-4 w-16 animate-pulse rounded bg-gray-200" />
+              <div className="h-4 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+              <div className="h-4 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
             </div>
           </div>
         ))}
@@ -65,23 +67,31 @@ export default function GithubPinnedRepos() {
 
   if (error) {
     return (
-      <div className="rounded-md bg-red-50 p-4">
+      <div className="rounded-md bg-red-50 dark:bg-red-900/10 p-4">
         <div className="flex">
           <div className="flex-shrink-0">
             <Icon
               icon={faExclamationCircle}
-              className="h-5 w-5 text-red-400"
+              className="h-5 w-5 text-red-400 dark:text-red-500"
             />
           </div>
           <div className="ml-3">
-            <h3 className="text-sm font-medium text-red-800">
+            <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
               Error loading repositories
             </h3>
-            <div className="mt-2 text-sm text-red-700">
+            <div className="mt-2 text-sm text-red-700 dark:text-red-300">
               {error}
             </div>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (repos.length === 0) {
+    return (
+      <div className="text-center text-gray-500 dark:text-gray-400">
+        No pinned repositories found.
       </div>
     );
   }
@@ -94,29 +104,29 @@ export default function GithubPinnedRepos() {
           href={repo.html_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
+          className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
         >
           <div className="flex items-center">
             <Icon
               icon={faGithub}
-              className="h-5 w-5 text-gray-400"
+              className="h-5 w-5 text-gray-400 dark:text-gray-500"
             />
-            <h3 className="ml-2 text-lg font-medium text-gray-900">
+            <h3 className="ml-2 text-lg font-medium text-gray-900 dark:text-white">
               {repo.name}
             </h3>
           </div>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
             {repo.description}
           </p>
           <div className="mt-4 flex items-center space-x-4">
-            <div className="flex items-center text-sm text-gray-500">
+            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
               <Icon
                 icon={faStar}
                 className="mr-1 h-4 w-4"
               />
               {repo.stargazers_count}
             </div>
-            <div className="flex items-center text-sm text-gray-500">
+            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
               <Icon
                 icon={faCodeBranch}
                 className="mr-1 h-4 w-4"
@@ -124,7 +134,7 @@ export default function GithubPinnedRepos() {
               {repo.forks_count}
             </div>
             {repo.language && (
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-500 dark:text-gray-400">
                 {repo.language}
               </div>
             )}

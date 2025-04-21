@@ -1,55 +1,90 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// Define a type for the expected pinned repository data structure (adjust as needed)
-type PinnedRepo = {
-  owner: string;
-  repo: string;
-  link: string;
-  description?: string;
-  image: string;
-  website?: string;
-  language?: string;
-  languageColor?: string;
-  stars: string | number;
-  forks: string | number;
-};
+interface Repository {
+  name: string;
+  description: string;
+  html_url: string;
+  stargazers_count: number;
+  forks_count: number;
+  language: string;
+}
 
-type ErrorResponse = {
+interface ErrorResponse {
   message: string;
-};
+}
+
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_USERNAME = 'NX211';
+
+const query = `
+  query {
+    user(login: "${GITHUB_USERNAME}") {
+      pinnedItems(first: 6, types: REPOSITORY) {
+        nodes {
+          ... on Repository {
+            name
+            description
+            url
+            stargazerCount
+            forkCount
+            primaryLanguage {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<PinnedRepo[] | ErrorResponse>
+  res: NextApiResponse<Repository[] | ErrorResponse>
 ) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
     return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
   }
 
-  // Replace with your actual GitHub username
-  const username = 'NX211'; 
-  const externalApiUrl = `https://gh-pinned-repos.egoist.dev/api/user/${username}`;
+  if (!GITHUB_TOKEN) {
+    console.error('GITHUB_TOKEN is not set');
+    return res.status(500).json({ message: 'GitHub token is not configured' });
+  }
 
   try {
-    const response = await fetch(externalApiUrl);
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Authorization': `bearer ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query }),
+    });
 
     if (!response.ok) {
-      // Log the error details from the external API if possible
-      let errorBody = 'Failed to fetch from external service';
-      try {
-        errorBody = await response.text();
-      } catch (_) { /* ignore parsing error */ }
-      console.error(`Error fetching pinned repos from ${externalApiUrl}: ${response.status} ${response.statusText}`, errorBody);
-      throw new Error(`External service responded with status ${response.status}`);
+      throw new Error(`GitHub API responded with status ${response.status}`);
     }
 
-    const pinnedRepos: PinnedRepo[] = await response.json();
-    res.status(200).json(pinnedRepos);
+    const data = await response.json();
+    
+    if (data.errors) {
+      console.error('GitHub API errors:', data.errors);
+      throw new Error('Failed to fetch data from GitHub API');
+    }
 
+    const repositories: Repository[] = data.data.user.pinnedItems.nodes.map((node: any) => ({
+      name: node.name,
+      description: node.description || '',
+      html_url: node.url,
+      stargazers_count: node.stargazerCount,
+      forks_count: node.forkCount,
+      language: node.primaryLanguage?.name || ''
+    }));
+
+    res.status(200).json(repositories);
   } catch (error) {
     console.error('Error in /api/github/pinned-repos:', error);
     const message = error instanceof Error ? error.message : 'An internal server error occurred';
-    res.status(500).json({ message: `Failed to fetch pinned repositories: ${message}` });
+    res.status(500).json({ message });
   }
 } 
