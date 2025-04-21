@@ -29,9 +29,17 @@ export class EmailError extends Error {
 }
 
 export class EmailService {
-  private transporter: ReturnType<typeof nodemailer.createTransport>;
+  private transporter: ReturnType<typeof nodemailer.createTransport> | null = null;
+  private isConfigured = false;
 
   constructor() {
+    // Only initialize if we're not in a build process
+    if (process.env.NEXT_BUILD_IN_DOCKER !== 'true') {
+      this.initializeTransporter();
+    }
+  }
+
+  private initializeTransporter() {
     const config = {
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
@@ -45,24 +53,38 @@ export class EmailService {
     try {
       smtpConfigSchema.parse(config);
       this.transporter = nodemailer.createTransport(config);
+      this.isConfigured = true;
     } catch (error) {
       if (error instanceof z.ZodError) {
-        throw new EmailError(
-          'Invalid SMTP configuration: ' + error.errors.map(e => e.message).join(', '),
-          'INVALID_CONFIG'
-        );
+        console.warn('SMTP configuration is incomplete:', error.errors.map(e => e.message).join(', '));
+      } else {
+        console.warn('Failed to initialize email service:', error);
       }
-      throw new EmailError('Failed to initialize email service', 'INIT_ERROR');
+      this.isConfigured = false;
     }
   }
 
   async sendEmail(options: EmailOptions): Promise<void> {
+    // During build, just validate the options without sending
+    if (process.env.NEXT_BUILD_IN_DOCKER === 'true') {
+      emailOptionsSchema.parse(options);
+      return;
+    }
+
+    // If not configured, throw a more descriptive error
+    if (!this.isConfigured) {
+      throw new EmailError(
+        'Email service is not configured. Please check your SMTP settings.',
+        'NOT_CONFIGURED'
+      );
+    }
+
     try {
       // Validate email options
       emailOptionsSchema.parse(options);
 
       // Send email
-      const info = await this.transporter.sendMail({
+      const info = await this.transporter!.sendMail({
         from: process.env.SMTP_FROM || 'noreply@coreyalan.me',
         ...options,
       });
@@ -85,8 +107,12 @@ export class EmailService {
   }
 
   async verifyConnection(): Promise<void> {
+    if (!this.isConfigured) {
+      throw new EmailError('Email service is not configured', 'NOT_CONFIGURED');
+    }
+
     try {
-      await this.transporter.verify();
+      await this.transporter!.verify();
     } catch (error) {
       throw new EmailError(
         'Failed to verify SMTP connection: ' + (error as Error).message,
@@ -99,21 +125,7 @@ export class EmailService {
 // Export singleton instance
 export const emailService = new EmailService();
 
+// Legacy function for backward compatibility
 export async function sendEmail({ to, subject, text }: EmailOptions) {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: true,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
-
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM,
-    to,
-    subject,
-    text,
-  });
+  return emailService.sendEmail({ to, subject, text });
 } 
