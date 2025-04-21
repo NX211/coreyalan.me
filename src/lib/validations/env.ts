@@ -48,13 +48,14 @@ const envSchema = z.object({
   // Contact Form
   CONTACT_EMAIL: z.string().email().optional().default('corey@coreyalan.me'),
   
-  // SMTP Configuration
-  SMTP_HOST: z.string(),
-  SMTP_PORT: z.string().transform(val => Number(val)),
-  SMTP_SECURE: z.string().transform(val => val === 'true'),
-  SMTP_USER: z.string(),
-  SMTP_PASSWORD: z.string(),
-  SMTP_FROM: z.string().email().optional().default('noreply@coreyalan.me'),
+  // Email Configuration
+  EMAIL_SERVER_HOST: z.string(),
+  EMAIL_SERVER_PORT: z.string().transform(val => Number(val)),
+  EMAIL_SERVER_SECURE: z.string().transform(val => val === 'true'),
+  EMAIL_SERVER_USER: z.string(),
+  EMAIL_SERVER_PASSWORD: z.string(),
+  EMAIL_FROM: z.string().email().optional().default('noreply@coreyalan.me'),
+  EMAIL_TO: z.string().email().optional().default('corey@coreyalan.me'),
 
   // OpenSign
   OPENSIGN_API_KEY: z.string().min(1),
