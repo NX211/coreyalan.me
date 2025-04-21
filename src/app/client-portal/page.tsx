@@ -20,29 +20,29 @@ export default function ClientPortal() {
         {/* Quick Stats/Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <FontAwesomeIcon icon={faHeadset} className="text-primary h-6 w-6 mr-3" />
+            <div className="flex flex-col items-center text-center mb-4">
+              <FontAwesomeIcon icon={faHeadset} className="text-primary h-6 w-6 mb-3" />
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">24/7 Support</h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 dark:text-gray-400 text-center">
               Get help anytime with our round-the-clock support system. Average response time: 2 hours.
             </p>
           </div>
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <FontAwesomeIcon icon={faLock} className="text-primary h-6 w-6 mr-3" />
+            <div className="flex flex-col items-center text-center mb-4">
+              <FontAwesomeIcon icon={faLock} className="text-primary h-6 w-6 mb-3" />
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Secure Access</h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 dark:text-gray-400 text-center">
               All your data is protected with enterprise-grade security and encryption.
             </p>
           </div>
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <FontAwesomeIcon icon={faClock} className="text-primary h-6 w-6 mr-3" />
+            <div className="flex flex-col items-center text-center mb-4">
+              <FontAwesomeIcon icon={faClock} className="text-primary h-6 w-6 mb-3" />
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Quick Access</h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 dark:text-gray-400 text-center">
               One-click access to all your support tickets, invoices, and project documents.
             </p>
           </div>
@@ -53,16 +53,16 @@ export default function ClientPortal() {
           {/* Support Section */}
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6 relative" style={{ height: '500px' }}>
             <div style={{ paddingBottom: '60px' }}>
-              <div className="flex items-center mb-4">
-                <FontAwesomeIcon icon={faTicket} className="text-primary h-6 w-6 mr-3" />
+              <div className="flex flex-col items-center text-center mb-4">
+                <FontAwesomeIcon icon={faTicket} className="text-primary h-6 w-6 mb-3" />
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Support Tickets</h2>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
                 Submit a support ticket or check the status of existing tickets using the widget below. Our support team is here to help with any technical issues, questions, or concerns.
               </p>
-              <div className="mb-4">
+              <div className="mb-4 text-center">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Common Support Topics:</h3>
-                <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1 inline-block text-left">
                   <li>Technical Issues</li>
                   <li>Account Management</li>
                   <li>Billing Questions</li>
@@ -85,16 +85,16 @@ export default function ClientPortal() {
           {/* Billing Section */}
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6 relative" style={{ height: '500px' }}>
             <div style={{ paddingBottom: '60px' }}>
-              <div className="flex items-center mb-4">
-                <FontAwesomeIcon icon={faFileInvoice} className="text-primary h-6 w-6 mr-3" />
+              <div className="flex flex-col items-center text-center mb-4">
+                <FontAwesomeIcon icon={faFileInvoice} className="text-primary h-6 w-6 mb-3" />
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Billing Portal</h2>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
                 Access your billing information, invoices, and payment history. Manage your subscription, update payment methods, and download past invoices.
               </p>
-              <div className="mb-4">
+              <div className="mb-4 text-center">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Available Actions:</h3>
-                <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1 inline-block text-left">
                   <li>View and Download Invoices</li>
                   <li>Update Payment Methods</li>
                   <li>Manage Subscription</li>
@@ -117,14 +117,14 @@ export default function ClientPortal() {
           {/* Document Signing Section */}
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6 relative" style={{ height: '500px' }}>
             <div style={{ paddingBottom: '60px' }}>
-              <div className="flex items-center mb-4">
-                <FontAwesomeIcon icon={faFileSignature} className="text-primary h-6 w-6 mr-3" />
+              <div className="flex flex-col items-center text-center mb-4">
+                <FontAwesomeIcon icon={faFileSignature} className="text-primary h-6 w-6 mb-3" />
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Document Center</h2>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
                 Upload and share project files securely through our document system. Sign important documents online including NDAs, contracts, and more.
               </p>
-              <div className="mb-4">
+              <div className="mb-4 text-center">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Document Sharing:</h3>
                 <p className="text-gray-600 dark:text-gray-400">
                   Securely upload files for collaboration and feedback. Our system also provides electronic document signing capabilities with legal validity.
@@ -144,12 +144,13 @@ export default function ClientPortal() {
 
         {/* Remote Support Download Section */}
         <div className="mt-12">
+          <h2 className="text-2xl font-bold text-[#37abc8] mb-6 text-center">Remote Support Client</h2>
           <RemoteSupportDownload />
         </div>
 
         {/* FAQ Section */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold text-[#37abc8] mb-6 text-center">Frequently Asked Questions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">How do I submit a support ticket?</h3>

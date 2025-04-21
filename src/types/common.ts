@@ -1,11 +1,10 @@
 import { z } from 'zod';
 
 /**
- * Represents a tag with a name and color
+ * Represents a tag with a name
  */
 export const tagSchema = z.object({
-  name: z.string().min(1).max(50),
-  color: z.enum(['blue', 'green', 'purple', 'yellow', 'red', 'orange', 'pink', 'indigo', 'gray'])
+  name: z.string().min(1).max(50)
 });
 
 export type Tag = z.infer<typeof tagSchema>;

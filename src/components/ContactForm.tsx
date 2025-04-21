@@ -121,8 +121,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
   };
   
   return (
-    <div className={`contact-form-wrapper ${className}`} style={style}>
-      <div className="mb-6">
+    <div className={`contact-form-wrapper`} style={style}>
+      <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{title}</h2>
         <p className="text-gray-600 dark:text-gray-300">{description}</p>
       </div>

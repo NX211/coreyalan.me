@@ -26,7 +26,7 @@ interface Project {
   catalogUrl?: string;
   websiteUrl?: string;
   logoUrl: string;
-  logoSize?: string;
+  logoSize?: 'normal' | 'large';
 }
 
 const featuredProjects: Project[] = [
@@ -74,7 +74,7 @@ const otherProjects: Project[] = [
     description: "Built and maintained a membership platform for JL Shaw Consulting using Kajabi. The site includes course content, membership management, and payment processing.",
     tags: [
       { name: "Kajabi", color: "orange" },
-      { name: "Web Development", color: "pink" }
+      { name: "Web Development", color: "blue" }
     ],
     websiteUrl: "https://members.jlshawconsulting.com",
     logoUrl: "/images/projects/jlshaw-logo.png",
@@ -93,13 +93,13 @@ export default function ProjectsPage() {
       
       <div className="container mx-auto px-4">
         {/* Main Content */}
-        <section className="py-16">
+        <section className="py-8">
           <div className="prose dark:prose-invert max-w-none">
             {/* Featured Projects */}
-            <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
+            <h2 className="text-4xl font-bold text-[#37abc8] mb-6 text-center">
               Featured Projects
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               {featuredProjects.map((project) => (
                 <ProjectCard 
                   key={project.title}
@@ -114,10 +114,10 @@ export default function ProjectsPage() {
             </div>
 
             {/* GitHub Pinned Repositories */}
-            <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
+            <h2 className="text-4xl font-bold text-[#37abc8] mb-6 text-center">
               GitHub Pinned Repositories
             </h2>
-            <div className="mb-16">
+            <div className="mb-8">
               <ErrorBoundary>
                 <Suspense fallback={<div>Loading GitHub repositories...</div>}>
                   <GithubPinnedRepos />
@@ -126,10 +126,10 @@ export default function ProjectsPage() {
             </div>
 
             {/* Other Projects */}
-            <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
+            <h2 className="text-4xl font-bold text-[#37abc8] mb-6 text-center">
               Other Projects
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               {otherProjects.map((project) => (
                 <ProjectCard 
                   key={project.title}
@@ -138,15 +138,16 @@ export default function ProjectsPage() {
                   tags={project.tags}
                   websiteUrl={project.websiteUrl}
                   logoUrl={project.logoUrl}
+                  logoSize={project.logoSize}
                 />
               ))}
             </div>
 
             {/* Open Source Contributions */}
-            <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
+            <h2 className="text-4xl font-bold text-[#37abc8] mb-6 text-center">
               Open Source Contributions
             </h2>
-            <div className="mb-16">
+            <div className="mb-8">
               <ErrorBoundary>
                 <Suspense fallback={<div>Loading open source projects...</div>}>
                   <OpenSourceProjects />
@@ -155,11 +156,11 @@ export default function ProjectsPage() {
             </div>
 
             {/* Call to Action */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-[#1E293B] dark:to-[#0F172A] p-12 rounded-lg shadow-md border-l-4 border-primary text-center">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-[#1E293B] dark:to-[#0F172A] pt-2 pb-12 px-12 rounded-lg shadow-md border-l-4 border-primary text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
                 Interested in Working Together?
               </h2>
-              <p className="text-xl mb-8 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              <p className="text-xl mb-6 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                 I'm always open to discussing new projects and collaborations.
               </p>
               <Link

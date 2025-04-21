@@ -79,19 +79,6 @@ export function RemoteSupportDownload() {
 
   return (
     <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6 w-full mx-auto">
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Remote Support Client</h2>
-        <p className="text-gray-600 dark:text-gray-400">
-          {loading ? (
-            "Loading download information..."
-          ) : error ? (
-            "Download the remote support client for your operating system. This allows us to provide remote assistance when needed."
-          ) : (
-            "Download the remote support client for your operating system. This allows us to provide remote assistance when needed."
-          )}
-        </p>
-      </div>
-      
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-3">
         {downloadData.map(({ osName, iconPath, getDownloadLinks }) => {
           const links = getDownloadLinks(release?.assets || []);

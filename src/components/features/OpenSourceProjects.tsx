@@ -12,6 +12,7 @@ interface OpenSourceProject {
   githubUrl?: string;
   gitlabUrl?: string;
   category: 'business' | 'support' | 'contribution';
+  tags: { name: string; color: 'blue' | 'green' | 'purple' | 'yellow' | 'orange' | 'pink' | 'red' | 'indigo' | 'gray' }[];
 }
 
 const projects: OpenSourceProject[] = [
@@ -21,7 +22,8 @@ const projects: OpenSourceProject[] = [
     iconUrl: '/images/projects/opensign-logo.svg',
     websiteUrl: 'https://opensign.com',
     githubUrl: 'https://github.com/opensign/opensign',
-    category: 'business'
+    category: 'business',
+    tags: [{ name: 'document signing', color: 'blue' }]
   },
   {
     name: 'FreeScout',
@@ -29,7 +31,11 @@ const projects: OpenSourceProject[] = [
     iconUrl: '/images/projects/freescout-logo.svg',
     websiteUrl: 'https://freescout.net',
     githubUrl: 'https://github.com/freescout-helpdesk/freescout',
-    category: 'business'
+    category: 'business',
+    tags: [
+      { name: 'helpdesk', color: 'green' },
+      { name: 'email', color: 'blue' }
+    ]
   },
   {
     name: 'Invoice Ninja',
@@ -37,7 +43,11 @@ const projects: OpenSourceProject[] = [
     iconUrl: '/images/projects/invoice-ninja-logo.svg',
     websiteUrl: 'https://invoiceninja.com',
     githubUrl: 'https://github.com/invoiceninja/invoiceninja',
-    category: 'business'
+    category: 'business',
+    tags: [
+      { name: 'invoicing', color: 'green' },
+      { name: 'crm', color: 'blue' }
+    ]
   },
   {
     name: 'Rust Desk',
@@ -45,7 +55,8 @@ const projects: OpenSourceProject[] = [
     iconUrl: '/images/projects/rustdesk-logo.svg',
     websiteUrl: 'https://rustdesk.com',
     githubUrl: 'https://github.com/rustdesk/rustdesk',
-    category: 'business'
+    category: 'business',
+    tags: [{ name: 'remote support', color: 'purple' }]
   },
   {
     name: 'Keila',
@@ -53,7 +64,11 @@ const projects: OpenSourceProject[] = [
     iconUrl: '/images/projects/keila-logo.svg',
     websiteUrl: 'https://keila.io',
     githubUrl: 'https://github.com/pentacent/keila',
-    category: 'business'
+    category: 'business',
+    tags: [
+      { name: 'email', color: 'blue' },
+      { name: 'newsletter', color: 'green' }
+    ]
   },
   {
     name: 'Traefik',
@@ -61,7 +76,12 @@ const projects: OpenSourceProject[] = [
     iconUrl: '/images/projects/traefik-logo.svg',
     websiteUrl: 'https://traefik.io',
     githubUrl: 'https://github.com/traefik/traefik',
-    category: 'support'
+    category: 'support',
+    tags: [
+      { name: 'reverse-proxy', color: 'blue' },
+      { name: 'docker', color: 'green' },
+      { name: 'go', color: 'purple' }
+    ]
   }
 ];
 
@@ -73,7 +93,7 @@ export default function OpenSourceProjects() {
           key={project.name}
           className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden h-full flex flex-col"
         >
-          <div className="p-6 flex-grow">
+          <div className="px-6 pt-2.5 pb-6 flex-grow">
             <div className="flex flex-col items-center mb-4">
               <div className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center mb-3">
                 <Image
@@ -93,7 +113,7 @@ export default function OpenSourceProjects() {
               {project.description}
             </p>
 
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4">
               <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
                 project.category === 'business' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' :
                 project.category === 'support' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' :
@@ -101,6 +121,24 @@ export default function OpenSourceProjects() {
               }`}>
                 {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
               </span>
+              {project.tags.map((tag) => (
+                <span 
+                  key={tag.name}
+                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                    tag.color === 'blue' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' :
+                    tag.color === 'green' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' :
+                    tag.color === 'purple' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' :
+                    tag.color === 'yellow' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' :
+                    tag.color === 'red' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' :
+                    tag.color === 'orange' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300' :
+                    tag.color === 'pink' ? 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300' :
+                    tag.color === 'indigo' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300' :
+                    'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
+                  }`}
+                >
+                  {tag.name}
+                </span>
+              ))}
             </div>
 
             <div className="flex flex-wrap gap-4">

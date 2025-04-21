@@ -8,6 +8,7 @@ import { ProjectInfo } from '@/types/common';
 
 interface ProjectCardProps extends Omit<ProjectInfo, 'technologies' | 'type'> {
   logoSize?: 'normal' | 'large';
+  tags: { name: string; color: 'blue' | 'green' | 'purple' | 'yellow' | 'orange' | 'pink' | 'red' | 'indigo' | 'gray' }[];
 }
 
 export default function ProjectCard({
@@ -22,7 +23,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden h-full flex flex-col">
-      <div className="p-6 flex-grow">
+      <div className="px-6 pt-2.5 pb-6 flex-grow">
         <div className="flex flex-col items-center mb-4">
           {logoUrl && (
             <div className={`relative flex-shrink-0 flex items-center justify-center mb-3 ${
@@ -44,33 +45,24 @@ export default function ProjectCard({
         
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4 mt-2">
-            {tags.map((tag) => {
-              // Map color string to the appropriate Tailwind classes
-              const getTagClasses = (color: string) => {
-                const colorMap: Record<string, string> = {
-                  blue: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
-                  green: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
-                  purple: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300",
-                  yellow: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300",
-                  red: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300",
-                  orange: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300",
-                  pink: "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300",
-                  indigo: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300",
-                  gray: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                };
-                
-                return colorMap[color] || colorMap.gray;
-              };
-              
-              return (
-                <span 
-                  key={tag.name} 
-                  className={`text-xs font-medium px-2.5 py-0.5 rounded ${getTagClasses(tag.color)}`}
-                >
-                  {tag.name}
-                </span>
-              );
-            })}
+            {tags.map((tag) => (
+              <span 
+                key={tag.name} 
+                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                  tag.color === 'blue' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' :
+                  tag.color === 'green' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' :
+                  tag.color === 'purple' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' :
+                  tag.color === 'yellow' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' :
+                  tag.color === 'red' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' :
+                  tag.color === 'orange' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300' :
+                  tag.color === 'pink' ? 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300' :
+                  tag.color === 'indigo' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300' :
+                  'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
+                }`}
+              >
+                {tag.name}
+              </span>
+            ))}
           </div>
         )}
         

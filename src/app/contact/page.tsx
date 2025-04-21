@@ -20,19 +20,19 @@ export default function Contact() {
       {/* Support Notice */}
       <div className="container mx-auto px-4">
         <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8 mt-12">
-          <div className="flex items-start">
-            <FontAwesomeIcon icon={faInfoCircle} className="text-blue-500 h-6 w-6 mr-4 mt-1" />
+          <div className="flex flex-col items-center text-center">
+            <FontAwesomeIcon icon={faInfoCircle} className="text-blue-500 h-6 w-6 mb-4" />
             <div>
               <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Client Support Notice</h3>
               <p className="text-blue-800 dark:text-blue-200 mb-4">
                 For existing clients with support needs, project inquiries, or technical issues, please use our dedicated support portal for faster response times and better tracking of your requests.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="https://help.coreyalan.me/help/3530376337"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-300"
+                  className="inline-flex items-center justify-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-300"
                 >
                   <FontAwesomeIcon icon={faTicket} className="mr-2" />
                   Access Support Portal
@@ -82,28 +82,28 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Get in Touch</h2>
             
             {/* Profile Photo and Contact Info Row */}
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
+            <div className="flex flex-col items-center gap-6 mb-8">
               {/* Profile Photo */}
               <div className="flex-shrink-0">
                 <GitHubAvatar 
                   username="NX211" 
-                  className="w-24 h-24 rounded-full object-cover border-4 border-primary dark:border-primary-light shadow-lg"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-primary dark:border-primary-light shadow-lg"
                 />
               </div>
               
               {/* Contact Details */}
-              <div className="text-center md:text-left">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Corey Stone</h3>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Corey Stone</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4">Full Stack Developer & Technology Consultant</p>
                 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-center md:justify-start">
+                  <div className="flex items-center justify-center">
                     <FontAwesomeIcon icon={faEnvelope} className="text-primary h-5 w-5 mr-3" />
                     <a href="mailto:corey@coreyalan.me" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
                       corey@coreyalan.me
                     </a>
                   </div>
-                  <div className="flex items-center justify-center md:justify-start">
+                  <div className="flex items-center justify-center">
                     <FontAwesomeIcon icon={faLocationDot} className="text-primary h-5 w-5 mr-3" />
                     <span className="text-gray-600 dark:text-gray-400">Clarksville, TN</span>
                   </div>
@@ -180,10 +180,10 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-8">
-            <ContactForm
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+            <ContactForm 
               title="Send a Message"
-              description="Fill out the form below to get in touch with me."
+              description="Fill out the form below to get in touch with me"
             />
           </div>
         </div>
