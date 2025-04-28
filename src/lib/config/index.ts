@@ -26,7 +26,6 @@ class ConfigService {
       invoiceNinja: {
         baseUrl: process.env.INVOICE_NINJA_URL,
         apiToken: process.env.INVOICE_NINJA_API_KEY,
-        apiSecret: process.env.INVOICE_NINJA_API_SECRET,
       },
       // ... other config
     };
