@@ -248,7 +248,6 @@ export class InvoiceNinjaClientService {
 
   private getAuthHeaders(): Record<string, string> {
     const headers: Record<string, string> = {
-      'X-API-SECRET': this.config.apiSecret,
       'X-Requested-With': 'XMLHttpRequest',
       'Content-Type': 'application/json',
     };
