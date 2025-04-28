@@ -3,14 +3,14 @@ import { getEnvVar } from '../env';
 export interface FreeScoutAuthConfig {
   apiKey: string;
   baseUrl: string;
-  method: 'header';
+  authMethod: 'basic' | 'query' | 'header';
 }
 
 export function getFreeScoutConfig(): FreeScoutAuthConfig {
   return {
     apiKey: process.env.FREESCOUT_API_KEY || '',
     baseUrl: process.env.FREESCOUT_BASE_URL || '',
-    method: 'header',
+    authMethod: 'header',
   };
 }
 
