@@ -1,4 +1,4 @@
-import { FreeScoutAuthConfig } from './types';
+import { FreeScoutAuthConfig } from './config';
 import { ConversationService } from './services/conversation-service';
 import { CustomerService } from './services/customer-service';
 import { MailboxService } from './services/mailbox-service';
@@ -13,8 +13,10 @@ export class FreeScoutClient {
   public users: UserService;
   public webhooks: WebhookService;
   public auth: AuthService;
+  public config: FreeScoutAuthConfig;
 
   constructor(config: FreeScoutAuthConfig) {
+    this.config = config;
     this.conversations = new ConversationService(config);
     this.customers = new CustomerService(config);
     this.mailboxes = new MailboxService(config);

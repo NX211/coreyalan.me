@@ -1,16 +1,24 @@
-import { FreeScoutAuthConfig } from './types/auth';
+import { getEnvVar } from '../env';
 
-export const FREESCOUT_CONFIG: FreeScoutAuthConfig = {
-  apiKey: process.env.FREESCOUT_API_KEY || '',
-  baseUrl: process.env.FREESCOUT_BASE_URL || 'https://help.coreyalan.me/api',
-  method: (process.env.FREESCOUT_AUTH_METHOD as 'header' | 'query' | 'basic') || 'header',
-};
+export interface FreeScoutAuthConfig {
+  apiKey: string;
+  baseUrl: string;
+  method: 'header';
+}
+
+export function getFreeScoutConfig(): FreeScoutAuthConfig {
+  return {
+    apiKey: process.env.FREESCOUT_API_KEY || '',
+    baseUrl: process.env.FREESCOUT_BASE_URL || '',
+    method: 'header',
+  };
+}
 
 // Validate required environment variables
-if (!FREESCOUT_CONFIG.apiKey) {
+if (!getFreeScoutConfig().apiKey) {
   throw new Error('FREESCOUT_API_KEY environment variable is required');
 }
 
-if (!FREESCOUT_CONFIG.baseUrl) {
+if (!getFreeScoutConfig().baseUrl) {
   throw new Error('FREESCOUT_BASE_URL environment variable is required');
 } 
