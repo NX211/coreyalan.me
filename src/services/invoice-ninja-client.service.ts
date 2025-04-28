@@ -395,4 +395,30 @@ export class InvoiceNinjaClientService extends BaseApiClient {
   async impersonateUser(id: string): Promise<{ data: InvoiceNinjaUser }> {
     return this.request('GET', `/users/${id}/impersonate`);
   }
+
+  /**
+   * Authenticate a user with email and password
+   * @param email The user's email
+   * @param password The user's password
+   * @returns The authenticated user or null if authentication fails
+   */
+  async authenticateUser(email: string, password: string): Promise<InvoiceNinjaUser | null> {
+    try {
+      const response = await this.request<InvoiceNinjaUser>(
+        'POST',
+        '/users/authenticate',
+        {
+          data: {
+            email,
+            password,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Authentication failed:', error);
+      return null;
+    }
+  }
 } 

@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from '@/lib/hooks/useSession';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -10,6 +13,8 @@ interface MobileMenuProps {
 
 function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
+  const session = useSession();
+  const isAuthenticated = session?.isAuthenticated ?? false;
 
   const getLinkClass = () => {
     return 'text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white';
@@ -63,6 +68,27 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           >
             Client Portal
           </Link>
+          
+          {/* Auth Link in Mobile Menu */}
+          {isAuthenticated ? (
+            <Link 
+              href="/auth/logout" 
+              className="flex items-center py-2 text-primary"
+              onClick={onClose}
+            >
+              <FontAwesomeIcon icon={faSignOutAlt} className="mr-2 h-4 w-4" />
+              Sign Out
+            </Link>
+          ) : (
+            <Link 
+              href="/auth/login" 
+              className="flex items-center py-2 text-primary"
+              onClick={onClose}
+            >
+              <FontAwesomeIcon icon={faSignInAlt} className="mr-2 h-4 w-4" />
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </div>

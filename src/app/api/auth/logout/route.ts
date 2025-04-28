@@ -1,34 +1,59 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { securityMiddleware } from '@/middleware/compose';
-import { invoiceNinjaService } from '@/lib/invoice-ninja';
 import { SecurityLogger } from '@/lib/security/logger';
-import { ApiError } from '@/lib/api/errors';
+import { cookies } from 'next/headers';
+import { deleteSession } from '@/lib/server/session';
+import { invoiceNinjaService } from '@/lib/invoice-ninja';
 
 export const POST = securityMiddleware(async (request: NextRequest) => {
   try {
-    // Clear the token from the service
-    invoiceNinjaService.setToken(null as any);
+    // Get session token from cookies
+    const sessionId = cookies().get('session')?.value;
     
-    // Create response that clears the session cookie
-    const response = NextResponse.redirect(new URL('/auth/login', request.url));
-    response.cookies.set('invoice_ninja_session', '', {
-      path: '/',
-      expires: new Date(0),
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax'
-    });
+    // Clear Invoice Ninja token regardless of session
+    invoiceNinjaService.setToken(null);
+    
+    if (sessionId) {
+      // Delete session from database
+      await deleteSession(sessionId);
+      
+      // Clear cookies
+      cookies().delete('session');
+      
+      // Log the successful logout
+      await SecurityLogger.logSecurityEvent('logout_success', request, {
+        sessionId,
+      });
+    }
 
-    // Log successful logout
-    await SecurityLogger.logSecurityEvent('logout_success', request);
+    // Optional: Try to call Invoice Ninja logout endpoint
+    // This depends on if the API supports a logout endpoint
+    try {
+      // Attempt to call a logout endpoint if available
+      // await fetch(`${invoiceNinjaBaseUrl}/api/v1/logout`, {
+      //   method: 'POST',
+      //   headers: { Authorization: `Bearer ${token}` },
+      // });
+    } catch (error) {
+      // Ignore errors from the logout endpoint
+      console.warn('Failed to call Invoice Ninja logout endpoint:', error);
+    }
 
-    return response;
-  } catch (error: any) {
+    return NextResponse.json(
+      { message: 'Successfully logged out' },
+      { status: 200 }
+    );
+  } catch (error) {
     console.error('Logout error:', error);
+    
+    // Log the error
     await SecurityLogger.logSecurityEvent('logout_error', request, {
-      error: error?.message || 'Unknown error'
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
     
-    return NextResponse.redirect(new URL('/auth/login?error=logout_failed', request.url));
+    return NextResponse.json(
+      { error: 'Something went wrong during logout' },
+      { status: 500 }
+    );
   }
 }); 

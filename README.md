@@ -73,6 +73,18 @@ The following API routes are used for interacting with these services:
    npm run dev
    ```
 
+### Development Authentication
+
+When working in development mode, you can use the secure development authentication system
+to login without connecting to the production Invoice Ninja service:
+
+1. Make sure `DEV_AUTH_ENABLED=true` is set in your `.env.development` or `.env.local` file
+2. Navigate to `/dev-login` in your browser or click the "Use Dev Login" link on the regular login page
+3. Enter your development credentials (any email and name) and select a role
+4. The system will create a local user and session that mimics the production flow
+
+See [Dev Authentication Documentation](docs/development/dev-authentication.md) for detailed information.
+
 ## Production
 
 This project is set up to be deployed using Docker. A `docker-compose.yml` file is included for easy deployment.

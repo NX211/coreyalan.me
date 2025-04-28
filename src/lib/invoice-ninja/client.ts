@@ -8,7 +8,15 @@ import {
   PaginationParams,
   InvoiceNinjaTask,
   InvoiceNinjaTaskStatus,
+  InvoiceNinjaAuthRequest,
+  InvoiceNinjaAuthResponse,
+  invoiceNinjaAuthResponseSchema,
+  InvoiceNinjaTokenRefreshRequest,
+  InvoiceNinjaTokenRefreshResponse,
+  InvoiceNinjaUser,
+  InvoiceNinjaToken
 } from '@/types/invoice-ninja';
+import { TokenStorage } from './token-storage';
 
 export class InvoiceNinjaClientError extends Error {
   constructor(
@@ -20,20 +28,222 @@ export class InvoiceNinjaClientError extends Error {
   }
 }
 
+export class InvoiceNinjaAuthError extends Error {
+  constructor(
+    public message: string,
+    public statusCode: number = 401
+  ) {
+    super(message);
+    this.name = 'InvoiceNinjaAuthError';
+  }
+}
+
 export class InvoiceNinjaClientService {
   private config: InvoiceNinjaConfig;
-  private token: string | null = null;
+  private token: InvoiceNinjaToken | null = null;
+  private tokenExpiry: Date | null = null;
+  private refreshTokenPromise: Promise<boolean> | null = null;
 
   constructor(config: InvoiceNinjaConfig) {
     this.config = config;
+    
+    // Load token from storage if available (client-side only)
+    if (typeof window !== 'undefined') {
+      const storedToken = TokenStorage.loadToken();
+      if (storedToken) {
+        this.token = storedToken;
+        this.tokenExpiry = new Date(Date.now() + storedToken.expires_in * 1000);
+      }
+    }
   }
 
-  setToken(token: string | null): void {
-    this.token = token;
+  setToken(accessToken: string | null, refreshToken?: string): void {
+    if (!accessToken) {
+      this.token = null;
+      this.tokenExpiry = null;
+      
+      // Clear from storage
+      TokenStorage.clearToken();
+      return;
+    }
+
+    this.token = {
+      access_token: accessToken,
+      token_type: 'Bearer',
+      expires_in: 3600, // Default to 1 hour
+      refresh_token: refreshToken || accessToken,
+    };
+
+    this.tokenExpiry = new Date(Date.now() + this.token.expires_in * 1000);
+    
+    // Save to storage
+    TokenStorage.saveToken(this.token);
+    
+    // Also save creation time
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('invoice_ninja_token_created', new Date().toISOString());
+    }
   }
 
-  getToken(): string | null {
+  getToken(): InvoiceNinjaToken | null {
     return this.token;
+  }
+
+  isTokenExpired(): boolean {
+    if (!this.token || !this.tokenExpiry) return true;
+    
+    // Add 30-second buffer to ensure token doesn't expire during request
+    return new Date(Date.now() + 30000) >= this.tokenExpiry;
+  }
+
+  /**
+   * Authenticate a user with Invoice Ninja
+   * @param email User email
+   * @param password User password
+   * @param oneTimePassword Optional one-time password for 2FA
+   * @returns User data if authentication is successful
+   * @throws InvoiceNinjaAuthError if authentication fails
+   */
+  async authenticateUser(
+    email: string, 
+    password: string, 
+    oneTimePassword?: string
+  ): Promise<InvoiceNinjaUser> {
+    try {
+      const authPayload: InvoiceNinjaAuthRequest = {
+        email,
+        password,
+      };
+      
+      if (oneTimePassword) {
+        authPayload.one_time_password = oneTimePassword;
+      }
+      
+      const response = await fetch(`${this.config.baseUrl}/api/v1/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify(authPayload),
+      });
+      
+      if (!response.ok) {
+        let errorMsg = 'Authentication failed';
+        
+        try {
+          const errorData = await response.json();
+          errorMsg = errorData.message || errorMsg;
+        } catch (e) {
+          // If we can't parse the error, use the default message
+        }
+        
+        throw new InvoiceNinjaAuthError(errorMsg, response.status);
+      }
+      
+      const data = await response.json();
+      
+      // Validate response structure
+      try {
+        const authResponse = invoiceNinjaAuthResponseSchema.parse(data);
+        
+        // Set the token for future requests
+        this.setToken(
+          authResponse.data.token,
+          authResponse.data.token // Use same token as refresh token until we have a proper refresh token
+        );
+        
+        // Create a user object from the response
+        const user: InvoiceNinjaUser = {
+          id: authResponse.data.user.id,
+          first_name: authResponse.data.user.first_name,
+          last_name: authResponse.data.user.last_name,
+          email: authResponse.data.user.email,
+          phone: authResponse.data.user.phone || undefined,
+          avatar: authResponse.data.user.avatar || undefined,
+          created_at: new Date(authResponse.data.user.created_at * 1000).toISOString(),
+          updated_at: new Date(authResponse.data.user.updated_at * 1000).toISOString(),
+          is_deleted: false,
+          custom_value1: authResponse.data.user.custom_value1 || undefined,
+          custom_value2: authResponse.data.user.custom_value2 || undefined,
+          custom_value3: authResponse.data.user.custom_value3 || undefined,
+          custom_value4: authResponse.data.user.custom_value4 || undefined,
+        };
+        
+        return user;
+      } catch (e) {
+        console.error('Failed to validate auth response:', e);
+        throw new InvoiceNinjaAuthError('Invalid authentication response format', 500);
+      }
+    } catch (error) {
+      if (error instanceof InvoiceNinjaAuthError) {
+        throw error;
+      }
+      
+      console.error('Authentication error:', error);
+      throw new InvoiceNinjaAuthError(
+        error instanceof Error ? error.message : 'An unexpected error occurred during authentication',
+        500
+      );
+    }
+  }
+
+  /**
+   * Refresh the access token using a refresh token
+   * @returns true if token was refreshed successfully, false otherwise
+   */
+  async refreshToken(): Promise<boolean> {
+    // If we already have a refresh in progress, return that promise
+    if (this.refreshTokenPromise) {
+      return this.refreshTokenPromise;
+    }
+
+    // If no refresh token is available, return false
+    if (!this.token?.refresh_token) {
+      return false;
+    }
+
+    // Create a new promise for this refresh attempt
+    this.refreshTokenPromise = (async () => {
+      try {
+        const refreshPayload: InvoiceNinjaTokenRefreshRequest = {
+          refresh_token: this.token!.refresh_token,
+        };
+
+        const response = await fetch(`${this.config.baseUrl}/api/v1/refresh`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+          body: JSON.stringify(refreshPayload),
+        });
+
+        if (!response.ok) {
+          return false;
+        }
+
+        const data = await response.json();
+        this.setToken(data.token, data.refresh_token);
+        this.tokenExpiry = new Date(Date.now() + (data.expires_in || 3600) * 1000);
+        return true;
+      } catch (error) {
+        console.error('Token refresh error:', error);
+        return false;
+      } finally {
+        this.refreshTokenPromise = null;
+      }
+    })();
+
+    return this.refreshTokenPromise;
+  }
+
+  /**
+   * Get the current authenticated user's profile
+   * @returns User profile information
+   */
+  async getUserProfile(): Promise<InvoiceNinjaUser> {
+    return this.fetchWithAuth<InvoiceNinjaUser>('/api/v1/users/me');
   }
 
   private getAuthHeaders(): Record<string, string> {
@@ -45,7 +255,7 @@ export class InvoiceNinjaClientService {
 
     // Use token if available, otherwise use API key
     if (this.token) {
-      headers['X-API-TOKEN'] = this.token;
+      headers['Authorization'] = `Bearer ${this.token.access_token}`;
     } else {
       headers['X-API-TOKEN'] = this.config.apiToken;
     }
@@ -72,6 +282,15 @@ export class InvoiceNinjaClientService {
     options: RequestInit = {},
     params?: PaginationParams
   ): Promise<T> {
+    // If token is expired, try to refresh it
+    if (this.token && this.isTokenExpired()) {
+      const refreshed = await this.refreshToken();
+      if (!refreshed) {
+        // If refresh failed, clear the token
+        this.token = null;
+      }
+    }
+
     const queryString = this.buildQueryString(params);
     const url = `${this.config.baseUrl}${endpoint}${queryString}`;
     
@@ -84,7 +303,21 @@ export class InvoiceNinjaClientService {
     });
 
     if (!response.ok) {
-      const error: InvoiceNinjaError = await response.json();
+      // For 401 errors, clear the token
+      if (response.status === 401) {
+        this.token = null;
+      }
+
+      let error: InvoiceNinjaError;
+      try {
+        error = await response.json();
+      } catch (e) {
+        error = {
+          message: 'Unknown error occurred',
+          status_code: response.status
+        };
+      }
+      
       throw new InvoiceNinjaClientError(error, response.status);
     }
 

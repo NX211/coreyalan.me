@@ -8,6 +8,10 @@ import PageHeader from '@/components/layout/PageHeader';
 // Force dynamic rendering to work around potential serialization issues during build
 export const dynamic = 'force-dynamic';
 
+export async function generateStaticParams() {
+  return []
+}
+
 export default async function Blog() {
   const posts = await getSortedPostsData();
   const post = posts[0]; // Get the most recent blog post

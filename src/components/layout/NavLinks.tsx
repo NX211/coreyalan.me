@@ -11,7 +11,7 @@ function NavLinks() {
   };
 
   return (
-    <nav className="hidden md:flex space-x-8">
+    <nav className="hidden md:flex space-x-8 justify-center">
       <Link 
         href="/" 
         className={getLinkClass()}

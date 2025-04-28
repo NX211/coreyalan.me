@@ -75,6 +75,13 @@ export class InternalServerError extends ApiError {
   }
 }
 
+export class UnauthorizedError extends Error {
+  constructor(message: string, public status: number = 401) {
+    super(message);
+    this.name = 'UnauthorizedError';
+  }
+}
+
 // Type guard to check if an error is an ApiError
 export function isApiError(error: unknown): error is ApiError {
   return error instanceof ApiError;

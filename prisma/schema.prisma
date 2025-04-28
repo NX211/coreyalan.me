@@ -16,24 +16,27 @@ datasource db {
 
 // User model for storing client information
 model User {
-  id             String          @id @default(uuid())
-  invoiceNinjaId String?         @unique // Added field to link to Invoice Ninja
-  email          String          @unique
-  name           String?
-  company        String?
-  phone          String?
-  website        String?         // Added field
-  address1       String?         // Added field
-  address2       String?         // Added field
-  city           String?         // Added field
-  state          String?         // Added field
-  postalCode     String?         // Added field
-  countryId      String?         // Added field (assuming String, adjust if needed)
-  documents      Document[]      // Documents uploaded by the user
-  signedDocuments SignedDocument[] // Documents signed by the user
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  contacts       Contact[]       // Added relation to Contact
+  id               String           @id @default(uuid())
+  invoiceNinjaId   String?          @unique // Added field to link to Invoice Ninja
+  email            String           @unique
+  name             String?
+  company          String?
+  phone            String?
+  website          String? // Added field
+  address1         String? // Added field
+  address2         String? // Added field
+  city             String? // Added field
+  state            String? // Added field
+  postalCode       String? // Added field
+  countryId        String? // Added field (assuming String, adjust if needed)
+  resetToken       String? // Added for password reset
+  resetTokenExpiry DateTime? // Added for password reset expiry
+  documents        Document[] // Documents uploaded by the user
+  signedDocuments  SignedDocument[] // Documents signed by the user
+  invoices         Invoice[] // Invoices for the user
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  contacts         Contact[] // Added relation to Contact
 }
 
 // Added Contact model
@@ -52,29 +55,29 @@ model Contact {
 
 // Document model for tracking uploaded files
 model Document {
-  id            String    @id @default(uuid())
-  fileName      String
-  fileType      String    // MIME type
-  fileSize      Int       // Size in bytes
-  filePath      String    // Path in Google Drive or storage
-  driveFileId   String?   // Google Drive file ID if applicable
-  description   String?
-  user          User      @relation(fields: [userId], references: [id])
-  userId        String
-  isPublic      Boolean   @default(false)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id          String   @id @default(uuid())
+  fileName    String
+  fileType    String // MIME type
+  fileSize    Int // Size in bytes
+  filePath    String // Path in Google Drive or storage
+  driveFileId String? // Google Drive file ID if applicable
+  description String?
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // SignedDocument model for tracking document signing status
 model SignedDocument {
   id                String    @id @default(uuid())
   documentName      String
-  documentType      String    // e.g., "nda", "contract", "sow"
+  documentType      String // e.g., "nda", "contract", "sow"
   status            Status    @default(PENDING)
-  externalId        String?   // ID from external signing service like OpenSign
-  documentUrl       String    // URL to the document for signing
-  signedDocumentUrl String?   // URL to the signed document
+  externalId        String? // ID from external signing service like OpenSign
+  documentUrl       String // URL to the document for signing
+  signedDocumentUrl String? // URL to the signed document
   signer            User      @relation(fields: [signerId], references: [id])
   signerId          String
   signedAt          DateTime?
@@ -94,11 +97,39 @@ enum Status {
 
 // DocumentTemplate model for reusable documents
 model DocumentTemplate {
-  id           String    @id @default(uuid())
+  id           String   @id @default(uuid())
   name         String
-  documentType String    // e.g., "nda", "contract", "sow"
-  templateUrl  String    // URL to the template
-  isActive     Boolean   @default(true)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  documentType String // e.g., "nda", "contract", "sow"
+  templateUrl  String // URL to the template
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Session {
+  id            String   @id @default(cuid())
+  userId        String
+  email         String
+  name          String
+  invoiceNinjaId String
+  role          String?
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime
+
+  @@index([userId])
+  @@index([invoiceNinjaId])
+}
+
+model Invoice {
+  id            String   @id @default(cuid())
+  invoiceNumber String   @unique
+  amount        Float
+  status        String // DRAFT, SENT, PAID, OVERDUE, CANCELLED
+  dueDate       DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
+
+  @@index([userId])
 }

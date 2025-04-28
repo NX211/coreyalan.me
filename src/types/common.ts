@@ -100,15 +100,17 @@ export type ProjectFeature = z.infer<typeof projectFeatureSchema>;
  */
 export const documentSchema = z.object({
   id: z.string().uuid(),
-  name: z.string().min(1).max(255),
-  type: z.string().min(1).max(50),
-  size: z.number().int().positive(),
-  url: z.string().url(),
-  uploadedAt: z.string().datetime(),
-  status: z.enum(['pending', 'processing', 'completed', 'failed'])
+  title: z.string().min(1).max(255),
+  status: z.enum(['pending', 'signed', 'draft', 'expired']),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+  url: z.string().url().optional(),
+  signedAt: z.string().datetime().optional(),
+  expiresAt: z.string().datetime().optional()
 });
 
 export type Document = z.infer<typeof documentSchema>;
+export type DocumentStatus = Document['status'];
 
 /**
  * User information and role

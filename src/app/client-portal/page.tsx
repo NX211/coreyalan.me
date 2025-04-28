@@ -1,13 +1,42 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/layout/PageHeader';
 import Script from 'next/script';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTicket, faFileInvoice, faClock, faHeadset, faLock, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import { faTicket, faFileInvoice, faClock, faHeadset, faLock, faFileSignature, faSignInAlt, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { RemoteSupportDownload } from '@/components/remote-support-download';
+import { useSession } from '@/lib/hooks/useSession';
+import { ClientPortalCard } from '@/components/client-portal/card';
+import { LoginCard } from '@/components/auth/login-card';
 
 export default function ClientPortal() {
+  const router = useRouter();
+  const session = useSession();
+  const isAuthenticated = session?.isAuthenticated ?? false;
+  
+  useEffect(() => {
+    // Redirect authenticated users to dashboard
+    if (isAuthenticated) {
+      router.push('/client-portal/dashboard');
+    }
+  }, [isAuthenticated, router]);
+  
+  // If authenticated, show loading state while redirecting
+  if (isAuthenticated) {
+    return (
+      <div className="pt-24 pb-16">
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-24 pb-16">
       {/* Hero Section */}
@@ -82,37 +111,8 @@ export default function ClientPortal() {
             </div>
           </div>
 
-          {/* Billing Section */}
-          <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6 relative" style={{ height: '500px' }}>
-            <div style={{ paddingBottom: '60px' }}>
-              <div className="flex flex-col items-center text-center mb-4">
-                <FontAwesomeIcon icon={faFileInvoice} className="text-primary h-6 w-6 mb-3" />
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Billing Portal</h2>
-              </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
-                Access your billing information, invoices, and payment history. Manage your subscription, update payment methods, and download past invoices.
-              </p>
-              <div className="mb-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Available Actions:</h3>
-                <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1 inline-block text-left">
-                  <li>View and Download Invoices</li>
-                  <li>Update Payment Methods</li>
-                  <li>Manage Subscription</li>
-                  <li>View Payment History</li>
-                </ul>
-              </div>
-            </div>
-            <div className="absolute bottom-6 left-0 right-0 text-center">
-              <a
-                href="https://billing.coreyalan.me/client/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors duration-300"
-              >
-                Access Billing Portal
-              </a>
-            </div>
-          </div>
+          {/* Login Section */}
+          <LoginCard />
 
           {/* Document Signing Section */}
           <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6 relative" style={{ height: '500px' }}>
@@ -149,8 +149,11 @@ export default function ClientPortal() {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-[#37abc8] mb-6 text-center">Frequently Asked Questions</h2>
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+            Frequently Asked Questions
+          </h2>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">How do I submit a support ticket?</h3>
@@ -159,9 +162,9 @@ export default function ClientPortal() {
               </p>
             </div>
             <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Where can I find my invoices?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">How do I access my account?</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                All invoices are available in the Billing Portal. Click the &quot;Access Billing Portal&quot; button to view and download your invoices.
+                Click the &quot;Sign In to Your Account&quot; button above and enter your email and password. If you don&apos;t have an account, contact support to get set up.
               </p>
             </div>
             <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">

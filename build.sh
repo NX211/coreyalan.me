@@ -15,7 +15,6 @@ npm install --quiet # Run install before setting NODE_ENV
 # Now set environment variables for the build process
 export NEXT_TELEMETRY_DISABLED=1
 export NODE_ENV=production
-export NEXT_SKIP_STATIC_EXPORT=true
 
 # Clean previous build
 echo "Cleaning previous build artifacts..."

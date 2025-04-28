@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=coreyalan
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   web:
     build:
       context: .
@@ -8,7 +19,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/coreyalan
       - EMAIL_SERVER_HOST=${EMAIL_SERVER_HOST}
       - EMAIL_SERVER_PORT=${EMAIL_SERVER_PORT}
       - EMAIL_SERVER_USER=${EMAIL_SERVER_USER}
@@ -16,6 +28,11 @@ services:
       - EMAIL_SERVER_SECURE=${EMAIL_SERVER_SECURE}
       - EMAIL_FROM=${EMAIL_FROM}
       - EMAIL_TO=${EMAIL_TO}
+    depends_on:
+      - db
     env_file:
       - .env.local
       - .env.email
+
+volumes:
+  postgres_data:

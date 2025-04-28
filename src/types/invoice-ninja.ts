@@ -350,6 +350,62 @@ export interface InvoiceNinjaUser {
   oauth_user_token_documents?: any[];
 }
 
+// Authentication request schema
+export const invoiceNinjaAuthRequestSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
+  one_time_password: z.string().optional(),
+});
+
+export type InvoiceNinjaAuthRequest = z.infer<typeof invoiceNinjaAuthRequestSchema>;
+
+// Authentication response schema
+export const invoiceNinjaAuthResponseSchema = z.object({
+  data: z.object({
+    token: z.string().min(1),
+    user: z.object({
+      id: z.string().min(1),
+      first_name: z.string(),
+      last_name: z.string(),
+      email: z.string().email(),
+      phone: z.string().optional().nullable(),
+      avatar: z.string().optional().nullable(),
+      account_id: z.string().min(1),
+      created_at: z.number(),
+      updated_at: z.number(),
+      custom_value1: z.string().optional().nullable(),
+      custom_value2: z.string().optional().nullable(),
+      custom_value3: z.string().optional().nullable(),
+      custom_value4: z.string().optional().nullable(),
+      is_owner: z.boolean().optional(),
+      oauth_provider_id: z.string().optional().nullable(),
+      oauth_user_id: z.string().optional().nullable(),
+    }),
+    company: z.object({
+      id: z.string().min(1),
+      name: z.string(),
+      // Add other company fields as needed
+    }).optional(),
+  }),
+});
+
+export type InvoiceNinjaAuthResponse = z.infer<typeof invoiceNinjaAuthResponseSchema>;
+
+// Token refresh request/response
+export const invoiceNinjaTokenRefreshRequestSchema = z.object({
+  refresh_token: z.string().min(1),
+});
+
+export type InvoiceNinjaTokenRefreshRequest = z.infer<typeof invoiceNinjaTokenRefreshRequestSchema>;
+
+export const invoiceNinjaTokenRefreshResponseSchema = z.object({
+  token: z.string().min(1),
+  refresh_token: z.string().min(1),
+  expires_in: z.number().int().positive(),
+});
+
+export type InvoiceNinjaTokenRefreshResponse = z.infer<typeof invoiceNinjaTokenRefreshResponseSchema>;
+
 // Export all schemas for runtime validation
 export const schemas = {
   config: invoiceNinjaConfigSchema,

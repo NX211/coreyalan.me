@@ -33,6 +33,12 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, must-revalidate' }
+        ]
+      }
     ]
   },
   // Remove static export configuration for Cloud Run
@@ -69,6 +75,19 @@ const nextConfig = {
     ignoreDuringBuilds: process.env.NODE_ENV === 'development',
     dirs: ['src'], // Only run ESLint on the src directory
   },
+  // Mark dynamic routes as server-side only
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: '/api/:path*',
+      },
+      {
+        source: '/auth/:path*',
+        destination: '/auth/:path*',
+      }
+    ]
+  }
 };
 
 module.exports = nextConfig; 
