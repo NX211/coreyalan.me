@@ -75,7 +75,7 @@ const nextConfig = {
     ignoreDuringBuilds: process.env.NODE_ENV === 'development',
     dirs: ['src'], // Only run ESLint on the src directory
   },
-  // Mark dynamic routes as server-side only
+  // Configure dynamic routes and API routes
   async rewrites() {
     return [
       {
@@ -87,7 +87,30 @@ const nextConfig = {
         destination: '/auth/:path*',
       }
     ]
-  }
+  },
+  // Disable static optimization for API routes
+  experimental: {
+    serverActions: true,
+    serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
+  },
+  // Configure page extensions
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  // Configure runtime
+  runtime: 'nodejs',
+  // Configure server components
+  serverComponents: true,
+  // Configure static optimization
+  staticPageGenerationTimeout: 1000,
+  // Configure dynamic routes
+  dynamicRoutes: [
+    '/api/auth/register',
+    '/api/auth/login',
+    '/api/auth/callback',
+    '/api/invoices',
+    '/api/documents',
+    '/api/opensign',
+    '/api/webhooks'
+  ]
 };
 
 module.exports = nextConfig; 

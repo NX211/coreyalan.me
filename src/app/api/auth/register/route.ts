@@ -79,7 +79,17 @@ export const POST = securityMiddleware(async (request: NextRequest) => {
       { status: 201 }
     );
   } catch (error: any) {
-    if (error instanceof ApiError) {
+    if (error instanceof ValidationError) {
+      return NextResponse.json(
+        { error: error.message, details: error.details },
+        { status: error.statusCode }
+      );
+    } else if (error instanceof ConflictError) {
+      return NextResponse.json(
+        { error: error.message },
+        { status: error.statusCode }
+      );
+    } else if (error instanceof ApiError) {
       return NextResponse.json(
         { error: error.message, details: error.details },
         { status: error.statusCode }
@@ -88,11 +98,12 @@ export const POST = securityMiddleware(async (request: NextRequest) => {
     
     console.error('Registration error:', error);
     await SecurityLogger.logSecurityEvent('registration_error', request, {
-      error: error?.message || 'Unknown error'
+      error: error?.message || 'Unknown error',
+      stack: error?.stack
     });
     
     return NextResponse.json(
-      { error: 'Registration failed' },
+      { error: 'Registration failed', details: error?.message || 'An unexpected error occurred' },
       { status: 500 }
     );
   }
