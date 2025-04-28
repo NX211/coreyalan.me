@@ -119,11 +119,12 @@ export class InvoiceNinjaClientService {
         authPayload.one_time_password = oneTimePassword;
       }
       
-      const response = await fetch(`${this.config.baseUrl}/api/v1/login`, {
+      const response = await fetch(`${this.config.baseUrl}/api/v1/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
+          'X-API-TOKEN': this.config.apiToken,
         },
         body: JSON.stringify(authPayload),
       });
