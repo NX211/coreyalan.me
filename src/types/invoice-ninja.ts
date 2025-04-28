@@ -6,7 +6,6 @@ import { z } from 'zod';
 export const invoiceNinjaConfigSchema = z.object({
   baseUrl: z.string().url(),
   apiToken: z.string().min(1),
-  apiSecret: z.string().min(1),
 });
 
 export type InvoiceNinjaConfig = z.infer<typeof invoiceNinjaConfigSchema>;

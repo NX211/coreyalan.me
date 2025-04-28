@@ -41,40 +41,6 @@ const nextConfig = {
       }
     ]
   },
-  // Remove static export configuration for Cloud Run
-  // assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
-  // trailingSlash: true,
-  // output: 'export',
-  
-  // Remove custom webpack rule for images - next/image handles this
-  /*
-  webpack: (config, { dev, isServer }) => {
-    // Optimize image loading
-    config.module.rules.push({
-      test: /\.(png|jpe?g|gif|webp|avif)$/i,
-      type: 'asset',
-      parser: {
-        dataUrlCondition: {
-          maxSize: 10 * 1024, // 10kb
-        },
-      },
-    });
-
-    return config;
-  },
-  */
-  
-  env: {
-    // Custom environment variables can go here
-  },
-  // For development only - disable in production builds
-  typescript: {
-    ignoreBuildErrors: process.env.NODE_ENV === 'development',
-  },
-  eslint: {
-    ignoreDuringBuilds: process.env.NODE_ENV === 'development',
-    dirs: ['src'], // Only run ESLint on the src directory
-  },
   // Configure dynamic routes and API routes
   async rewrites() {
     return [
@@ -88,29 +54,8 @@ const nextConfig = {
       }
     ]
   },
-  // Disable static optimization for API routes
-  experimental: {
-    serverActions: true,
-    serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
-  },
   // Configure page extensions
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
-  // Configure runtime
-  runtime: 'nodejs',
-  // Configure server components
-  serverComponents: true,
-  // Configure static optimization
-  staticPageGenerationTimeout: 1000,
-  // Configure dynamic routes
-  dynamicRoutes: [
-    '/api/auth/register',
-    '/api/auth/login',
-    '/api/auth/callback',
-    '/api/invoices',
-    '/api/documents',
-    '/api/opensign',
-    '/api/webhooks'
-  ]
 };
 
 module.exports = nextConfig; 
