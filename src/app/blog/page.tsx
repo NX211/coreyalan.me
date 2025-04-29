@@ -29,7 +29,7 @@ export default async function Blog() {
       {/* Hero Section */}
       <PageHeader
         title="Blog"
-        description="Thoughts, tutorials, and insights on technology and web development."
+        description="Thoughts, Tutorials, And Insights On Technology And Web Development"
       />
 
       {/* Blog Post */}

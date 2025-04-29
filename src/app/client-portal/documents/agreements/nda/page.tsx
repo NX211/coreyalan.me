@@ -33,7 +33,7 @@ export default function NdaDocumentPage() {
       {/* Hero Section */}
       <PageHeader 
         title="Non-Disclosure Agreement" 
-        description="Review and sign your NDA document"
+        description="Review And Sign Your NDA Document"
       />
       
       <div className="container mx-auto px-4 py-12 dark:bg-[#0F172A]">

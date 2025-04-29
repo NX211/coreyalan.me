@@ -11,7 +11,7 @@ export default function About() {
       {/* Hero Section */}
       <PageHeader
         title="About Me"
-        description="Technology consultant focusing on custom solutions for small businesses"
+        description="Technology Consultant Focusing On Custom Solutions For Small Businesses"
       />
 
       {/* Main Content */}
@@ -48,7 +48,7 @@ export default function About() {
                     <FontAwesomeIcon icon={faDownload} className="mr-2 h-4 w-4" /> Download Resume
                   </a>
                   <a
-                    href="https://calendar.app.google/4bZN3vV8H6aU5cNt9"
+                    href="https://calendly.com/coreyalan/discovery-meeting"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
@@ -71,10 +71,10 @@ export default function About() {
                 <h2 className="text-4xl font-bold text-[#37abc8] mb-10 text-center">
                   My Experience
                 </h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                   I work as a technology consultant primarily with small businesses, creating custom solutions to technical problems. My expertise spans web development, custom integration, and workflow automation to help businesses modernize their processes.
                 </p>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                   With a background in systems administration and full-stack development, I bring a holistic approach to technology problems. I believe in finding the right solution for each client's unique needs, whether that's a custom web application, an automated workflow, or integrating existing systems.
                 </p>
 
@@ -83,8 +83,8 @@ export default function About() {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Web Development</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                    <h4 className="font-semibold text-[#37abc8] mb-4 text-center">Web Development</h4>
+                    <ul className="list-disc marker:text-[#37abc8] pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>React.js & Next.js</li>
                       <li>TypeScript & JavaScript</li>
                       <li>HTML & CSS (Tailwind)</li>
@@ -92,8 +92,8 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">System Administration</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                    <h4 className="font-semibold text-[#37abc8] mb-4 text-center">System Administration</h4>
+                    <ul className="list-disc marker:text-[#37abc8] pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Linux Server Administration</li>
                       <li>Windows Server & Active Directory</li>
                       <li>macOS Management</li>
@@ -101,8 +101,8 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Cloud & Infrastructure</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                    <h4 className="font-semibold text-[#37abc8] mb-4 text-center">Cloud & Infrastructure</h4>
+                    <ul className="list-disc marker:text-[#37abc8] pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Azure Cloud Services</li>
                       <li>Microsoft 365 Administration</li>
                       <li>Docker & Container Orchestration</li>
@@ -110,8 +110,8 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">DevOps & Automation</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                    <h4 className="font-semibold text-[#37abc8] mb-4 text-center">DevOps & Automation</h4>
+                    <ul className="list-disc marker:text-[#37abc8] pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Ansible Configuration Management</li>
                       <li>CI/CD Pipelines</li>
                       <li>GitHub Actions</li>
@@ -119,8 +119,8 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Data & Security</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                    <h4 className="font-semibold text-[#37abc8] mb-4 text-center">Data & Security</h4>
+                    <ul className="list-disc marker:text-[#37abc8] pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Data Engineering & Pipelines</li>
                       <li>Security Implementation</li>
                       <li>Monitoring & Logging</li>
@@ -128,8 +128,8 @@ export default function About() {
                     </ul>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Networking & Solutions</h4>
-                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400 space-y-1">
+                    <h4 className="font-semibold text-[#37abc8] mb-4 text-center">Networking & Solutions</h4>
+                    <ul className="list-disc marker:text-[#37abc8] pl-5 text-gray-600 dark:text-gray-400 space-y-1">
                       <li>Network Administration & Design</li>
                       <li>Remote Work Solutions</li>
                       <li>Social Media Management</li>
@@ -140,30 +140,30 @@ export default function About() {
                 <h3 className="text-4xl font-bold text-[#37abc8] mt-10 mb-10 text-center">
                   Professional Experience
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                   I have extensive experience working across diverse technology environments. My background includes managing hybrid infrastructures with Windows, macOS, and Linux systems, implementing security-focused solutions, and developing custom integrations between disparate platforms.
                 </p>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                   My work with Azure cloud services and Microsoft 365 has helped businesses transition to modern, scalable, and secure work environments. I specialize in creating robust data pipelines and implementing efficient network designs that improve operational workflows while maintaining security best practices.
                 </p>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                   In addition to technical infrastructure, I've helped organizations optimize their digital presence through strategic social media management and implementing streamlined remote work solutions that enhance productivity and collaboration.
                 </p>
 
                 <h3 className="text-4xl font-bold text-[#37abc8] mt-10 mb-10 text-center">
                   Current Direction
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                   I'm currently focused on becoming more involved in the tech community and growing my knowledge and expertise around technologies that solve real business problems. I'm passionate about helping small businesses leverage modern technology solutions that were previously only accessible to larger enterprises.
                 </p>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                   In addition to client work, I maintain open-source projects like Traefik plugins and create content for my HomeLab Hobby channel, where I share knowledge about home server setups, self-hosting, and infrastructure.
                 </p>
 
                 <h3 className="text-4xl font-bold text-[#37abc8] mt-10 mb-10 text-center">
                   Ready to Collaborate?
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-8">
+                <p className="text-gray-600 dark:text-gray-400 mb-8 text-center">
                   If you're looking for custom technology solutions for your business or have a project in mind, I'd love to discuss how I can help.
                 </p>
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">

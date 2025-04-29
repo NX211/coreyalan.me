@@ -88,7 +88,7 @@ export default function ProjectsPage() {
       {/* Hero Section */}
       <PageHeader 
         title="Projects" 
-        description="A collection of my work, open-source contributions, and development projects"
+        description="A Collection Of My Work, Open-Source Contributions, And Development Projects"
       />
       
       <div className="container mx-auto px-4">
@@ -157,7 +157,7 @@ export default function ProjectsPage() {
 
             {/* Call to Action */}
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-[#1E293B] dark:to-[#0F172A] pt-2 pb-12 px-12 rounded-lg shadow-md border-l-4 border-primary text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#37abc8]">
                 Interested in Working Together?
               </h2>
               <p className="text-xl mb-6 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">

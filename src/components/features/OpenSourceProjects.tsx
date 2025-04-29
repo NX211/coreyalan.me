@@ -109,11 +109,11 @@ export default function OpenSourceProjects() {
               </h3>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
+            <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
               {project.description}
             </p>
 
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4 justify-center">
               <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
                 project.category === 'business' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' :
                 project.category === 'support' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' :
@@ -141,7 +141,7 @@ export default function OpenSourceProjects() {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center">
               {project.websiteUrl && (
                 <Link
                   href={project.websiteUrl}

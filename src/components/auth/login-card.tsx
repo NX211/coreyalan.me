@@ -14,7 +14,7 @@ export function LoginCard(): JSX.Element {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Client Login</h2>
         </div>
         <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
-          Sign in to access your account, view invoices, manage your subscription, and more.
+          Sign in to access your account, view invoices, access quotes, make payments, update your information, and more.
         </p>
         <div className="mb-4 text-center">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Account Features:</h3>

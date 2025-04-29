@@ -14,7 +14,7 @@ export default function Contact() {
       {/* Hero Section */}
       <PageHeader 
         title="Contact Me" 
-        description="Have a question or want to work together? Get in touch!"
+        description="Have A Question Or Want To Work Together? Get In Touch!"
       />
 
       {/* Support Notice */}
@@ -168,7 +168,7 @@ export default function Contact() {
             {/* Calendar Booking Button */}
             <div className="text-center mt-8">
               <a
-                href="https://calendar.app.google/4bZN3vV8H6aU5cNt9"
+                href="https://calendly.com/coreyalan/discovery-meeting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300"

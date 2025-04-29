@@ -11,6 +11,7 @@ import { RemoteSupportDownload } from '@/components/remote-support-download';
 import { useSession } from '@/lib/hooks/useSession';
 import { ClientPortalCard } from '@/components/client-portal/card';
 import { LoginCard } from '@/components/auth/login-card';
+import { FaqCard } from '@/components/faq/FaqCard';
 
 export default function ClientPortal() {
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function ClientPortal() {
       {/* Hero Section */}
       <PageHeader 
         title="Client Portal" 
-        description="Your central hub for support, billing, and project management"
+        description="Your Central Hub For Support, Billing, And Project Management"
       />
       
       <div className="container mx-auto px-4 py-12 dark:bg-[#0F172A]">
@@ -87,7 +88,7 @@ export default function ClientPortal() {
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Support Tickets</h2>
               </div>
               <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
-                Submit a support ticket or check the status of existing tickets using the widget below. Our support team is here to help with any technical issues, questions, or concerns.
+                Submit a support ticket or check the status of existing tickets using the button below. Our support team is here to help with any technical issues, questions, or concerns.
               </p>
               <div className="mb-4 text-center">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Common Support Topics:</h3>
@@ -149,35 +150,98 @@ export default function ClientPortal() {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        <div className="mt-12 sm:mt-16">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#37abc8] mb-6 sm:mb-8 text-center">
             Frequently Asked Questions
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">How do I submit a support ticket?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+          <div className="masonry-grid grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 container mx-auto px-4 sm:px-6">
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I submit a support ticket?">
                 Click the &quot;Access Support Portal&quot; button above and use the widget to create a new ticket. Provide as much detail as possible about your issue.
-              </p>
+              </FaqCard>
             </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">How do I access my account?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I access my account?">
                 Click the &quot;Sign In to Your Account&quot; button above and enter your email and password. If you don&apos;t have an account, contact support to get set up.
-              </p>
+              </FaqCard>
             </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">What&apos;s the response time for support?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+
+            <div className="break-inside-avoid">
+              <FaqCard question="What's the response time for support?">
                 We aim to respond to all support tickets within 2 hours during business hours. Emergency issues are prioritized.
-              </p>
+              </FaqCard>
             </div>
-            <div className="bg-white dark:bg-[#1E293B] rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">How do I sign documents?</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I sign documents?">
                 Click the &quot;Access Documents&quot; button to view and sign your documents. You&apos;ll be guided through the signing process with clear instructions.
-              </p>
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I install the support client software on Windows?">
+                Download the Windows installer from the Remote Support section above. Run the installer and follow the prompts. For silent installation, run the installer with <code>--silent-install</code> parameter.
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I install the support client software on Mac?">
+                Download the Mac DMG file from the Remote Support section. Open the DMG file and drag the support client to Applications. Allow it to run and enable requested permissions to complete setup.
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I install the support client software on Ubuntu?">
+                Download the DEB package from the Remote Support section. Open terminal and run: <code>sudo apt install -fy ./support-client-version.deb</code>. Follow any additional prompts to complete installation.
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I configure the support client?">
+                After installation, open the support client and click the menu button [⋮]. Go to Settings &gt; Network and enter the configuration string provided in the Remote Support section. This will automatically configure all necessary connection settings.
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="What is the configuration string for Windows?">
+                <p>Copy this configuration string and paste it into the Network settings:</p>
+                <pre className="break-all bg-gray-50 dark:bg-gray-800 rounded p-2 mt-2 text-xs overflow-x-auto">
+9JSPVFXTyJDchJ0dX9GRFdTZjZFcmdnMGtWNwVzKvxGaLdWM5tSbDZFN4BFSaJiOikXZrJCLiUWbu4WYsFWelJ3bj5CdjVmbu92YiojI0N3boJye
+                </pre>
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="What is the configuration string for Mac and Ubuntu?">
+                <p>Use the same configuration string as Windows. The configuration is universal across all platforms:</p>
+                <pre className="break-all bg-gray-50 dark:bg-gray-800 rounded p-2 mt-2 text-xs overflow-x-auto">
+9JSPVFXTyJDchJ0dX9GRFdTZjZFcmdnMGtWNwVzKvxGaLdWM5tSbDZFN4BFSaJiOikXZrJCLiUWbu4WYsFWelJ3bj5CdjVmbu92YiojI0N3boJye
+                </pre>
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="What if I need to manually configure the client?">
+                <p>If needed, you can manually configure the client using the following key:</p>
+                <pre className="break-all bg-gray-50 dark:bg-gray-800 rounded p-2 mt-2 text-xs overflow-x-auto">
+ZHPx4VCm+y1gKhlo+5p5kF2wfpVce7EDoWwBap2rMqU=
+                </pre>
+                <p className="mt-2">Enter this in the Network settings under the manual configuration section.</p>
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="How do I get remote support using the support client?">
+                Once configured, share your support client ID with our team through a support ticket. We&apos;ll use this ID to establish a secure remote connection when needed.
+              </FaqCard>
+            </div>
+
+            <div className="break-inside-avoid">
+              <FaqCard question="Is the support client secure?">
+                The support client uses end-to-end encryption and requires your explicit permission for each connection. You maintain full control and can end the session at any time. All connections are logged for security.
+              </FaqCard>
             </div>
           </div>
         </div>

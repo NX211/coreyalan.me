@@ -179,12 +179,12 @@ export default function Home() {
             <div className="text-center p-6 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300">
               <div className="text-4xl mb-4">🔧</div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">System Integration</h3>
-              <p className="text-gray-600 dark:text-gray-400">Ansible, Docker, Python, Linux, Proxmox, Ubuntu</p>
+              <p className="text-gray-600 dark:text-gray-400">Ansible, Docker, Python, Linux, Proxmox, Google Workspace, Microsoft 365</p>
             </div>
             <div className="text-center p-6 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300">
               <div className="text-4xl mb-4">🔄</div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Workflow Automation</h3>
-              <p className="text-gray-600 dark:text-gray-400">CI/CD, Data Pipelines, Scripting, GitHub Actions</p>
+              <p className="text-gray-600 dark:text-gray-400">CI/CD, Data Pipelines, Scripting, GitHub Actions, Zapier</p>
             </div>
             <div className="text-center p-6 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300">
               <div className="text-4xl mb-4">👥</div>

@@ -43,8 +43,12 @@ export default function ProjectCard({
           </h3>
         </div>
         
+        <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
+          {description}
+        </p>
+
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4 mt-2">
+          <div className="flex flex-wrap gap-2 mb-4 justify-center">
             {tags.map((tag) => (
               <span 
                 key={tag.name} 
@@ -66,11 +70,7 @@ export default function ProjectCard({
           </div>
         )}
         
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {description}
-        </p>
-        
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
           {githubUrl && (
             <a 
               href={githubUrl} 

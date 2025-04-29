@@ -39,7 +39,7 @@ export default function DocumentsPage() {
       {/* Hero Section */}
       <PageHeader 
         title="Document Center" 
-        description="Manage, sign, and share documents in one secure location"
+        description="Manage, Sign, And Share Documents In One Secure Location"
       />
       
       <div className="container mx-auto px-4 py-12 dark:bg-[#0F172A]">

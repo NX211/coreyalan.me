@@ -18,7 +18,7 @@ export default function AgreementsPage() {
       {/* Hero Section */}
       <PageHeader 
         title="Legal Agreements" 
-        description="Review and sign important documents"
+        description="Review And Sign Important Documents"
       />
       
       <div className="container mx-auto px-4 py-12 dark:bg-[#0F172A]">

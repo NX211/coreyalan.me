@@ -164,7 +164,7 @@ export default function DocumentUploadPage() {
       {/* Hero Section */}
       <PageHeader 
         title="Upload Documents" 
-        description="Share files securely through our Google Drive integration"
+        description="Share Files Securely Through Our Google Drive Integration"
       />
       
       <div className="container mx-auto px-4 py-12 dark:bg-[#0F172A]">
