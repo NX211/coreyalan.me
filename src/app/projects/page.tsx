@@ -33,6 +33,34 @@ interface Project {
 
 const featuredProjects: Project[] = [
   {
+    title: "JL Shaw Consulting",
+    description: "",
+    tags: [
+      { name: "Web Development", color: "blue" },
+      { name: "Kajabi", color: "orange" },
+      { name: "E-Learning", color: "green" }
+    ],
+    websiteUrl: "https://members.jlshawconsulting.com",
+    logoUrl: "/images/projects/jlshaw_page_demo.png",
+    type: "site"
+  },
+  {
+    title: "BNA Airport Workforce Analytics",
+    description: "Developed data pipelines and analytics solutions for Nashville International Airport (BNA) to generate workforce insights. As a Systems Administrator and Data Engineer at LTA Tech Services, I helped design and implement software systems that transform operational data into actionable intelligence.",
+    tags: [
+      { name: "Data Engineering", color: "blue" },
+      { name: "Analytics", color: "green" },
+      { name: "System Administration", color: "purple" }
+    ],
+    websiteUrl: "https://lta-services.com",
+    logoUrl: "/images/projects/bna-logo.svg",
+    logoSize: "large",
+    type: "project"
+  }
+];
+
+const otherProjects: Project[] = [
+  {
     title: "Traefik WebFinger Plugin",
     description: "A Traefik plugin that implements the WebFinger protocol (RFC7033), enabling federated identity for web applications. This plugin allows Traefik to respond to WebFinger requests, which is crucial for ActivityPub and other federated protocols.",
     tags: [
@@ -58,34 +86,6 @@ const featuredProjects: Project[] = [
   }
 ];
 
-const otherProjects: Project[] = [
-  {
-    title: "BNA Airport Workforce Analytics",
-    description: "Developed data pipelines and analytics solutions for Nashville International Airport (BNA) to generate workforce insights. As a Systems Administrator and Data Engineer at LTA Tech Services, I helped design and implement software systems that transform operational data into actionable intelligence.",
-    tags: [
-      { name: "Data Engineering", color: "blue" },
-      { name: "Analytics", color: "green" },
-      { name: "System Administration", color: "purple" }
-    ],
-    websiteUrl: "https://lta-services.com",
-    logoUrl: "/images/projects/bna-logo.svg",
-    logoSize: "large",
-    type: "project"
-  },
-  {
-    title: "JL Shaw Consulting",
-    description: "",
-    tags: [
-      { name: "Web Development", color: "blue" },
-      { name: "Kajabi", color: "orange" },
-      { name: "E-Learning", color: "green" }
-    ],
-    websiteUrl: "https://members.jlshawconsulting.com",
-    logoUrl: "/images/projects/jlshaw_page_demo.png",
-    type: "site"
-  }
-];
-
 export default function ProjectsPage() {
   return (
     <div className="pt-24 pb-16">
@@ -105,15 +105,25 @@ export default function ProjectsPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               {featuredProjects.map((project) => (
-                <ProjectCard 
-                  key={project.title}
-                  title={project.title}
-                  description={project.description}
-                  tags={project.tags}
-                  githubUrl={project.githubUrl}
-                  catalogUrl={project.catalogUrl}
-                  logoUrl={project.logoUrl}
-                />
+                project.type === 'site' ? (
+                  <SiteProjectCard 
+                    key={project.title}
+                    title={project.title}
+                    tags={project.tags}
+                    websiteUrl={project.websiteUrl}
+                    logoUrl={project.logoUrl}
+                  />
+                ) : (
+                  <ProjectCard 
+                    key={project.title}
+                    title={project.title}
+                    description={project.description}
+                    tags={project.tags}
+                    websiteUrl={project.websiteUrl}
+                    logoUrl={project.logoUrl}
+                    logoSize={project.logoSize}
+                  />
+                )
               ))}
             </div>
 
@@ -149,9 +159,9 @@ export default function ProjectsPage() {
                     title={project.title}
                     description={project.description}
                     tags={project.tags}
-                    websiteUrl={project.websiteUrl}
+                    githubUrl={project.githubUrl}
+                    catalogUrl={project.catalogUrl}
                     logoUrl={project.logoUrl}
-                    logoSize={project.logoSize}
                   />
                 )
               ))}
