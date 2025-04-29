@@ -2,9 +2,14 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function apiProtectionMiddleware(request: NextRequest) {
-  // Skip protection for public routes
-  if (request.nextUrl.pathname.startsWith('/api/public')) {
-    return null; // Allow public API requests to proceed
+  // Skip protection for public routes and authentication endpoints
+  if (
+    request.nextUrl.pathname.startsWith('/api/public') ||
+    request.nextUrl.pathname === '/api/auth/register' ||
+    request.nextUrl.pathname === '/api/auth/login' ||
+    request.nextUrl.pathname === '/api/auth/forgot-password'
+  ) {
+    return null; // Allow public API and auth requests to proceed
   }
 
   // In production, this would check authentication tokens

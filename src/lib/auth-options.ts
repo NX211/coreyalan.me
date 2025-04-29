@@ -1,6 +1,7 @@
 import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import crypto from 'crypto';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -46,6 +47,11 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, account, user }) {
+      // Generate CSRF token if it doesn't exist
+      if (!token.csrfToken) {
+        token.csrfToken = crypto.randomBytes(32).toString('hex');
+      }
+      
       if (account) {
         token.accessToken = account.access_token;
       }
@@ -58,6 +64,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.role = token.role || 'user';
         session.accessToken = token.accessToken;
+        session.csrfToken = token.csrfToken;
       }
       return session;
     },

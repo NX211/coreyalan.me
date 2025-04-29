@@ -195,6 +195,82 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Commercial Platforms Section */}
+      <section className="py-16 sm:py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8 sm:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Commercial Platforms
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              I specialize in implementing and integrating these industry-leading platforms to create powerful business solutions.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
+            {/* Kajabi */}
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-[220px] flex items-center justify-center">
+              <Image
+                src="/images/logos/kajabi_logo.png"
+                alt="Kajabi"
+                width={150}
+                height={150}
+                className="h-auto max-w-[130px] object-contain"
+                priority
+              />
+            </div>
+
+            {/* Google Workspace */}
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-[220px] flex items-center justify-center">
+              <Image
+                src="/images/logos/google_workspace.png"
+                alt="Google Workspace"
+                width={150}
+                height={150}
+                className="h-auto max-w-[130px] object-contain"
+                priority
+              />
+            </div>
+
+            {/* WordPress */}
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-[220px] flex items-center justify-center">
+              <Image
+                src="/images/logos/wordpress_logo.png"
+                alt="WordPress"
+                width={150}
+                height={150}
+                className="h-auto max-w-[130px] object-contain"
+                priority
+              />
+            </div>
+
+            {/* Zapier */}
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-[220px] flex items-center justify-center">
+              <Image
+                src="/images/logos/zapier_logo.svg"
+                alt="Zapier"
+                width={150}
+                height={150}
+                className="h-auto max-w-[130px] object-contain"
+                priority
+              />
+            </div>
+
+            {/* Webflow */}
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-[220px] flex items-center justify-center">
+              <Image
+                src="/images/logos/webflow_logo.png"
+                alt="Webflow"
+                width={150}
+                height={150}
+                className="h-auto max-w-[130px] object-contain"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action */}
       <section className="py-16 bg-primary dark:bg-primary-dark text-white">
         <div className="container mx-auto px-4 text-center">
