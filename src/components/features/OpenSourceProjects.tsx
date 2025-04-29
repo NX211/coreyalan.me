@@ -72,7 +72,7 @@ const projects: OpenSourceProject[] = [
   },
   {
     name: 'Traefik',
-    description: 'A modern HTTP reverse proxy and load balancer that makes deploying microservices easy.',
+    description: 'A modern HTTP reverse proxy and load balancer for deploying microservices easily.',
     iconUrl: '/images/projects/traefik-logo.svg',
     websiteUrl: 'https://traefik.io',
     githubUrl: 'https://github.com/traefik/traefik',

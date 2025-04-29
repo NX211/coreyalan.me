@@ -7,6 +7,7 @@ import { faLink, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import GithubPinnedRepos from '@/components/features/GithubPinnedRepos';
 import PageHeader from '@/components/layout/PageHeader';
 import ProjectCard from '@/components/ui-components/ProjectCard';
+import SiteProjectCard from '@/components/ui-components/SiteProjectCard';
 import OpenSourceProjects from '@/components/features/OpenSourceProjects';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { Suspense } from 'react';
@@ -27,6 +28,7 @@ interface Project {
   websiteUrl?: string;
   logoUrl: string;
   logoSize?: 'normal' | 'large';
+  type?: 'site' | 'project';
 }
 
 const featuredProjects: Project[] = [
@@ -67,18 +69,20 @@ const otherProjects: Project[] = [
     ],
     websiteUrl: "https://lta-services.com",
     logoUrl: "/images/projects/bna-logo.svg",
-    logoSize: "large"
+    logoSize: "large",
+    type: "project"
   },
   {
     title: "JL Shaw Consulting",
-    description: "Built and maintained a membership platform for JL Shaw Consulting using Kajabi. The site includes course content, membership management, and payment processing.",
+    description: "",
     tags: [
+      { name: "Web Development", color: "blue" },
       { name: "Kajabi", color: "orange" },
-      { name: "Web Development", color: "blue" }
+      { name: "E-Learning", color: "green" }
     ],
     websiteUrl: "https://members.jlshawconsulting.com",
-    logoUrl: "/images/projects/jlshaw-logo.png",
-    logoSize: "large"
+    logoUrl: "/images/projects/jlshaw_page_demo.png",
+    type: "site"
   }
 ];
 
@@ -131,15 +135,25 @@ export default function ProjectsPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               {otherProjects.map((project) => (
-                <ProjectCard 
-                  key={project.title}
-                  title={project.title}
-                  description={project.description}
-                  tags={project.tags}
-                  websiteUrl={project.websiteUrl}
-                  logoUrl={project.logoUrl}
-                  logoSize={project.logoSize}
-                />
+                project.type === 'site' ? (
+                  <SiteProjectCard 
+                    key={project.title}
+                    title={project.title}
+                    tags={project.tags}
+                    websiteUrl={project.websiteUrl}
+                    logoUrl={project.logoUrl}
+                  />
+                ) : (
+                  <ProjectCard 
+                    key={project.title}
+                    title={project.title}
+                    description={project.description}
+                    tags={project.tags}
+                    websiteUrl={project.websiteUrl}
+                    logoUrl={project.logoUrl}
+                    logoSize={project.logoSize}
+                  />
+                )
               ))}
             </div>
 

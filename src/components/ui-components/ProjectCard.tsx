@@ -21,31 +21,35 @@ export default function ProjectCard({
   logoUrl,
   logoSize = 'normal'
 }: ProjectCardProps) {
+  const hasDescription = description && description.length > 0;
+  
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden h-full flex flex-col">
-      <div className="px-6 pt-2.5 pb-6 flex-grow">
-        <div className="flex flex-col items-center mb-4">
-          {logoUrl && (
-            <div className={`relative flex-shrink-0 flex items-center justify-center mb-3 ${
-              logoSize === 'large' ? 'w-32 h-32' : 'w-16 h-16'
-            }`}>
-              <Image 
-                src={logoUrl} 
-                alt={`${title} logo`} 
-                fill
-                style={{ objectFit: 'contain' }}
-                className="p-1"
-              />
-            </div>
-          )}
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white text-center">
+      <div className={`px-6 ${hasDescription ? 'pt-2.5' : 'pt-6'} pb-6 flex-grow`}>
+        {logoUrl && (
+          <div className={`relative flex-shrink-0 flex items-center justify-center mb-4 ${
+            logoSize === 'large' ? 'w-32 h-32' : 'w-16 h-16'
+          } mx-auto`}>
+            <Image 
+              src={logoUrl} 
+              alt={`${title} logo`} 
+              fill
+              style={{ objectFit: 'contain' }}
+              className="p-1"
+            />
+          </div>
+        )}
+        <div className="flex flex-col items-center">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white text-center mb-4">
             {title}
           </h3>
         </div>
         
-        <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
-          {description}
-        </p>
+        {hasDescription && (
+          <p className="text-gray-600 dark:text-gray-400 mb-4 text-center">
+            {description}
+          </p>
+        )}
 
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4 justify-center">
