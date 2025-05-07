@@ -1,22 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image'; // Re-enabled
+import Image from 'next/image';
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center">
-      {/* Increased logo size again */}
-      <div className="relative w-16 h-16"> {/* Increased to 56x56px (h-14) to better fill header height */}
+    <Link href="/" className="flex items-center space-x-3">
+      <div className="relative w-12 h-12">
         <Image
-          src="/images/logo-header.png" // Kept corrected path
-          alt="Corey Alan Logo"
+          src="/images/logo.png"
+          alt="Corey Alan Consulting Logo"
           fill
           className="object-contain"
-          sizes="(max-width: 1024px) 68px, 68px" // Updated sizes to match new dimensions
+          sizes="48px"
           priority
         />
       </div>
+      <span className="text-xl font-bold text-[#37abc8]">Corey Alan Consulting</span>
     </Link>
   );
 }

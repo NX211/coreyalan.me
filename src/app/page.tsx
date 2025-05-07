@@ -24,8 +24,8 @@ export default function Home() {
               Turning Vision Into Reality With Code And Design.
             </h1>
             <p className="text-lg sm:text-xl mb-8 text-gray-600 dark:text-gray-400">
-              As a technology consultant and engineer, I specialize in solving real business problems through custom solutions. 
-              From data pipelines to system integrations, I help small businesses leverage technology that was previously only accessible to larger enterprises.
+              As technology consultants and engineers, we specialize in solving real business problems through custom solutions. 
+              From data pipelines to system integrations, we help small businesses leverage technology that was previously only accessible to larger enterprises.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 sm:space-x-4 justify-center md:justify-start">
               <Link
@@ -38,7 +38,7 @@ export default function Home() {
                 href="/contact"
                 className="w-full sm:w-auto border border-primary text-primary hover:bg-primary/10 px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-center"
               >
-                Contact Me
+                Contact Us
               </Link>
             </div>
           </div>
@@ -53,8 +53,7 @@ export default function Home() {
               Featured Projects
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Check out some of my latest work. These projects showcase my skills
-              and experience in developing modern web applications.
+              Check out some of our latest work. These projects showcase our skills and experience in developing modern web applications and custom business solutions.
             </p>
           </div>
 
@@ -166,7 +165,7 @@ export default function Home() {
               Technical Skills
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              As a technology consultant, I work with a variety of tools and technologies to deliver custom solutions.
+              As technology consultants, we work with a variety of tools and technologies to deliver custom solutions.
             </p>
           </div>
 

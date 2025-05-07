@@ -13,7 +13,7 @@ export default function Contact() {
     <div className="pt-24 pb-16">
       {/* Hero Section */}
       <PageHeader 
-        title="Contact Me" 
+        title="Contact Us" 
         description="Have A Question Or Want To Work Together? Get In Touch!"
       />
 
@@ -99,8 +99,8 @@ export default function Contact() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-center">
                     <FontAwesomeIcon icon={faEnvelope} className="text-primary h-5 w-5 mr-3" />
-                    <a href="mailto:corey@coreyalan.me" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
-                      corey@coreyalan.me
+                    <a href="mailto:corey@coreyalan.com" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
+                      corey@coreyalan.com
                     </a>
                   </div>
                   <div className="flex items-center justify-center">

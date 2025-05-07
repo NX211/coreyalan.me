@@ -24,8 +24,8 @@ EMAIL_SERVER_PORT=587
 EMAIL_SERVER_USER=your_email_user
 EMAIL_SERVER_PASSWORD=your_email_password
 EMAIL_SERVER_SECURE=false
-EMAIL_FROM=contact@coreyalan.me
-EMAIL_TO=corey@coreyalan.me
+EMAIL_FROM=contact@coreyalan.com
+EMAIL_TO=corey@coreyalan.com
 ```
 
 Replace the values with your own email service provider's information:

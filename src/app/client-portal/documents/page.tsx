@@ -266,7 +266,7 @@ export default function DocumentsPage() {
                   Send us an email directly for non-urgent document questions
                 </p>
                 <a
-                  href="mailto:support@coreyalan.me"
+                  href="mailto:support@coreyalan.com"
                   className="inline-flex items-center justify-center w-full bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors"
                 >
                   <FontAwesomeIcon icon={faEnvelope} className="mr-2 h-4 w-4" />

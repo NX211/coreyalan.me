@@ -97,7 +97,7 @@ export default function ProjectsPage() {
       
       <div className="container mx-auto px-4">
         {/* Main Content */}
-        <section className="py-8">
+        <section className="py-16">
           <div className="prose dark:prose-invert max-w-none">
             {/* Featured Projects */}
             <h2 className="text-4xl font-bold text-[#37abc8] mb-6 text-center">
@@ -191,7 +191,7 @@ export default function ProjectsPage() {
                 href="/contact"
                 className="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-medium transition-colors duration-300 inline-flex items-center"
               >
-                Contact Me
+                Contact Us
                 <FontAwesomeIcon icon={faArrowRight} className="ml-2 h-4 w-4" />
               </Link>
             </div>

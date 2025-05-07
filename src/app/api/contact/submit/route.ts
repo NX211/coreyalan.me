@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     // Construct email options
     const mailOptions = {
       from: `"${name}" <${process.env.EMAIL_FROM}>`,
-      to: process.env.EMAIL_TO || 'corey@coreyalan.me',
+      to: process.env.EMAIL_TO || 'corey@coreyalan.com',
       replyTo: email,
       subject: `[Website Contact] ${subject}`,
       text: `

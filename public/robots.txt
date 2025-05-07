@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://coreyalan.me/sitemap.xml 
+Sitemap: https://coreyalan.com/sitemap.xml 

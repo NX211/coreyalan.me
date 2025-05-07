@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faEnvelope, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faEnvelope, faClock, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/layout/PageHeader';
 import Icon from '@/components/ui-components/Icon';
@@ -169,9 +169,10 @@ export default function About() {
                 <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
                   <Link
                     href="/projects"
-                    className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 text-center"
+                    className="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-medium transition-colors duration-300 inline-flex items-center"
                   >
-                    View My Projects
+                    View Our Projects
+                    <FontAwesomeIcon icon={faArrowRight} className="ml-2 h-4 w-4" />
                   </Link>
                   <Link
                     href="/contact"

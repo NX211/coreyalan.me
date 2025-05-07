@@ -20,7 +20,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const plausibleDomain = "coreyalan.me";
+  const plausibleDomain = "coreyalan.com";
   const customDomain = "stats.authoritah.com";
 
   return (

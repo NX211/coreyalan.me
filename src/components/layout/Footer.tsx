@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <Link href="/" className="text-xl font-bold text-primary dark:text-white">
-              Corey Stone
+              Corey Alan Consulting
             </Link>
             <div className="flex space-x-2 mt-2">
               <div className="w-2 h-2 rounded-full bg-red-400"></div>
@@ -141,7 +141,7 @@ export default function Footer() {
         
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
           <p className="text-center text-gray-600 dark:text-gray-400">
-            &copy; {currentYear} Corey Stone. All rights reserved.
+            &copy; {currentYear} Corey Alan Consulting. All rights reserved.
           </p>
         </div>
       </div>
