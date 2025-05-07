@@ -46,7 +46,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']),
   
   // Contact Form
-  CONTACT_EMAIL: z.string().email().optional().default('corey@coreyalan.me'),
+  CONTACT_EMAIL: z.string().email().optional().default('corey@coreyalan.com'),
   
   // Email Configuration
   EMAIL_SERVER_HOST: z.string(),
@@ -54,8 +54,8 @@ const envSchema = z.object({
   EMAIL_SERVER_SECURE: z.string().transform(val => val === 'true'),
   EMAIL_SERVER_USER: z.string(),
   EMAIL_SERVER_PASSWORD: z.string(),
-  EMAIL_FROM: z.string().email().optional().default('noreply@coreyalan.me'),
-  EMAIL_TO: z.string().email().optional().default('corey@coreyalan.me'),
+  EMAIL_FROM: z.string().email().optional().default('noreply@coreyalan.com'),
+  EMAIL_TO: z.string().email().optional().default('corey@coreyalan.com'),
 
   // OpenSign
   OPENSIGN_API_KEY: z.string().min(1),

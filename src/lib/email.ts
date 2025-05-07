@@ -85,7 +85,7 @@ export class EmailService {
 
       // Send email
       const info = await this.transporter!.sendMail({
-        from: process.env.SMTP_FROM || 'noreply@coreyalan.me',
+        from: process.env.SMTP_FROM || 'noreply@coreyalan.com',
         ...options,
       });
 
