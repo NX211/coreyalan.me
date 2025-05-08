@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLocationDot, faClock, faPhone, faGlobe, faInfoCircle, faTicket, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin, faMastodon, faBluesky } from '@fortawesome/free-brands-svg-icons';
-import GitHubAvatar from '@/components/GitHubAvatar';
+import Image from 'next/image';
 import PageHeader from '@/components/layout/PageHeader';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
@@ -79,28 +79,32 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-[#1E293B] dark:to-[#0F172A] p-8 rounded-lg shadow-md border-l-4 border-primary">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Get in Touch</h2>
-            
             {/* Profile Photo and Contact Info Row */}
             <div className="flex flex-col items-center gap-6 mb-8">
-              {/* Profile Photo */}
+              {/* Company Logo */}
               <div className="flex-shrink-0">
-                <GitHubAvatar 
-                  username="NX211" 
-                  className="w-32 h-32 rounded-full object-cover border-4 border-primary dark:border-primary-light shadow-lg"
-                />
+                <div className="relative w-32 h-32">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Corey Alan Consulting Logo"
+                    fill
+                    className="object-contain"
+                    sizes="128px"
+                    priority
+                  />
+                </div>
               </div>
               
               {/* Contact Details */}
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Corey Stone</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">Full Stack Developer & Technology Consultant</p>
+                <h3 className="text-2xl font-bold text-[#37abc8] mb-2">Corey Alan Consulting</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">Turning Vision Into Reality With Code And Design</p>
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-center">
                     <FontAwesomeIcon icon={faEnvelope} className="text-primary h-5 w-5 mr-3" />
-                    <a href="mailto:corey@coreyalan.com" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
-                      corey@coreyalan.com
+                    <a href="mailto:contact@coreyalan.com" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
+                      contact@coreyalan.com
                     </a>
                   </div>
                   <div className="flex items-center justify-center">
@@ -114,22 +118,22 @@ export default function Contact() {
             {/* Social Links */}
             <div className="flex justify-center space-x-4">
               <a 
-                href="https://github.com/NX211" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
-                aria-label="GitHub"
-              >
-                <FontAwesomeIcon icon={faGithub} className="h-6 w-6" />
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/corey-stone-17b19a80" 
+                href="https://linkedin.com/company/corey-alan-consulting" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
                 aria-label="LinkedIn"
               >
                 <FontAwesomeIcon icon={faLinkedin} className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://github.com/Corey-Alan-Consulting" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                aria-label="GitHub"
+              >
+                <FontAwesomeIcon icon={faGithub} className="h-6 w-6" />
               </a>
               <a 
                 href="https://authoritah.social/@nx211" 
@@ -184,6 +188,7 @@ export default function Contact() {
             <ContactForm 
               title="Send a Message"
               description="Fill out the form below to get in touch with me"
+              titleClassName="text-[#37abc8]"
             />
           </div>
         </div>

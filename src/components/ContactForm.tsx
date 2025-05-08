@@ -9,6 +9,7 @@ interface ContactFormProps {
   title?: string;
   description?: string;
   className?: string;
+  titleClassName?: string;
   style?: React.CSSProperties;
   onComplete?: () => void;
   onError?: (error: Error) => void;
@@ -18,6 +19,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   title = 'Contact Form',
   description = 'Please fill out the form below.',
   className = '',
+  titleClassName = '',
   style = {},
   onComplete,
   onError,
@@ -123,7 +125,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   return (
     <div className={`contact-form-wrapper`} style={style}>
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{title}</h2>
+        <h2 className={`text-2xl font-bold mb-2 ${titleClassName || 'text-gray-800 dark:text-white'}`}>{title}</h2>
         <p className="text-gray-600 dark:text-gray-300">{description}</p>
       </div>
       

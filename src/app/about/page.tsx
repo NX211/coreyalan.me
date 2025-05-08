@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faEnvelope, faClock, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faGithub, faMastodon, faBluesky } from '@fortawesome/free-brands-svg-icons';
 import GitHubAvatar from '@/components/GitHubAvatar';
 import PageHeader from '@/components/layout/PageHeader';
 import Icon from '@/components/ui-components/Icon';
@@ -38,6 +39,44 @@ export default function About() {
                   <div className="w-2 h-2 rounded-full bg-blue-400"></div>
                   <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
                   <div className="w-2 h-2 rounded-full bg-purple-400"></div>
+                </div>
+                <div className="flex justify-center space-x-4 mb-6">
+                  <a 
+                    href="https://www.linkedin.com/in/corey-stone-17b19a80" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                    aria-label="LinkedIn"
+                  >
+                    <FontAwesomeIcon icon={faLinkedin} className="h-6 w-6" />
+                  </a>
+                  <a 
+                    href="https://github.com/NX211" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                    aria-label="GitHub"
+                  >
+                    <FontAwesomeIcon icon={faGithub} className="h-6 w-6" />
+                  </a>
+                  <a 
+                    href="https://authoritah.social/@nx211" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                    aria-label="Mastodon"
+                  >
+                    <FontAwesomeIcon icon={faMastodon} className="h-6 w-6" />
+                  </a>
+                  <a 
+                    href="https://bsky.app/profile/nx211.bsky.social" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"
+                    aria-label="Bluesky"
+                  >
+                    <FontAwesomeIcon icon={faBluesky} className="h-6 w-6" />
+                  </a>
                 </div>
                 <div className="flex flex-col space-y-3">
                   <a
